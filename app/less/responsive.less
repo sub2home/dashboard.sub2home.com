@@ -1,0 +1,43 @@
+// Classes: .noMobile / .noTablet
+
+// Common Styles ---------------------------------------------------------------
+// -----------------------------------------------------------------------------
+
+// Mobile
+
+@media only screen and (max-width : 449px) {
+
+  .mobile-hidden {
+    display: none;
+  }
+}
+
+// Larger-Than-Mobile
+
+@media only screen and (min-width : 450px) {
+
+  // Set bigger Font-size
+
+  body {
+    font-size: @tabletBaseFontSize;
+  }
+
+  .smallHint {
+    font-size: 14px;
+  }
+
+  // Resize Icons
+
+  .icn {
+    &.inSmallText {
+      font-size: 24px;
+
+      &.before {
+        margin-right: 10px;
+      }
+      &.after {
+        margin-left: 10px;
+      }
+    }
+  }
+}

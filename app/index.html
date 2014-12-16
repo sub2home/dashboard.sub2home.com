@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>sub2home - Deine SUBWAY®-Onlinetheke</title>
+    <meta name="description" content="Bei SUBWAY® bestellen war noch nie so einfach: Lieferservice wählen, Sandwich belegen, Lieferadresse angeben, zurücklehnen und liefern lassen.">
+    <noscript>
+        <meta http-equiv="refresh" content="1; URL=http://browser.sub2home.com" />
+    </noscript>
+    <!-- build:css /css/main.css -->
+    <link rel="stylesheet" href="/.tmp/css/main.css">
+    <!-- endbuild -->
+</head>
+
+<body>
+    <div ng-view id="page"></div>
+    <div id="pageLoaderContainer">
+			<div id="pageLoader"><div></div><div></div><div></div></div>
+		</div>
+    <!-- build:js /js/main.js -->
+    <script src="/.tmp/js/libs.js"></script>
+    <script src="/.tmp/js/template-cache.js"></script>
+    <script src="/.tmp/js/app.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>
