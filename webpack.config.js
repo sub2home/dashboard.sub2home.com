@@ -1,8 +1,15 @@
+var webpack = require('webpack');
+
 module.exports = {
-    entry: './app',
+    entry: [
+        'webpack-dev-server/client?http://0.0.0.0:8080',
+        'webpack/hot/only-dev-server',
+        './app',
+    ],
     output: {
+        path: __dirname,
         filename: 'bundle.js',
-        path: './build'
+        publicPath: '/'
     },
     module: {
         loaders: [{
@@ -10,9 +17,13 @@ module.exports = {
             loader: 'style-loader!css-loader!less-loader'
         }, {
             test: /\.jsx$/,
-            loader: 'jsx-loader?harmony'
+            loaders: ['react-hot', 'jsx-loader?harmony']
         }]
     },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
+    ],
     resolve: {
         extensions: ['', '.js', '.jsx']
     },

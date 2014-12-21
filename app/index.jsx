@@ -3,7 +3,4 @@ var Header = require('./components/Header');
 
 require('./less/main.less');
 
-React.render(
-  <Header />,
-  document.getElementById('container')
-);
+React.render(<Header />, document.body);
