@@ -1,0 +1,114 @@
+// Module variables
+// --------------------------
+
+@loginMobileFontSize:   24px;
+@loginTabletFontSize:   48px;
+
+
+// Module styles
+// --------------------------
+
+#login {
+  // Override content-header-padding
+  padding: 0;
+}
+
+#loginAppTitle {
+  
+  .logo {
+    font-size: 150px;
+    color: @onNoteColor50;
+    line-height: 0.7;
+  }
+  h2 {
+    font-size: @loginMobileFontSize;
+  }
+}
+
+#loginAppTitleContainer {
+  position: absolute;
+  .size(180px, 300px);
+  margin: -180px/2 0 0 -300px/2;
+  top: 50%;
+  left: 50%;
+}
+
+#loginInputGroup {
+  .border-box;
+  padding: 0 10% 10%;
+  
+  input {
+    .center-block;
+    margin-bottom: 35px;
+    padding: 45px 45px 35px;
+    width: 100%;
+    font-size: @loginMobileFontSize;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+#loginSubmitButton {
+  height: 170px;
+  border-top: 1px solid @noteBorderColor;
+  font-size: @loginMobileFontSize;
+  h2 {
+    padding: 65px 0 0;
+    font-size: @loginMobileFontSize;
+  }
+}
+
+
+// Module responsiveness
+// --------------------------
+
+// Mobile
+
+@media only screen and (max-width : 449px) {
+  
+  #loginAppTitle {
+    
+    .logo { font-size: 80px; }
+  }
+  
+  #loginAppTitleContainer {
+    width: 200px;
+    height: 100px;
+    margin: -50px 0 0 -100px;
+  }
+  
+  #loginInputGroup input {
+    margin-bottom: 15px;
+    padding: 20px 20px 15px;
+  }
+  
+  #loginSubmitButton {
+    height: 80px;
+    
+    h2 { padding-top:28px; }
+  }
+}
+
+// Portrait Tablet
+
+@media only screen and (min-width : 450px) {
+  #loginInputGroup input { font-size: @tabletH2FontSize; }
+}
+
+// Landscape Tablet
+
+@media only screen and (min-width : 800px) {
+  #loginInputGroup {
+    padding: 0 5% 5%;
+    
+    input {
+      display: inline-block;
+      width: 45%;
+      margin: 2%;
+    }
+  }
+}
+
+// Still missing: height media-queries to override width queries when needed
+

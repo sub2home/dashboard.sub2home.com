@@ -6,7 +6,9 @@ module.exports = React.createClass({
   render: function() {
     return (
       <header id="header">
-        <h1>sub2home dashboard</h1>
+        <div id="headerContent">
+          Blablablal
+        </div>
       </header>
     );
   }

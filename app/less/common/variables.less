@@ -38,28 +38,6 @@
   font-style: normal;
 }
 
-// HAND FONT
-
-// // ICON FONT
-//
-// @font-face {
-//   font-family: "Homicons";
-//   src: url("/fonts/Homicons-2.eot");
-//   src: url("/fonts/Homicons-2.eot?#iefix") format("embedded-opentype"), url("/fonts/Homicons-2.ttf") format("truetype"), url("/fonts/Homicons-2.svg#Homicons-2") format("svg");
-//   font-weight: normal;
-//   font-style: normal;
-// }
-
-// @media screen and (-webkit-min-device-pixel-ratio:0) {
-//   .win {
-//     @font-face {
-//         font-family: "Homicons";
-//         src: url("/fonts/Homicons-2.svg#Homicons-2") format("svg");
-//     }
-//   }
-// }
-
-
 // GLOBAL VALUES
 // --------------------------------------------------
 
@@ -72,22 +50,15 @@
 @grayDark:              #828282;
 @gray:                  #bbb;
 @grayLight:             #ccc;
-
 @grayLighter:           #dadada;
 
 @darkerWhite:           #ededed;
-
 @darkWhite:             #fbfbfb;
-
 @white:                 #fff;
 
-
 @onNoteColor:           rgba(203,172,94,1);
-@onNoteColor10:         rgba(203,172,94,0.1);
-@onNoteColor20:         rgba(203,172,94,0.2);
 @onNoteColor30:         rgba(203,172,94,0.3);
 @onNoteColor50:         rgba(203,172,94,0.5);
-@onNoteColor60:         rgba(203,172,94,0.6);
 @onNoteColor70:         rgba(203,172,94,0.7);
 
 @onDarkNoteColor:       rgba(177,145,68,1);
@@ -95,62 +66,55 @@
 @onDarkNoteColor50:     rgba(177,145,68,0.5);
 @onDarkNoteColor70:     rgba(177,145,68,0.7);
 
+@darkNote:              rgba(224,166,54,0.2);
+@darkNote50:            rgba(225,166,54,0.1);
+
 @noteColor:             #fbf5d5;
 @darkNoteColor:         #f4e3b7;
+
+@borderColor:           @grayLighter;
 @noteBorderColor:       @onNoteColor30;
 
 @darkColor:             #454545;
 
-@darkNote:              rgba(224,166,54,0.2);
-@darkNote50:            rgba(225,166,54,0.1);
-
-@onInfoColor:           @black;
-
-@headerTrayBackground:  rgba(196,144,18,0.25);
-
-@onHeaderColor:         #ac872d; // Old
-
 @onHeaderColor:         #a17426;
-@onHeaderColor50:       rgba(172,135,45,0.5);
+@onHeaderColor30:       rgba(172,135,45,0.3);
 @onHeaderColor50:       rgba(161,116,38,0.5);
+@onHeaderColor50:       rgba(161,116,38,0.7);
 
 @headerColor:           #e4c988;
 
 // Accent colors
 // -------------------------
 
-@red:               #9d261d;
-@red10:             rgba(157,38,29,0.1);
-@red20:             rgba(157,38,29,0.2);
-@red30:             rgba(157,38,29,0.3);
-@red50:             rgba(157,38,29,0.5);
-@red70:             rgba(157,38,29,0.7);
+@red:                      #9d261d;
+@red30:                    rgba(157,38,29,0.3);
+@red50:                    rgba(157,38,29,0.5);
+@red70:                    rgba(157,38,29,0.7);
 
-@orange:            #dc952b;
-@orange40:          rgba(220,149,43,0.4);
-@orange50:          rgba(220,149,43,0.5);
+@orange:                   #dc952b;
+@orange30:                 rgba(220,149,43,0.3);
+@orange50:                 rgba(220,149,43,0.5);
+@orange70:                 rgba(220,149,43,0.7);
 
-@greenLight:        #57a827;
+@greenLight:               #57a827;
+@greenLight30:             rgba(87,168,39,0.3);
+@greenLight50:             rgba(87,168,39,0.5);
+@greenLight70:             rgba(87,168,39,0.7);
 
-@greenLight10:      rgba(87,168,39,0.1);
-@greenLight20:      rgba(87,168,39,0.2);
-@greenLight30:      rgba(87,168,39,0.3);
-@greenLight50:      rgba(87,168,39,0.5);
-@greenLight70:      rgba(87,168,39,0.7);
+@greenLighter:             #9cc83e;
+@greenLighter30:           rgba(156,200,62,0.3);
+@greenLighter50:           rgba(156,200,62,0.5);
+@greenLighter70:           rgba(156,200,62,0.7);
 
-@greenLighter:      #9cc83e;
+@greenDark:                #13493b;
 
-@greenLighter30:    rgba(156,200,62,0.3);
-@greenLighter50:    rgba(156,200,62,0.5);
-@greenLighter60:    rgba(156,200,62,0.6);
-@greenLighter70:    rgba(156,200,62,0.7);
+@placeholderText:          @onNoteColor50;
 
-@greenDark:         #13493b;
+@globalShadowColorLight:   rgba(113,87,25,0.15);
+@globalShadowColorDark:    rgba(113,87,25,0.55);
 
-@placeholderText:   @onNoteColor50;
 
-@globalShadowColor15: rgba(113,87,25,0.15);
-@globalShadowColor55: rgba(113,87,25,0.55);
 
 // Scaffolding
 // -------------------------
@@ -158,31 +122,36 @@
 @bodyBackground:               @white;
 @textColor:                    @grayDark;
 
-@noteBackground:               url("/images/notebackground.jpg") repeat #fbf4d7;
-@darkBackground:               url("/images/darkbackground.jpg") repeat #454545;
+@noteBackground:               url("/images/notebackground.jpg") repeat @noteColor;
+@darkBackground:               url("/images/darkbackground.jpg") repeat @darkColor;
 
-// Links
-// -------------------------
+@noteBackground-2x:            url("/images/notebackground-2x.jpg") repeat @noteColor;
+@darkBackground-2x:            url("/images/darkbackground-2x.jpg") repeat @darkColor;
 
-@linkColor:             @greenDark;
+// Heights & Widths
+
+@bodyPadding:                  15px;
+
+@headerHeight:                 50px;
+@headerTopPadding: 	           16px;
 
 // Typography
 // -------------------------
 
-@headingsFontWeight:    normal;
-@headingsColor:         @greenDark;
-@headingsFontSize:      20px;
-
 @baseFontFamily:    "VAGRoundedStd-Thin", Helvetica, Arial, sans-serif;
+
+@headingsFontWeight:    normal;
+@headingsColor:         @greenLight;
 
 @mobileBaseFontSize:      18px;
 @tabletBaseFontSize:      24px;
+@desktopBaseFontSize:     24px;
 
-@mobileSmallFontSize:      13px;
-@tabletSmallFontSize:      18px;
+@mobileSmallFontSize:     13px;
+@tabletSmallFontSize:     18px;
+@desktopSmallFontSize:    18px;
 
 @baseLineHeight:          1.3;
-
 
 // Headings
 
@@ -196,9 +165,7 @@
 @tabletH3FontSize:        36px;
 @tabletH4FontSize:        27px;
 
-
-// REATINA IMAGES
-// -------------------------
-
-  @noteBackground-2x:               url("/images/notebackground-2x.jpg") repeat #fbf4d7;
-  @darkBackground-2x:               url("/images/darkbackground-2x.jpg") repeat #454545;
+@desktopH1FontSize:       60px;
+@desktopH2FontSize:       48px;
+@desktopH3FontSize:       36px;
+@desktopH4FontSize:       27px;

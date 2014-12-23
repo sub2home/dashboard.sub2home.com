@@ -1,23 +1,32 @@
-//
-// Typography
-// --------------------------------------------------
-
-
-// On Note Styling
-
-.note {
-  color: @onNoteColor;
-}
-
 // Body text
 // -------------------------
 
-p {
-  // font-size: @mobileBaseFontSize;
-  .backface-visibility(hidden);
+p, a {
   margin: 0;
-  line-height: 1.3;
-  margin-bottom: 10px;
+  padding: 10px @bodyPadding;
+  line-height: @baseLineHeight;
+  .backface-visibility(hidden);
+  
+  // Mobile font-size
+  
+  font-size: @mobileBaseFontSize;
+}
+
+// Tablet font-size
+
+@media only screen and (min-width : 450px) {
+  p, a { font-size: @tabletBaseFontSize;}
+}
+
+// Desktop font-size
+
+@media only screen and (min-width : 1000px) {
+  p, a { font-size: @desktopBaseFontSize;}
+}
+
+
+p a {
+  text-decoration: underline;
 }
 
 a {
@@ -42,7 +51,7 @@ cite {
 
 // Utility classes
 .muted {
-  color: @grayLight;
+  .opacity(50);
 }
 
 
@@ -50,30 +59,36 @@ cite {
 // -------------------------
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: @headingsFontWeight;
   line-height: 1;
   margin: 0;
+  font-weight: @headingsFontWeight;
   text-rendering: optimizelegibility;
   .backface-visibility(hidden);
-
-  small {
-    font-weight: normal;
-    line-height: 1;
-    color: @grayLight;
-  }
 }
+
+// Mobile font-sizes
+
 h1 { font-size: @mobileH1FontSize;}
 h2 { font-size: @mobileH2FontSize;}
 h3 { font-size: @mobileH3FontSize;}
 h4 { font-size: @mobileH4FontSize;}
 
-// TABLET SIZES:
+// Tablet font-sizes
 
 @media only screen and (min-width : 450px) {
   h1 { font-size: @tabletH1FontSize;}
   h2 { font-size: @tabletH2FontSize;}
   h3 { font-size: @tabletH3FontSize;}
   h4 { font-size: @tabletH4FontSize;}
+}
+
+// Desktop font-sizes
+
+@media only screen and (min-width : 1000px) {
+  h1 { font-size: @desktopH1FontSize;}
+  h2 { font-size: @desktopH2FontSize;}
+  h3 { font-size: @desktopH3FontSize;}
+  h4 { font-size: @desktopH4FontSize;}
 }
 
 
@@ -85,17 +100,7 @@ ul, ol {
   padding: 0;
   margin: 0;
 }
-ul ul,
-ul ol,
-ol ol,
-ol ul {
-  margin-bottom: 0;
-}
+
 li {
   line-height: @baseLineHeight;
-}
-ul.unstyled,
-ol.unstyled {
-  margin-left: 0;
-  list-style: none;
 }

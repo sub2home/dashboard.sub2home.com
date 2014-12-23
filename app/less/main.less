@@ -1,42 +1,35 @@
-/*!
- * Pure-LESS v0.6.1
- *
- * Uses Pure v0.2.1
- *
- * @author Mattia Migliorini "deshack" - http://www.deshack.net
- */
-
 // Core variables and mixins
-@import "variables.less";
-@import "mixins.less";
-@import "icons.less";
+@import "common/variables.less";
+@import "common/mixins.less";
 
 // Reset
-@import "normalize.less";
+@import "common/normalize.less";
 
 // Typography
-@import "type.less";
+@import "common/icons.less";
+@import "common/type.less";
 
-// Buttons
-// @import "buttons.less";
+// Common Styles and Responsiveness
 
-// Components
-// @import "snapjs.less";
+@import "common/common.less";
+@import "common/commonResponsive.less";
+@import "common/commonRetina.less";
 
-// Content
 
-@import "common.less";
+// Scaffolding Modules
 
-@import "views/login.less";
+@import "modules/sc-content.less";
+@import "modules/sc-header.less";
+@import "modules/sc-note.less";
+@import "modules/sc-dark.less";
 
-// Feedback on Tap & Click-Events
+// Element Modules
 
-@import "events.less";
+@import "modules/e-button.less";
+@import "modules/e-loader.less";
+@import "modules/e-logo.less";
+@import "modules/e-input.less";
 
-// Responsive Styles
+// View Modules
 
-@import "responsive.less";
-
-// Retina Switches
-
-@import "retina.less";
+@import "modules/login.less";

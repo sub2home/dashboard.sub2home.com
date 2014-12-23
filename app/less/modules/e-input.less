@@ -1,0 +1,26 @@
+input {
+  background: none;
+  outline: none;
+  border: 1px solid @borderColor;
+  .border-radius(2px);
+  .border-box;
+  padding: 10px 10px 8px;
+  line-height: 1;
+  color: @textColor;
+  box-shadow: none;
+  
+  // Remove Inset-Box Shadow on IOS
+  -webkit-appearance: none;
+  
+  // Remove Firefox "Ghost-Padding"
+  ::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+.note input {
+  background: @darkNote;
+  border-color: @noteBorderColor;
+  color: @onNoteColor;
+}
