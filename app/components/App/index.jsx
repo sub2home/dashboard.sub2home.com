@@ -5,7 +5,7 @@ var RouteHandler = require('react-router').RouteHandler;
 require('./index.less');
 
 module.exports = React.createClass({
-  render: function () {
+  render: function() {
     return (
       <div>
         <Header/>
