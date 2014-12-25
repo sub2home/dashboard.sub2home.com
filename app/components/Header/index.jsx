@@ -7,7 +7,13 @@ module.exports = React.createClass({
     return (
       <header id="header">
         <div id="headerContent">
-          Blablablal
+          <div id="headerActiveDeliveryTime">
+            11:30-15:00
+          </div>
+          <div id="headerOutstandingOrder">
+            <span className="counter">3</span>
+            <span>offene Bestellungen</span>
+          </div>
         </div>
       </header>
     );
