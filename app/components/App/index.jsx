@@ -2,7 +2,7 @@ var React = require('react');
 var Header = require('../Header');
 var RouteHandler = require('react-router').RouteHandler;
 
-require('./less/main.less');
+require('./index.less');
 
 module.exports = React.createClass({
   render: function () {
