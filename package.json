@@ -20,15 +20,17 @@
   "homepage": "https://github.com/sub2home/dashboard.sub2home.com",
   "devDependencies": {
     "css-loader": "^0.9.0",
+    "file-loader": "^0.8.1",
     "jsx-loader": "^0.12.2",
     "less-loader": "^0.7.8",
     "react-hot-loader": "^1.0.2",
     "style-loader": "^0.8.2",
+    "url-loader": "^0.5.5",
     "webpack": "^1.4.13",
     "webpack-dev-server": "^1.6.6"
   },
   "dependencies": {
-    "common-styles": "git://github.com/sub2home/common-styles",
+    "common-styles": "sub2home/common-styles",
     "react": "^0.12.2",
     "react-router": "^0.11.6"
   }

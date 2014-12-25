@@ -14,10 +14,16 @@ module.exports = {
     module: {
         loaders: [{
             test: /\.less$/,
-            loader: 'style-loader!css-loader!less-loader'
+            loader: 'style!css!less'
         }, {
             test: /\.jsx$/,
-            loaders: ['react-hot', 'jsx-loader?harmony']
+            loader: 'react-hot!jsx?harmony'
+        }, {
+            test: /\.(svg|jpg)$/,
+            loader: 'url?limit=10000'
+        }, {
+            test: /\.(ttf|eot|woff)$/,
+            loader: 'url?limit=100000'
         }]
     },
     plugins: [
