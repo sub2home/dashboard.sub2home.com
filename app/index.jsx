@@ -1,6 +1,6 @@
 var React = require('react');
-var Header = require('./components/Header');
+var router = require('./config/router');
 
-require('./less/main.less');
-
-React.render(<Header />, document.body);
+router.run(function (Handler) {
+  React.render(<Handler/>, document.body);
+});
