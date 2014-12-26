@@ -31,7 +31,10 @@
   },
   "dependencies": {
     "common-styles": "sub2home/common-styles",
+    "es6-promise": "^2.0.1",
+    "fetch": "github/fetch",
     "react": "^0.12.2",
-    "react-router": "^0.11.6"
+    "react-router": "^0.11.6",
+    "setimmediate": "^1.0.2"
   }
 }

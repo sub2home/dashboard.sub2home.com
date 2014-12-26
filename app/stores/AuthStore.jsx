@@ -19,4 +19,8 @@ module.exports = Reflux.createStore({
       });
   },
 
+  onLogout: function(number, password) {
+    localStorage.removeItem('token');
+  },
+
 });
