@@ -1,5 +1,10 @@
-@import "~common-styles/less/common/variables";
-@import "~common-styles/less/common/mixins";
+@import "~common-styles/less/common/common.less";
+
+@import "~common-styles/less/modules/sc-note.less";
+
+@import "~common-styles/less/modules/e-logo.less";
+@import "~common-styles/less/modules/e-input.less";
+@import "~common-styles/less/modules/e-counter.less";
 
 // Module variables
 // --------------------------
@@ -18,22 +23,25 @@
 
 #loginAppTitle {
   
+  .fix-tr { min-height: 150px; }   
+  
   .logo {
-    font-size: 150px;
     color: @onNoteColor50;
     line-height: 0.7;
+    font-size: 80px;
   }
-  h2 {
-    font-size: @loginMobileFontSize;
-  }
+  
+  h2 { font-size: @loginMobileFontSize; }
+  
 }
 
 #loginAppTitleContainer {
   position: absolute;
-  .size(180px, 300px);
-  margin: -180px/2 0 0 -300px/2;
   top: 50%;
   left: 50%;
+
+  .size(100px, 200px);
+  margin: -100px/2 0 0 -200px/2;
 }
 
 #loginInputGroup {
@@ -42,10 +50,12 @@
   
   input {
     .center-block;
-    margin-bottom: 35px;
-    padding: 45px 45px 35px;
     width: 100%;
+    
+    margin-bottom: 15px;
+    padding: 20px 20px 15px;
     font-size: @loginMobileFontSize;
+    
     &:last-child {
       margin-bottom: 0;
     }
@@ -53,12 +63,12 @@
 }
 
 #loginSubmitButton {
-  height: 170px;
+  height: 80px;
   border-top: 1px solid @noteBorderColor;
-  font-size: @loginMobileFontSize;
+  
   h2 {
-    padding: 65px 0 0;
     font-size: @loginMobileFontSize;
+    padding: 28px 0 0;
   }
 }
 
@@ -66,37 +76,38 @@
 // Module responsiveness
 // --------------------------
 
-// Mobile
-
-@media only screen and (max-width : 449px) {
-  
-  #loginAppTitle {
-    
-    .logo { font-size: 80px; }
-  }
-  
-  #loginAppTitleContainer {
-    width: 200px;
-    height: 100px;
-    margin: -50px 0 0 -100px;
-  }
-  
-  #loginInputGroup input {
-    margin-bottom: 15px;
-    padding: 20px 20px 15px;
-  }
-  
-  #loginSubmitButton {
-    height: 80px;
-    
-    h2 { padding-top:28px; }
-  }
-}
-
 // Portrait Tablet
 
 @media only screen and (min-width : 450px) {
-  #loginInputGroup input { font-size: @tabletH2FontSize; }
+  
+  #loginAppTitle {
+    .fix-tr { min-height: 250px; }
+    .logo { font-size: 150px; }
+    h2 {font-size: @loginTabletFontSize; }
+  }
+  
+  // tablet font-sizes & min-heights
+  
+  #loginAppTitleContainer {
+    .size(180px, 300px);
+    margin: -180px/2 0 0 -300px/2;
+  }
+  
+  #loginInputGroup {
+    padding: 0 10% 10%;
+    input {
+      margin-bottom: 35px;
+      padding: 45px 45px 35px;
+      font-size: @loginTabletFontSize;
+    }
+  }
+  #loginSubmitButton {
+    height: 170px;
+    h2 {
+      font-size: @loginTabletFontSize;
+      padding-top: 65px; 
+    }
+  }
 }
 
 // Landscape Tablet
@@ -113,5 +124,5 @@
   }
 }
 
-// Still missing: height media-queries to override width queries when needed
+// Still missing: height media-queries to fit sizes for common tablets without scrolling
 
