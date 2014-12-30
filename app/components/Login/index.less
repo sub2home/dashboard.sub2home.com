@@ -59,6 +59,14 @@
     &:last-child {
       margin-bottom: 0;
     }
+    
+    .transition(e('color .1s linear, background .1s linear, border-color .1s linear'));
+    
+    &:focus {
+      background: @darkNote150;
+      border-color: darken(@noteBorderColor, 10%);
+      color: darken(@onDarkNoteColor, 5%);
+    }
   }
 }
 
@@ -69,6 +77,14 @@
   h2 {
     font-size: @loginMobileFontSize;
     padding: 28px 0 0;
+  }
+  
+  .transition(e('color .1s linear, background .1s linear, border-color .1s linear'));
+  
+  &:active {
+    background: @darkNote150;
+    color: darken(@onDarkNoteColor, 5%);
+    border-color: darken(@noteBorderColor, 10%);
   }
 }
 
