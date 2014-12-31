@@ -10,9 +10,13 @@ module.exports = React.createClass({
           <div id="headerActiveDeliveryTime">
             11:30-15:00
           </div>
-          <div id="headerOutstandingOrder">
+          <div id="headerOutstandingOrders">
             <span className="counter">3</span>
             <span>offene Bestellungen</span>
+          </div>
+          <div id="sendTestMail" className="headerButton icn iMail emphasized">
+          </div>
+          <div id="logout" className="headerButton icn iNav">
           </div>
         </div>
       </header>

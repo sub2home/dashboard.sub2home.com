@@ -1,0 +1,113 @@
+@import "~common-styles/less/common/common.less";
+@import "~common-styles/less/modules/sc-header.less";
+@import "~common-styles/less/modules/e-counter.less";
+
+// Module variables
+// --------------------------
+
+
+
+// Module styles
+// --------------------------
+
+#header {
+  
+}
+
+#headerActiveDeliveryTime {
+  padding: 2px 0 0 0 !important; // fix vertical-align (no descender due to number-only format), override left-padding for correct center-align
+  width: 135px; // Based on characters "00:00-00:00"
+  text-align: center;
+  border-right: 1px solid @onHeaderColor50;
+  
+  &:before {
+    content: "";
+    display: inline-block;
+    margin-right: 7px;
+    background: @onHeaderColor50;
+    .square(15px);
+    .circle;
+    .positioned;
+    top: 1px;
+  }
+  
+  &.open:before {
+    background: @greenLight;
+  }
+  
+  &.closed:before {
+    background: @orange;
+  }
+  &.notAvailable:before {
+    background: @red;
+  }
+}
+
+#headerOutstandingOrders {
+  .text-overflow;
+  
+  .counter {
+    .square(26px);
+    font-size: 18px;
+    padding-top: 3px;
+    margin-right: 7px;
+  }
+}
+
+.headerButton {
+  width: @headerMobileHeight;
+  padding: 0 !important;
+  text-align: center;
+  border-left: 1px solid @onHeaderColor50;
+  font-size: 24px;
+  
+  .transition(e('background .1s linear, color .1s linear'));
+  
+  &:active {
+    background: @darkHeader20;
+    color: darken(@onHeaderColor, 7%);
+  }
+  
+  &.emphasized {
+    background: @darkHeader20;
+    
+    &:active {
+      background: @darkHeader40;
+    }
+  }
+}
+
+// Module responsiveness
+// --------------------------
+
+// Portrait Tablet
+
+@media only screen and (min-width : 450px) {
+  #headerActiveDeliveryTime {
+    width: 200px;
+    &:before {
+      .square(19px);
+      margin-right: 12px;
+    }
+  }
+  
+  #headerOutstandingOrders {
+    .counter {
+      .square(42px);
+      font-size: 24px;
+      padding-top: 8px;
+      margin-right: 12px;
+    }
+  }
+  
+  .headerButton {
+    width: @headerTabletHeight;
+    font-size: 38px;
+  }
+}
+
+// Landscape Tablet
+
+@media only screen and (min-width : 800px) {
+
+}
