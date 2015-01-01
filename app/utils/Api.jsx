@@ -2,6 +2,10 @@ module.exports = {
 
   _api: 'https://localhost:1070/',
 
+  get: function(path) {
+    return this._request(path, 'get').then(response => response.json());
+  },
+
   post: function(path, data) {
     return this._request(path, 'post', data).then(response => response.json());
   },

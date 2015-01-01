@@ -1,6 +1,5 @@
 var Reflux = require('reflux');
 var AuthActions = require('../actions/AuthActions');
-var localStorage = window.localStorage;
 var Api = require('../utils/Api');
 
 module.exports = Reflux.createStore({
@@ -11,19 +10,17 @@ module.exports = Reflux.createStore({
 
   listenables: AuthActions,
 
-  onLogin: function(number, password) {
+  login: function(number, password) {
     var self = this;
     Api.post('login', {number, password})
-      .then(function(data) {
+      .then(data => {
         localStorage.setItem('token', data.token);
         self.trigger(this.LOGIN_SUCCESS);
       })
-      .catch(function() {
-        self.trigger(this.LOGIN_ERROR);
-      });
+      .catch(() => self.trigger(this.LOGIN_ERROR));
   },
 
-  onLogout: function(number, password) {
+  logout: function(number, password) {
     localStorage.removeItem('token');
     self.trigger(this.LOGOUT);
   },
