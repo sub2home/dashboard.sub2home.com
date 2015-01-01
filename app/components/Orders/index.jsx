@@ -3,6 +3,8 @@ var Header = require('../Header');
 var { Navigation } = require('react-router');
 var AuthStore = require('../../stores/AuthStore');
 
+require('./index.less');
+
 module.exports = React.createClass({
 
   mixins: [Navigation],

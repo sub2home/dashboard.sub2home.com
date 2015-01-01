@@ -1,0 +1,73 @@
+@import "~common-styles/less/common/common.less";
+
+@import "~common-styles/less/modules/sc-content.less";
+@import "~common-styles/less/modules/sc-note.less";
+
+@import "~common-styles/less/modules/e-list.less";
+
+// Module variables
+// --------------------------
+
+
+// Module styles
+// --------------------------
+
+.orderStatus {
+  width: 15px;
+  padding-right: 7px;
+  
+  &:before {
+    content: "";
+    display: inline-block;
+    background: @grayLighter;
+    .square(15px);
+    .circle;
+    .positioned;
+    top: 1px;
+  }
+}
+
+.orderTime {
+  width: 45px;
+}
+
+.orderDestination {
+  &:before {
+    content: "\2013";
+    display: inline-block;
+    margin: 0 5px 0;
+  }
+}
+
+.orderOrderer {
+  &:before {
+    content: "an ";
+  }
+}
+
+.orderDeliveryArea {
+  &:before {
+    content: " in ";
+  }
+}
+
+.orderDueTime {
+  text-align: right;
+  
+  &:before {
+    content: "bis ";
+  }
+}
+
+.orderDestination,
+.orderOrderer,
+.orderDeliveryArea,
+.orderDueTime {
+  &:before {
+    color: @grayLighter;
+  }
+}
+
+// Module responsiveness
+// --------------------------
+
