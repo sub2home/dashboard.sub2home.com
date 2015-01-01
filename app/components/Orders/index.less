@@ -14,7 +14,7 @@
 
 .orderStatus {
   width: 15px;
-  padding-right: 7px;
+  padding-right: 15px;
   
   &:before {
     content: "";
@@ -25,38 +25,53 @@
     .positioned;
     top: 1px;
   }
+  
+  &.delivered {
+    .icn;
+    .iCheck;
+    &:before {
+      
+    }
+  }
 }
 
 .orderTime {
-  width: 45px;
+  width: 50px;
+  text-overflow: clip;
+  &:after {
+    content: "";
+    height: 1px;
+    width: 30px;
+    display: inline-block;
+    background: @grayLighter;
+    margin-left: 5px;
+    vertical-align: middle;
+  }
 }
 
 .orderDestination {
-  &:before {
-    content: "\2013";
-    display: inline-block;
-    margin: 0 5px 0;
-  }
-}
-
-.orderOrderer {
-  &:before {
-    content: "an ";
-  }
+  padding-left: 5px;
 }
 
 .orderDeliveryArea {
   &:before {
-    content: " in ";
+    content: ", ";
   }
 }
 
 .orderDueTime {
-  text-align: right;
+  text-align: right !important;
+  width: 45px;
+  color: @orange;
   
   &:before {
-    content: "bis ";
+    content: "";
   }
+}
+
+.orderClaim {
+  display: none !important;
+  
 }
 
 .orderDestination,
@@ -64,10 +79,22 @@
 .orderDeliveryArea,
 .orderDueTime {
   &:before {
-    color: @grayLighter;
+    color: @grayLight;
   }
 }
 
 // Module responsiveness
 // --------------------------
+
+//.orderOrderer {
+//  &:before {
+//    content: "an ";
+//  }
+//}
+//
+//.orderDeliveryArea {
+//  &:before {
+//    content: " in ";
+//  }
+//}
 
