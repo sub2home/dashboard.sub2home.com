@@ -3,11 +3,11 @@ module.exports = {
   _api: 'https://localhost:1070/',
 
   get: function(path) {
-    return this._request(path, 'get').then(response => response.json());
+    return this._request(path, 'get');
   },
 
   post: function(path, data) {
-    return this._request(path, 'post', data).then(response => response.json());
+    return this._request(path, 'post', data);
   },
 
   _request: function(path, method, data) {
@@ -22,7 +22,8 @@ module.exports = {
       headers.Token = token;
     }
     var body = JSON.stringify(data);
-    return fetch(url, {method, headers, body});
+    var promise = fetch(url, {method, headers, body});
+    return promise.then(response => response.status === 200 ? response.json() : null);
   },
 
 };

@@ -1,8 +1,14 @@
 var React = require('react');
+var OrdersActions = require('../../actions/OrdersActions');
 
 require('./index.less');
 
 module.exports = React.createClass({
+
+  _sendTest: function() {
+    OrdersActions.sendTest();
+  },
+
   render: function() {
     return (
       <header id="header">
@@ -14,12 +20,13 @@ module.exports = React.createClass({
             <span className="counter">3</span>
             <span>offene Bestellungen</span>
           </div>
-          <div id="sendTestMail" className="headerButton icn iMail emphasized">
+          <div id="sendTestMail" onClick={this._sendTest} className="headerButton icn iMail emphasized">
           </div>
           <div id="logout" className="headerButton icn iNav">
           </div>
         </div>
       </header>
     );
-  }
+  },
+
 });

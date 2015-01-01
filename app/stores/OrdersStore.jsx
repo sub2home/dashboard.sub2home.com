@@ -15,4 +15,8 @@ module.exports = Reflux.createStore({
       .catch(() => self.trigger(this.GET_ORDERS_ERROR));
   },
 
+  sendTest: function() {
+    Api.post('stores/memmingen/testorder').then(OrdersActions.fetchOrders);
+  },
+
 });
