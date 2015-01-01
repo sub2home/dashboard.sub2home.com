@@ -6,7 +6,13 @@ module.exports = React.createClass({
     return (
       <div>
         <Header/>
-        <h1>Just a list</h1>
+        <ul>
+          <li>An order 1</li>
+          <li>An order 2</li>
+          <li>An order 3</li>
+          <li>An order 4</li>
+          <li>An order 5</li>
+        </ul>
       </div>
     );
   }
