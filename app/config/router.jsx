@@ -1,8 +1,5 @@
 var React = require('react');
-var Router = require('react-router');
-var Route = Router.Route;
-var NotFoundRoute = Router.NotFoundRoute;
-var DefaultRoute = Router.DefaultRoute;
+var { create, DefaultRoute, Route, NotFoundRoute, HistoryLocation } = require('react-router');
 var App = require('../components/App');
 var Login = require('../components/Login');
 var Orders = require('../components/Orders');
@@ -14,7 +11,7 @@ var routes = (
   </Route>
 );
 
-module.exports = Router.create({
+module.exports = create({
   routes: routes,
-  location: Router.HistoryLocation
+  location: HistoryLocation
 });
