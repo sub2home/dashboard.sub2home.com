@@ -18,13 +18,22 @@ module.exports = React.createClass({
     return (
       <div>
         <Header/>
-        <ul>
-          <li>An order 1</li>
-          <li>An order 2</li>
-          <li>An order 3</li>
-          <li>An order 4</li>
-          <li>An order 5</li>
-        </ul>
+        <div className="content">
+          <ul id="ordersList" className="list">
+            <li>
+              <div className="orderStatus"></div>
+              <div className="orderTime">11:30</div>
+              <div className="orderDestination">
+                <span className="orderOrderer">Schulze</span>
+                <span className="orderDeliveryArea">87700 Benningen</span>
+              </div>
+              <div className="orderDueTime">12:00</div>
+              <div className="orderClaim icn iAlert"></div>
+            </li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
       </div>
     );
   },
