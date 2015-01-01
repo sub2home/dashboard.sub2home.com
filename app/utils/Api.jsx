@@ -1,5 +1,3 @@
-var fetch = require('fetch').fetch;
-
 module.exports = {
 
   _api: 'https://localhost:1070/',
