@@ -1,5 +1,5 @@
-var Reflux = require('reflux');
 var React = require('react');
+var { ListenerMixin } = require('reflux');
 var { Navigation } = require('react-router');
 var AuthActions = require('../../actions/AuthActions');
 var AuthStore = require('../../stores/AuthStore');
@@ -8,7 +8,7 @@ require('./index.less');
 
 module.exports = React.createClass({
 
-  mixins: [Reflux.ListenerMixin, Navigation],
+  mixins: [ListenerMixin, Navigation],
 
   getInitialState: function() {
     return {

@@ -15,6 +15,11 @@ module.exports = {
     var headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+    };
+    var token = localStorage.getItem('token');
+    if (token) {
+      // TODO rename to Authorization
+      headers.Token = token;
     }
     var body = JSON.stringify(data);
     return fetch(url, {method, headers, body});

@@ -9,7 +9,8 @@ module.exports = Reflux.createStore({
   listenables: OrdersActions,
 
   fetchOrders: function() {
-    Api.get('stores/memmingen')
+    var self = this;
+    Api.get('stores/memmingen/orders')
       .then(data => self.trigger(data))
       .catch(() => self.trigger(this.GET_ORDERS_ERROR));
   },
