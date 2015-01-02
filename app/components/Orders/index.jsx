@@ -38,7 +38,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div>
-        <Header/>
+        <Header unreadOrders={this.state.orders.reduce((acc, order) => acc + order.isDelivered, 0)}/>
         <div className="content">
           <ul id="ordersList" className="list">
             {this.state.orders.map(order => <Order {...order} />)}
