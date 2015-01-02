@@ -6,7 +6,7 @@ var Orders = require('../components/Orders');
 
 var routes = (
   <Route name="app" path="/" handler={App}>
-    <Route name="orders" handler={Orders}/>
+    <Route name="orders" path=":storeAlias" handler={Orders}/>
     <DefaultRoute handler={Login}/>
   </Route>
 );

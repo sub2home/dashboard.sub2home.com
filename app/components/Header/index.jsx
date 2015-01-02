@@ -1,16 +1,20 @@
 var React = require('react');
+var { State } = require('react-router');
 var OrdersActions = require('../../actions/OrdersActions');
 
 require('./index.less');
 
 module.exports = React.createClass({
 
+  mixins: [State],
+
   propTypes: {
     unreadOrders: React.PropTypes.number.isRequired,
   },
 
   _sendTest: function() {
-    OrdersActions.sendTest();
+    var { storeAlias } = this.getParams();
+    OrdersActions.sendTest(storeAlias);
   },
 
   render: function() {

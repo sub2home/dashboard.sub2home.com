@@ -1,6 +1,6 @@
 var React = require('react');
 var { ListenerMixin } = require('reflux');
-var { Navigation } = require('react-router');
+var { Navigation, State } = require('react-router');
 var Header = require('../Header');
 var Order = require('../Order');
 var OrdersActions = require('../../actions/OrdersActions');
@@ -11,7 +11,7 @@ require('./index.less');
 
 module.exports = React.createClass({
 
-  mixins: [ListenerMixin, Navigation],
+  mixins: [ListenerMixin, Navigation, State],
 
   getInitialState: function() {
     return {
@@ -28,7 +28,8 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    OrdersActions.fetchOrders();
+    var { storeAlias } = this.getParams();
+    OrdersActions.fetch(storeAlias);
   },
 
   _onOrdersChange: function(orders) {

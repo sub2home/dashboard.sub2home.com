@@ -1,10 +1,13 @@
 var React = require('react/addons');
+var { State } = require('react-router');
 var { timestampToTime } = require('../../utils/Date');
 var OrdersActions = require('../../actions/OrdersActions');
 
 require('./index.less');
 
 module.exports = React.createClass({
+
+  mixins: [State],
 
   getInitialState: function() {
     return {
@@ -15,7 +18,8 @@ module.exports = React.createClass({
   _toggleDelivered: function() {
     this.setState({isLoading: true});
     var isDelivered = !this.props.isDelivered;
-    OrdersActions.updateOrder(this.props.id, {isDelivered});
+    var { storeAlias } = this.getParams();
+    OrdersActions.updateOrder(this.props.id, {isDelivered}, storeAlias);
   },
 
   componentWillReceiveProps: function() {

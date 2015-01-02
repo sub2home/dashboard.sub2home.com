@@ -2,6 +2,4 @@ var Reflux = require('reflux');
 
 module.exports = Reflux.createActions([
   'fetch',
-  'sendTest',
-  'updateOrder',
 ]);
