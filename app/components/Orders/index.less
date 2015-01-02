@@ -16,6 +16,7 @@
   width: 15px;
   padding-right: 15px;
   text-align: center;
+  overflow: visible !important;
   
   &:before {
     content: "";
@@ -27,9 +28,9 @@
     top: 1px;
   }
   
-  &.isLoading {
-    -webkit-animation: orderStatusIsLoading 1s infinite;
-    animation:         orderStatusIsLoading 1s infinite;
+  &.isLoading:before {
+    -webkit-animation: orderStatusIsLoading 1s ease infinite;
+    animation:         orderStatusIsLoading 1s ease infinite;
     .transform-origin(50%, 50%, 0);
   }
   
@@ -47,14 +48,14 @@
 /* Chrome, Safari, Opera */ 
 @-webkit-keyframes orderStatusIsLoading {
     0%     {.scale(1)}
-    50%    {.scale(1.5)}
+    50%    {.scale(1.2)}
     100%   {.scale(1)}
 } 
 
 /* Standard syntax */
 @keyframes orderStatusIsLoading {
     0%     {.scale(1)}
-    50%    {.scale(1.5)}
+    50%    {.scale(1.2)}
     100%   {.scale(1)}
 }
 
