@@ -6,15 +6,29 @@ require('./index.less');
 
 module.exports = React.createClass({
 
+  getInitialState: function() {
+    return {
+      isLoading: false,
+    };
+  },
+
   _toggleDelivered: function() {
+    this.setState({isLoading: true});
     var isDelivered = !this.props.isDelivered;
     OrdersActions.updateOrder(this.props.id, {isDelivered});
+  },
+
+  componentWillReceiveProps: function() {
+    if (this.state.isLoading) {
+      this.setState({isLoading: false});
+    }
   },
 
   render: function() {
     var orderStatusClasses = React.addons.classSet({
       orderStatus: true,
-      delivered: this.props.isDelivered
+      isDelivered: this.props.isDelivered,
+      isLoading: this.state.isLoading,
     });
     return (
       <li>
