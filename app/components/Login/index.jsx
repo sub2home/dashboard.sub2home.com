@@ -20,12 +20,12 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    if (AuthStore.isLoggedIn()) {
-      StoresActions.fetch();
-      return;
-    }
     this.listenTo(AuthStore, this._onAuthChange);
     this.listenTo(StoresStore, this._onStoresChange);
+
+    if (AuthStore.isLoggedIn()) {
+      StoresActions.fetch();
+    }
   },
 
   _onAuthChange: function(status) {

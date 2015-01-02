@@ -22,7 +22,6 @@ module.exports = React.createClass({
   componentDidMount: function() {
     if (!AuthStore.isLoggedIn()) {
       this.replaceWith('/');
-      return;
     }
     this.listenTo(OrdersStore, this._onOrdersChange);
   },
