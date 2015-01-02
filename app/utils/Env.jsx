@@ -1,5 +1,5 @@
 module.exports = {
 
-  isProduction: window.location.hostname.indexOf('sub2home.com') !== -1,
+  isProduction: location.hostname.indexOf('sub2home.com') !== -1,
 
 };
