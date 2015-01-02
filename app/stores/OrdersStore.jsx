@@ -6,16 +6,16 @@ module.exports = Reflux.createStore({
 
   listenables: OrdersActions,
 
-  fetch: function(storeAlias) {
+  list: function(storeAlias) {
     Api.get(`stores/${storeAlias}/orders`).then(this.trigger.bind(this));
   },
 
   sendTest: function(storeAlias) {
-    Api.post(`stores/${storeAlias}/testorder`).then(OrdersActions.fetch.bind(null, storeAlias));
+    Api.post(`stores/${storeAlias}/testorder`).then(OrdersActions.list.bind(null, storeAlias));
   },
 
   updateOrder: function(id, data, storeAlias) {
-    Api.put(`orders/${id}`, data).then(OrdersActions.fetch.bind(null, storeAlias));
+    Api.put(`orders/${id}`, data).then(OrdersActions.list.bind(null, storeAlias));
   },
 
 });

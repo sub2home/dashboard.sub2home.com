@@ -24,13 +24,13 @@ module.exports = React.createClass({
     this.listenTo(StoresStore, this._onStoresChange);
 
     if (AuthStore.isLoggedIn()) {
-      StoresActions.fetch();
+      StoresActions.list();
     }
   },
 
   _onAuthChange: function(status) {
     if (status === AuthStore.LOGIN_SUCCESS) {
-      StoresActions.fetch();
+      StoresActions.list();
     }
   },
 

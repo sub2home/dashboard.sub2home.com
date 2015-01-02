@@ -28,7 +28,7 @@ module.exports = React.createClass({
 
   componentWillMount: function() {
     var { storeAlias } = this.getParams();
-    OrdersActions.fetch(storeAlias);
+    OrdersActions.list(storeAlias);
   },
 
   _onOrdersChange: function(orders) {

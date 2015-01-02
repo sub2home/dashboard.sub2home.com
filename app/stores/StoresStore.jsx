@@ -8,7 +8,7 @@ module.exports = Reflux.createStore({
 
   listenables: StoresActions,
 
-  fetch: function() {
+  list: function() {
     var self = this;
     Api.get('clients')
       .then(data => self.trigger(data.storesCollection))

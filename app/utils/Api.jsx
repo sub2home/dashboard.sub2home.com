@@ -28,7 +28,7 @@ module.exports = {
       headers.Token = token;
     }
     var body = JSON.stringify(data);
-    var promise = fetch(url, {method, headers, body});
+    var promise = list(url, {method, headers, body});
     return promise.then(response => response.status === 200 ? response.json() : null);
   },
 

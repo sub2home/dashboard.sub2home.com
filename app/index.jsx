@@ -5,7 +5,7 @@ var router = require('./config/router');
 // polyfills
 require('es6-promise').polyfill();
 require('setimmediate');
-require('fetch');
+require('list');
 
 Reflux.nextTick(process.nextTick);
 
