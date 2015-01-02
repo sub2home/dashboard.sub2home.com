@@ -4,6 +4,7 @@
 @import "~common-styles/less/modules/sc-note.less";
 
 @import "~common-styles/less/modules/e-list.less";
+//@import "~common-styles/less/modules/e-input.less";
 
 // Module variables
 // --------------------------
@@ -17,7 +18,6 @@
   display: table;
   table-layout: fixed;
   width: 100%;
-  padding: 15px;
   .border-box;
   
   > div {
@@ -37,8 +37,6 @@
   padding: 0 0 0 15px;
   .border-box;
 }
-
-
 
 .orderStatus {
   width: 15px;
@@ -65,6 +63,7 @@
   &.isDelivered {
     .icn;
     .iCheck;
+    color: @greenLight;
     font-size: 16px;
     
     &:before {
@@ -127,7 +126,6 @@
 
 .orderClaim {
   display: none !important;
-  
 }
 
 .orderDestination,
@@ -141,6 +139,30 @@
 
 // Module responsiveness
 // --------------------------
+
+#ordersControls {
+  
+}
+
+#ordersRefresh {
+  width: 65px;
+  text-align: center;
+  padding-left: 20px;
+}
+
+.orderStatus {
+  
+  width: 20px;
+  padding-right: 25px;
+  
+  &:before {
+    .square(20px);
+  }
+  
+  &.isDelivered {
+    font-size: 22px;
+  }
+}
 
 //.orderOrderer {
 //  &:before {
