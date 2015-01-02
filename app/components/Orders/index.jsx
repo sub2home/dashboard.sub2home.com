@@ -40,6 +40,12 @@ module.exports = React.createClass({
       <div>
         <Header unreadOrders={this.state.orders.reduce((acc, order) => acc + !order.isDelivered, 0)}/>
         <div className="content">
+          <div id="ordersControls" className="note above">
+           <div id="ordersSearch">
+             <input type="text" placeholder="Bestellungen durchsuchen" />
+           </div>
+            <div id="ordersRefresh" className="icn iNav"></div>
+          </div>
           <ul id="ordersList" className="list">
             {this.state.orders.map(order => <Order {...order} />)}
           </ul>
