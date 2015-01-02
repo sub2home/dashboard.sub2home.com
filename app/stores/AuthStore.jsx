@@ -15,9 +15,9 @@ module.exports = Reflux.createStore({
     Api.post('login', {number, password})
       .then(data => {
         localStorage.setItem('token', data.token);
-        self.trigger(this.LOGIN_SUCCESS);
+        self.trigger(self.LOGIN_SUCCESS);
       })
-      .catch(() => self.trigger(this.LOGIN_ERROR));
+      .catch(() => self.trigger(self.LOGIN_ERROR));
   },
 
   logout: function(number, password) {
