@@ -10,6 +10,10 @@ module.exports = {
     return this._request(path, 'post', data);
   },
 
+  put: function(path, data) {
+    return this._request(path, 'put', data);
+  },
+
   _request: function(path, method, data) {
     var url = this._api + path;
     var headers = {

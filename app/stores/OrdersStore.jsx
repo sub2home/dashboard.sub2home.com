@@ -12,11 +12,15 @@ module.exports = Reflux.createStore({
     var self = this;
     Api.get('stores/memmingen/orders')
       .then(data => self.trigger(data))
-      .catch(() => self.trigger(this.GET_ORDERS_ERROR));
+      .catch(() => self.trigger(self.GET_ORDERS_ERROR));
   },
 
   sendTest: function() {
     Api.post('stores/memmingen/testorder').then(OrdersActions.fetchOrders);
+  },
+
+  updateOrder: function(id, data) {
+    Api.put('orders/' + id, data).then(OrdersActions.fetchOrders);
   },
 
 });
