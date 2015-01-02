@@ -29,8 +29,8 @@
   }
   
   &.isLoading:before {
-    -webkit-animation: orderStatusIsLoading 1s ease infinite;
-    animation:         orderStatusIsLoading 1s ease infinite;
+    -webkit-animation: orderStatusIsLoading 1s ease-out infinite;
+    animation:         orderStatusIsLoading 1s ease-out infinite;
     .transform-origin(50%, 50%, 0);
   }
   
@@ -51,14 +51,14 @@
 /* Chrome, Safari, Opera */ 
 @-webkit-keyframes orderStatusIsLoading {
     0%     {.scale(1)}
-    50%    {.scale(1.1)}
+    50%    {.scale(0.7)}
     100%   {.scale(1)}
 } 
 
 /* Standard syntax */
 @keyframes orderStatusIsLoading {
     0%     {.scale(1)}
-    50%    {.scale(1.1)}
+    50%    {.scale(0.7)}
     100%   {.scale(1)}
 }
 
