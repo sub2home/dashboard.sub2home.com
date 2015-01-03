@@ -9,12 +9,12 @@ module.exports = React.createClass({
   mixins: [State],
 
   propTypes: {
-    unreadOrders: React.PropTypes.number.isRequired,
+    currentCount: React.PropTypes.number.isRequired,
   },
 
   _sendTest: function() {
     var { storeAlias } = this.getParams();
-    actions.sendTest(storeAlias);
+    actions.createTestOrder(storeAlias);
   },
 
   render: function() {
@@ -25,8 +25,8 @@ module.exports = React.createClass({
             11:30-15:00
           </div>
           <div id="headerOutstandingOrders">
-            <span className="counter">{this.props.unreadOrders}</span>
-            <span>offene Bestellungen</span>
+            <span className="counter">{this.props.currentCount}</span>
+            <span>aktuelle Bestellungen</span>
           </div>
           <div id="sendTestMail" onClick={this._sendTest} className="headerButton icn iMail emphasized">
           </div>

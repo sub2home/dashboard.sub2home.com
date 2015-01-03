@@ -10,7 +10,7 @@ var actions = Reflux.createActions([
   'fetchOrders',
   'setOrdersFilter',
   'ordersUpdated',
-  'sendTest',
+  'createTestOrder',
   'updateOrder',
   // stores
   'list',
@@ -25,12 +25,12 @@ actions.fetchOrders.listen(function(storeAlias) {
   api.get(`stores/${storeAlias}/orders`).then(actions.ordersUpdated);
 });
 
-actions.sendTest.listen(function(storeAlias) {
+actions.createTestOrder.listen(function(storeAlias) {
   api.post(`stores/${storeAlias}/testorder`).then(actions.fetchOrders.bind(null, storeAlias));
 });
 
 actions.updateOrder.listen(function(id, data, storeAlias) {
-  api.put(`orders/${id}`, data).then(actions.list.bind(null, storeAlias));
+  api.put(`orders/${id}`, data).then(actions.fetchOrders.bind(null, storeAlias));
 });
 
 module.exports = actions;

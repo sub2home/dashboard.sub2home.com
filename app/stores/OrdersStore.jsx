@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var Reflux = require('reflux');
 var actions = require('../actions');
 var api = require('../utils/api');
@@ -8,24 +9,24 @@ module.exports = Reflux.createStore({
   listenables: actions,
 
   init: function() {
-    this.orders = [];
-    this.filter = '';
+    this._orders = [];
+    this._filter = '';
   },
 
   ordersUpdated: function(orders) {
-    this.orders = orders;
-    this.update();
+    this._orders = orders;
+    this._update();
   },
 
   setOrdersFilter: function(filter) {
-    this.filter = filter;
-    this.update();
+    this._filter = filter;
+    this._update();
   },
 
-  update: function() {
-    var orders = this.orders;
+  _update: function() {
+    var orders = this._orders;
 
-    if (this.filter) {
+    if (this._filter) {
       var keys = [
         'addressModel.firstName',
         'addressModel.lastName',
@@ -33,12 +34,27 @@ module.exports = Reflux.createStore({
         'addressModel.city',
         'addressModel.district',
       ];
-      orders = filter.forKeys(keys, this.orders, this.filter);
+      orders = filter.forKeys(keys, this._orders, this._filter);
     }
 
-    orders = orders.sort((a, b) => new Date(b.dueAt) - new Date(a.dueAt));
+    var now = new Date();
 
-    this.trigger(orders);
+    var { old, current, future } = _.groupBy(orders, function(order) {
+      var delta = (new Date(order.dueAt) - now) / 60000;
+      if (delta < 0) {
+        return 'old';
+      } else if (delta <= order.deliveryAreaModel.minimumDuration) {
+        return 'current';
+      } else {
+        return 'future';
+      }
+    });
+
+    current = current.sort((a, b) => new Date(a.dueAt) - new Date(b.dueAt));
+    old = old.sort((a, b) => new Date(b.dueAt) - new Date(a.dueAt));
+    future = future.sort((a, b) => new Date(b.dueAt) - new Date(a.dueAt));
+
+    this.trigger({ old, current, future });
   },
 
 });

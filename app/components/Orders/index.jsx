@@ -16,26 +16,27 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
-      orders: [],
+      current: [],
+      future: [],
+      old: [],
       nextDeliveryTime: null,
     };
   },
 
-  componentDidMount: function() {
+  componentWillMount: function() {
     if (!AuthStore.isLoggedIn()) {
       this.replaceWith('/');
     }
+
     this.listenTo(ordersStore, this._onOrdersUpdate);
     //this.listenTo(sStore, this._onsChange);
-  },
 
-  componentWillMount: function() {
     var { storeAlias } = this.getParams();
     actions.listenToOrders(storeAlias);
   },
 
-  _onOrdersUpdate: function(orders) {
-    this.setState({orders});
+  _onOrdersUpdate: function(data) {
+    this.setState(data);
   },
 
   _onFilterChange: function(e) {
@@ -45,7 +46,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div>
-        <Header nextDeliveryTime={this.state.nextDeliveryTime} unreadOrders={this.state.orders.reduce((acc, order) => acc + !order.isDelivered, 0)}/>
+        <Header nextDeliveryTime={this.state.nextDeliveryTime} currentCount={this.state.current.length}/>
         <div className="content">
           <div id="ordersControls" className="note above">
            <div id="ordersSearch">
@@ -53,8 +54,17 @@ module.exports = React.createClass({
            </div>
             <div id="ordersRefresh" className="icn iNav"></div>
           </div>
+          <h2>Current</h2>
           <ul id="ordersList" className="list">
-            {this.state.orders.map(order => <Order {...order} />)}
+            {this.state.current.map(order => <Order {...order} />)}
+          </ul>
+          <h2>Future</h2>
+          <ul id="ordersList" className="list">
+            {this.state.future.map(order => <Order {...order} />)}
+          </ul>
+          <h2>Old</h2>
+          <ul id="ordersList" className="list">
+            {this.state.old.map(order => <Order {...order} />)}
           </ul>
         </div>
       </div>
