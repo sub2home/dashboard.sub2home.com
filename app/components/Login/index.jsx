@@ -1,8 +1,7 @@
 var React = require('react');
 var { ListenerMixin } = require('reflux');
 var { Navigation } = require('react-router');
-var AuthActions = require('../../actions/AuthActions');
-var StoresActions = require('../../actions/StoresActions');
+var actions = require('../../actions');
 var AuthStore = require('../../stores/AuthStore');
 var StoresStore = require('../../stores/StoresStore');
 
@@ -24,13 +23,13 @@ module.exports = React.createClass({
     this.listenTo(StoresStore, this._onStoresChange);
 
     if (AuthStore.isLoggedIn()) {
-      StoresActions.list();
+      actions.list();
     }
   },
 
   _onAuthChange: function(status) {
     if (status === AuthStore.LOGIN_SUCCESS) {
-      StoresActions.list();
+      actions.list();
     }
   },
 
@@ -54,7 +53,7 @@ module.exports = React.createClass({
   },
 
   _handleSubmit: function() {
-    AuthActions.login(this.state.number, this.state.password);
+    actions.login(this.state.number, this.state.password);
   },
 
   render: function() {

@@ -3,9 +3,10 @@ var { ListenerMixin } = require('reflux');
 var { Navigation, State } = require('react-router');
 var Header = require('../Header');
 var Order = require('../Order');
-var OrdersActions = require('../../actions/OrdersActions');
+var actions = require('../../actions');
 var AuthStore = require('../../stores/AuthStore');
-var OrdersStore = require('../../stores/OrdersStore');
+var ordersStore = require('../../stores/ordersStore');
+var StoresStore = require('../../stores/StoresStore');
 
 require('./index.less');
 
@@ -16,6 +17,7 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       orders: [],
+      nextDeliveryTime: null,
     };
   },
 
@@ -23,26 +25,31 @@ module.exports = React.createClass({
     if (!AuthStore.isLoggedIn()) {
       this.replaceWith('/');
     }
-    this.listenTo(OrdersStore, this._onOrdersChange);
+    this.listenTo(ordersStore, this._onOrdersUpdate);
+    //this.listenTo(sStore, this._onsChange);
   },
 
   componentWillMount: function() {
     var { storeAlias } = this.getParams();
-    OrdersActions.list(storeAlias);
+    actions.listenToOrders(storeAlias);
   },
 
-  _onOrdersChange: function(orders) {
+  _onOrdersUpdate: function(orders) {
     this.setState({orders});
+  },
+
+  _onFilterChange: function(e) {
+    actions.setOrdersFilter(e.target.value);
   },
 
   render: function() {
     return (
       <div>
-        <Header unreadOrders={this.state.orders.reduce((acc, order) => acc + !order.isDelivered, 0)}/>
+        <Header nextDeliveryTime={this.state.nextDeliveryTime} unreadOrders={this.state.orders.reduce((acc, order) => acc + !order.isDelivered, 0)}/>
         <div className="content">
           <div id="ordersControls" className="note above">
            <div id="ordersSearch">
-             <input type="text" placeholder="Bestellungen durchsuchen" />
+             <input type="text" onChange={this._onFilterChange} placeholder="Bestellungen durchsuchen" />
            </div>
             <div id="ordersRefresh" className="icn iNav"></div>
           </div>

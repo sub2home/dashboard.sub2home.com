@@ -1,21 +1,44 @@
 var Reflux = require('reflux');
-var OrdersActions = require('../actions/OrdersActions');
-var Api = require('../utils/Api');
+var actions = require('../actions');
+var api = require('../utils/api');
+var filter = require('../utils/filter');
 
 module.exports = Reflux.createStore({
 
-  listenables: OrdersActions,
+  listenables: actions,
 
-  list: function(storeAlias) {
-    Api.get(`stores/${storeAlias}/orders`).then(this.trigger.bind(this));
+  init: function() {
+    this.orders = [];
+    this.filter = '';
   },
 
-  sendTest: function(storeAlias) {
-    Api.post(`stores/${storeAlias}/testorder`).then(OrdersActions.list.bind(null, storeAlias));
+  ordersUpdated: function(orders) {
+    this.orders = orders;
+    this.update();
   },
 
-  updateOrder: function(id, data, storeAlias) {
-    Api.put(`orders/${id}`, data).then(OrdersActions.list.bind(null, storeAlias));
+  setOrdersFilter: function(filter) {
+    this.filter = filter;
+    this.update();
+  },
+
+  update: function() {
+    var orders = this.orders;
+
+    if (this.filter) {
+      var keys = [
+        'addressModel.firstName',
+        'addressModel.lastName',
+        'addressModel.postal',
+        'addressModel.city',
+        'addressModel.district',
+      ];
+      orders = filter.forKeys(keys, this.orders, this.filter);
+    }
+
+    orders = orders.sort((a, b) => new Date(b.dueAt) - new Date(a.dueAt));
+
+    this.trigger(orders);
   },
 
 });

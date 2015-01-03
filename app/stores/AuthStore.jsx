@@ -1,6 +1,6 @@
 var Reflux = require('reflux');
-var AuthActions = require('../actions/AuthActions');
-var Api = require('../utils/Api');
+var actions = require('../actions');
+var api = require('../utils/api');
 
 module.exports = Reflux.createStore({
 
@@ -8,11 +8,11 @@ module.exports = Reflux.createStore({
   LOGIN_ERROR: 2,
   LOGOUT: 3,
 
-  listenables: AuthActions,
+  listenables: actions,
 
   login: function(number, password) {
     var self = this;
-    Api.post('login', {number, password})
+    api.post('login', {number, password})
       .then(data => {
         localStorage.setItem('token', data.token);
         self.trigger(self.LOGIN_SUCCESS);

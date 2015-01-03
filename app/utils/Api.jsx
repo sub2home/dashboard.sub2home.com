@@ -1,8 +1,8 @@
-var Env = require('./Env');
+var env = require('./env');
 
 module.exports = {
 
-  _api: Env.isProduction ? 'https://api.sub2home.com/' : `https://${location.hostname}:1070/`,
+  _api: env.isProduction ? 'https://api.sub2home.com/' : `https://${location.hostname}:1070/`,
 
   get: function(path) {
     return this._request(path, 'get');

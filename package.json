@@ -34,6 +34,8 @@
     "common-styles": "sub2home/common-styles",
     "es6-promise": "^2.0.1",
     "fetch": "github/fetch",
+    "lodash": "^2.4.1",
+    "lunr": "^0.5.7",
     "react": "^0.12.2",
     "react-router": "^0.11.6",
     "reflux": "^0.2.1",
