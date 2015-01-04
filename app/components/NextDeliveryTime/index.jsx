@@ -1,5 +1,4 @@
 var React = require('react');
-var actions = require('../../actions');
 var { minutesToTime } = require('../../utils/date');
 
 require('./index.less');
