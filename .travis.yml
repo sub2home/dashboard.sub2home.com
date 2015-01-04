@@ -13,3 +13,5 @@ deploy:
   region: eu-west-1
   local-dir: dist
   acl: public_read
+notifications:
+  email: false
