@@ -28,8 +28,7 @@ module.exports = React.createClass({
             <span className="counter">{this.props.currentCount}</span>
             <span>aktuelle Bestellungen</span>
           </div>
-          <div id="sendTestMail" onClick={this._sendTest} className="headerButton icn iMail emphasized">
-          </div>
+          <div id="sendTestMail" onClick={this._sendTest} className="headerButton icn iMail emphasized"></div>
           <div id="logout" className="headerButton icn iNav">
           </div>
         </div>

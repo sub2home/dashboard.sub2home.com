@@ -43,21 +43,37 @@ module.exports = React.createClass({
     actions.setOrdersFilter(e.target.value);
   },
 
+  _createTestOrder: function() {
+    var { storeAlias } = this.getParams();
+    actions.createTestOrder(storeAlias);
+  },
+
   render: function() {
+    var currentOrders;
+    if (this.state.current.length > 0) {
+      currentOrders = (
+        <ul id="ordersList" className="list">
+          {this.state.current.map(order => <Order {...order} />)}
+        </ul>
+      );
+    } else {
+      currentOrders = (
+        <div id="sendTestMail" onClick={this._createTestOrder} className="headerButton icn iMail emphasized"></div>
+      );
+    }
+
     return (
       <div>
         <Header nextDeliveryTime={this.state.nextDeliveryTime} currentCount={this.state.current.length}/>
         <div className="content">
           <div id="ordersControls" className="note above">
-           <div id="ordersSearch">
-             <input type="text" onChange={this._onFilterChange} placeholder="Bestellungen durchsuchen" />
-           </div>
+            <div id="ordersSearch">
+              <input type="text" onChange={this._onFilterChange} placeholder="Bestellungen durchsuchen" />
+            </div>
             <div id="ordersRefresh" className="icn iNav"></div>
           </div>
           <h2>Current</h2>
-          <ul id="ordersList" className="list">
-            {this.state.current.map(order => <Order {...order} />)}
-          </ul>
+          {currentOrders}
           <h2>Future</h2>
           <ul id="ordersList" className="list">
             {this.state.future.map(order => <Order {...order} />)}

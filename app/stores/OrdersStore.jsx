@@ -50,6 +50,10 @@ module.exports = Reflux.createStore({
       }
     });
 
+    current = current || [];
+    old = old || [];
+    future = future || [];
+
     current = current.sort((a, b) => new Date(a.dueAt) - new Date(b.dueAt));
     old = old.sort((a, b) => new Date(b.dueAt) - new Date(a.dueAt));
     future = future.sort((a, b) => new Date(b.dueAt) - new Date(a.dueAt));
