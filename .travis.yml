@@ -3,6 +3,7 @@ node_js:
 - '0.11'
 after_success:
 - npm run build
+- find dist -type f -exec gzip "{}" \; -exec mv "{}.gz" "{}" \;
 deploy:
   provider: s3
   access_key_id:
@@ -14,5 +15,6 @@ deploy:
   local-dir: dist
   skip_cleanup: true
   acl: public_read
+  detect_encoding: true
 notifications:
   email: false
