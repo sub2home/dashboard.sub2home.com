@@ -38,26 +38,29 @@ module.exports = Reflux.createStore({
 
     var now = new Date();
 
-    var { old, current, future } = _.groupBy(orders, function(order) {
-      var delta = (new Date(order.dueAt) - now) / 60000;
-      if (delta < 0) {
-        return 'old';
-      } else if (delta <= order.deliveryAreaModel.minimumDuration) {
+    var { current, today, old } = _.groupBy(orders, function(order) {
+      var dueDate = new Date(order.dueAt);
+      var delta = (dueDate - now) / 60000;
+      var isToday = dueDate.toDateString() === now.toDateString();
+
+      if (delta >= 0 && delta <= order.deliveryAreaModel.minimumDuration) {
         return 'current';
+      } else if (isToday) {
+        return 'today';
       } else {
-        return 'future';
+        return 'old';
       }
     });
 
     current = current || [];
+    today = today || [];
     old = old || [];
-    future = future || [];
 
     current = current.sort((a, b) => new Date(a.dueAt) - new Date(b.dueAt));
+    today = today.sort((a, b) => new Date(b.dueAt) - new Date(a.dueAt));
     old = old.sort((a, b) => new Date(b.dueAt) - new Date(a.dueAt));
-    future = future.sort((a, b) => new Date(b.dueAt) - new Date(a.dueAt));
 
-    this.trigger({ old, current, future });
+    this.trigger({ current, today, old });
   },
 
 });

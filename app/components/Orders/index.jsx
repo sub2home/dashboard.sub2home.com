@@ -16,7 +16,7 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       current: [],
-      future: [],
+      today: [],
       old: [],
       nextDeliveryTime: {
         deliveryTime: null,
@@ -77,9 +77,9 @@ module.exports = React.createClass({
           </div>
           <h2>Current</h2>
           {currentOrders}
-          <h2>Future</h2>
+          <h2>Today</h2>
           <ul id="ordersList" className="list">
-            {this.state.future.map(order => <Order order={order} />)}
+            {this.state.today.map(order => <Order order={order} />)}
           </ul>
           <h2>Old</h2>
           <ul id="ordersList" className="list">

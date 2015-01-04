@@ -7,7 +7,6 @@ module.exports = Reflux.createStore({
   listenables: actions,
 
   deliveryTimesUpdated: function(deliveryTimes) {
-
     var now = new Date();
     var min = now.getMinutes() + now.getHours() * 60;
     var day = now.getDay();
@@ -15,11 +14,9 @@ module.exports = Reflux.createStore({
     var mod = x => (x + 7) % 7;
 
     var deliveryTime = _.find(deliveryTimes, d => d.dayOfWeek === day && d.startMinutes <= min && min <= d.endMinutes);
-    var isNow = false;
+    var isNow = !!deliveryTime;
 
-    if (deliveryTime) {
-      isNow = true;
-    } else {
+    if (!deliveryTime) {
       deliveryTime = _(deliveryTimes)
         .filter(d => d.dayOfWeek !== day || d.startMinutes > min)
         .sort((a, b) => a.startMinutes - b.startMinutes)
