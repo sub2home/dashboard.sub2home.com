@@ -3,6 +3,7 @@ var { State } = require('react-router');
 var { timestampToTime } = require('../../utils/date');
 var actions = require('../../actions');
 var OrderDetails = require('../OrderDetails');
+var OrderCountdown = require('../OrderCountdown');
 
 require('./index.less');
 
@@ -55,11 +56,7 @@ module.exports = React.createClass({
 
     return (
       <li onClick={this._toggleDetails}>
-        <div className="orderRemainingTime">
-          <svg width="50" height="50">
-            <circle className="orderRemainingTimeStroke" strokeDasharray="40px * 3.14159265359" strokeDashoffset="40px * 3.14159265359" cx="25" cy="25" r="20" />
-          </svg>
-        </div>
+        <OrderCountdown dueDate={new Date(this.props.order.dueAt)} timespan={this.props.order.deliveryAreaModel.minimumDuration} />
         <div className={orderStatusClasses} onClick={this._toggleDelivered}></div>
         <div className="orderTime">{timestampToTime(this.props.order.createdAt)}</div>
         <div className="orderDestination">
