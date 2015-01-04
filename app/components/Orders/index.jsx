@@ -6,7 +6,7 @@ var Order = require('../Order');
 var actions = require('../../actions');
 var AuthStore = require('../../stores/AuthStore');
 var ordersStore = require('../../stores/ordersStore');
-var StoresStore = require('../../stores/StoresStore');
+var nextDeliveryTimeStore = require('../../stores/nextDeliveryTimeStore');
 
 require('./index.less');
 
@@ -19,7 +19,10 @@ module.exports = React.createClass({
       current: [],
       future: [],
       old: [],
-      nextDeliveryTime: null,
+      nextDeliveryTime: {
+        deliveryTime: null,
+        isNow: false,
+      },
     };
   },
 
@@ -29,14 +32,19 @@ module.exports = React.createClass({
     }
 
     this.listenTo(ordersStore, this._onOrdersUpdate);
-    //this.listenTo(sStore, this._onsChange);
+    this.listenTo(nextDeliveryTimeStore, this._onNextDeliveryTimeChange);
 
     var { storeAlias } = this.getParams();
     actions.listenToOrders(storeAlias);
+    actions.fetchDeliveryTimes(storeAlias);
   },
 
   _onOrdersUpdate: function(data) {
     this.setState(data);
+  },
+
+  _onNextDeliveryTimeChange: function(nextDeliveryTime) {
+    this.setState({ nextDeliveryTime });
   },
 
   _onFilterChange: function(e) {

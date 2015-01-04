@@ -14,38 +14,6 @@
   
 }
 
-#headerActiveDeliveryTime {
-  padding: 2px 0 0 !important; // fix vertical-align (no descender due to number-only format), override left-padding for correct center-align
-  width: 135px; // Based on characters "00:00-00:00"
-  text-align: center;
-  border-right: 1px solid @onHeaderColor50;
-  white-space: nowrap;
-  overflow: hidden;
-  
-  &:before {
-    content: "";
-    display: inline-block;
-    margin-right: 7px;
-    background: @onHeaderColor50;
-    .square(15px);
-    .circle;
-    .positioned;
-    top: 1px;
-  }
-  
-  &.open:before {
-    background: @greenLight;
-  }
-  
-  &.closed:before {
-    background: @orange;
-  }
-  &.notAvailable:before {
-    background: @red;
-  }
-  
-}
-
 #headerOutstandingOrders {
   .text-overflow;
   

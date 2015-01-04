@@ -1,6 +1,7 @@
 var React = require('react');
 var { State } = require('react-router');
 var actions = require('../../actions');
+var NextDeliveryTime = require('../NextDeliveryTime');
 
 require('./index.less');
 
@@ -10,6 +11,10 @@ module.exports = React.createClass({
 
   propTypes: {
     currentCount: React.PropTypes.number.isRequired,
+    nextDeliveryTime: React.PropTypes.shape({
+      deliveryTime: React.PropTypes.object.isRequired,
+      isNow: React.PropTypes.bool.isRequired,
+    }),
   },
 
   _sendTest: function() {
@@ -21,9 +26,7 @@ module.exports = React.createClass({
     return (
       <header id="header">
         <div id="headerContent">
-          <div id="headerActiveDeliveryTime">
-            11:30-15:00
-          </div>
+          <NextDeliveryTime isNow={this.props.nextDeliveryTime.isNow} deliveryTime={this.props.nextDeliveryTime.deliveryTime} />
           <div id="headerOutstandingOrders">
             <span className="counter">{this.props.currentCount}</span>
             <span>aktuelle Bestellungen</span>

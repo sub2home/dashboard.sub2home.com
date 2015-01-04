@@ -5,6 +5,9 @@ var actions = Reflux.createActions([
   // auth
   'login',
   'logout',
+  // deliveryTimes
+  'fetchDeliveryTimes',
+  'deliveryTimesUpdated',
   // orders
   'listenToOrders',
   'fetchOrders',
@@ -16,6 +19,18 @@ var actions = Reflux.createActions([
   'list',
 ]);
 
+
+/*
+ * deliveryTime actions
+ */
+actions.fetchDeliveryTimes.listen(function(storeAlias) {
+  api.get(`stores/${storeAlias}/auth`).then(data => actions.deliveryTimesUpdated(data.deliveryTimesCollection));
+});
+
+
+/*
+ * order actions
+ */
 actions.listenToOrders.listen(function(storeAlias) {
   actions.fetchOrders(storeAlias);
   setInterval(actions.fetchOrders.bind(null, storeAlias), 5000);

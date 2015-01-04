@@ -1,7 +1,6 @@
 var _ = require('lodash');
 var Reflux = require('reflux');
 var actions = require('../actions');
-var api = require('../utils/api');
 var filter = require('../utils/filter');
 
 module.exports = Reflux.createStore({
