@@ -38,6 +38,30 @@
   .border-box;
 }
 
+.ordersAreaLabel {
+  .positioned;
+  margin-top: 10px;
+  font-size: 13px;
+  text-align: left;
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 1px;
+    top: 50%;
+    margin-top: -2px;
+    width: 100%;
+    border-top: 3px double @grayLighter;
+  }
+  span {
+    .positioned;
+    display: inline-block;
+    background: @white;
+    padding: 0 5px;
+    margin-left: 10px;
+  }
+}
+
 .orderStatus {
   width: 15px;
   padding-right: 15px;
@@ -140,39 +164,26 @@
 // Module responsiveness
 // --------------------------
 
-#ordersControls {
-  
-}
+// Portrait Tablet
 
-#ordersRefresh {
-  width: 65px;
-  text-align: center;
-  padding-left: 20px;
-}
+@media only screen and (min-width : 450px) {
 
-.orderStatus {
-  
-  width: 20px;
-  padding-right: 25px;
-  
-  &:before {
-    .square(20px);
+  .orderStatus {
+
+    width: 20px;
+    padding-right: 25px;
+
+    &:before {
+      .square(20px);
+    }
+
+    &.isDelivered {
+      font-size: 22px;
+    }
   }
   
-  &.isDelivered {
-    font-size: 22px;
+  .orderDueTime {
+    width: 60px;
   }
+  
 }
-
-//.orderOrderer {
-//  &:before {
-//    content: "an ";
-//  }
-//}
-//
-//.orderDeliveryArea {
-//  &:before {
-//    content: " in ";
-//  }
-//}
-

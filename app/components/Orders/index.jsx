@@ -61,7 +61,7 @@ module.exports = React.createClass({
       );
     } else {
       currentOrders = (
-        <div id="sendTestMail" onClick={this._createTestOrder} className="headerButton icn iMail emphasized"></div>
+        <div id="sendTestMail" onClick={this._createTestOrder} className="icn iMail"></div>
       );
     }
 
@@ -75,13 +75,13 @@ module.exports = React.createClass({
             </div>
             <div id="ordersRefresh" className="icn iNav"></div>
           </div>
-          <h2>Current</h2>
+          <div className="ordersAreaLabel"><span>Aktuell</span></div>
           {currentOrders}
-          <h2>Today</h2>
+          <div className="ordersAreaLabel"><span>Heute</span></div>
           <ul id="ordersList" className="list">
             {this.state.today.map(order => <Order order={order} />)}
           </ul>
-          <h2>Old</h2>
+          <div className="ordersAreaLabel"><span>Ältere Bestellungen</span></div>
           <ul id="ordersList" className="list">
             {this.state.old.map(order => <Order order={order} />)}
           </ul>

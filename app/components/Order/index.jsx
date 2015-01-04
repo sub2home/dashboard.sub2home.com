@@ -58,13 +58,11 @@ module.exports = React.createClass({
       <li onClick={this._toggleDetails}>
         <OrderCountdown dueDate={new Date(this.props.order.dueAt)} timespan={this.props.order.deliveryAreaModel.minimumDuration} />
         <div className={orderStatusClasses} onClick={this._toggleDelivered}></div>
-        <div className="orderTime">{timestampToTime(this.props.order.createdAt)}</div>
         <div className="orderDestination">
           <span className="orderOrderer">({this.props.order.id}) {this.props.order.addressModel.firstName} {this.props.order.addressModel.lastName}</span>
           <span className="orderDeliveryArea">{this.props.order.addressModel.postal} {this.props.order.addressModel.city} {this.props.order.addressModel.district ? '(' + this.props.order.addressModel.district + ')' : ''}</span>
         </div>
         <div className="orderDueTime">{timestampToTime(this.props.order.dueAt)}</div>
-        <div className="orderClaim icn iAlert"></div>
         {details}
       </li>
     );
