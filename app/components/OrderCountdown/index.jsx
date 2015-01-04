@@ -17,17 +17,22 @@ module.exports = React.createClass({
     var dasharray = full;
     var dashoffset = (1 - progress) * full;
 
-    var orderRemainingTimeCx = React.addons.classSet({
-      orderRemainingTime: true,
+    var orderCountdownCx = React.addons.classSet({
+      orderCountdown: true,
       urgent: progress <= 0.2,
     });
 
     return (
-      <div className={orderRemainingTimeCx}>
-        <svg width="50" height="50">
-          <circle className="orderRemainingTimeStroke" style={{strokeDashoffset: dashoffset + 'px'}} strokeDasharray={dasharray + 'px'} cx="25" cy="25" r="20" />
-        </svg>
-        {parseInt(minutesRemaining + 1, 10)}
+      <div className={orderCountdownCx}>
+        <div className="orderCountdownContainer fix-tc">
+          <svg width="50" height="50">
+            <circle className="orderCountdownBackground" cx="25" cy="25" r="20" />
+          </svg>
+          <svg width="50" height="50">
+            <circle className="orderCountdownStroke" style={{strokeDashoffset: dashoffset + 'px'}} strokeDasharray={dasharray + 'px'} cx="25" cy="25" r="20" />
+          </svg>
+          <div className="orderCountdownNumber">{parseInt(minutesRemaining + 1, 10)}</div>
+        </div>  
       </div>
     );
   },

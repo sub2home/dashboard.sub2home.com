@@ -1,15 +1,48 @@
 @import (reference) "~common-styles/less/common/common.less";
 
-.orderRemainingTime {
-  /*svg { border: 1px solid @grayLighter;}*/
+.orderCountdown {
+  .positioned;
+  width: 50px;
+  
   svg {
-    transform: rotate(-90deg);
+    .rotate(-90deg);
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 }
 
-.orderRemainingTimeStroke {
-  stroke: @greenLight;
-  stroke-width: 10px;
+.orderCountdownContainer {
+  height: 50px;
+}
+
+.orderCountdownBackground, .orderCountdownStroke {
+  stroke-width: 7px;
   fill: none;
 }
 
+.orderCountdownBackground {
+  stroke: @greenLight20;
+}
+
+.orderCountdownStroke {
+  stroke: @greenLight;
+}
+
+.orderCountdownNumber {
+  .positioned;
+  top: 17px;
+  font-size: 16px;
+  color: @greenLight;
+  text-align: center;
+}
+
+.orderCountdown.urgent {
+  .orderCountdownBackground {
+    stroke: @orange20;
+  }
+
+  .orderCountdownStroke {
+    stroke: @orange;
+  }
+}
