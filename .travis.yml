@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+- '0.11'
+after_script:
+- npm run build
+deploy:
+  provider: s3
+  access_key_id:
+    secure: Skll7697lfL88zgYEdLYQ0ViSs8kxzcRrQm+xmMeuFXQna4cbFhy/3k5vsoSX+Y4VM3rtxqu8dNXT6ilpMWOGBZVXjXMEr82g5uBK/j55r3pCkxw30GJ8nyd7QME9eWbdrhyViVmLQhyw2LXtSh1ciuEN/54QQUgsa3b/v5tCa0=
+  secret_access_key:
+    secure: dKwFJD2P/lCEa+yrdcF1yXpGgNb8iMHPPrPh9HyekSer/HOuQN5pRpsHheAiC/pJHxPVbxXRkUmD4BilS1jBcV3ExboFZGNQqlNN+eonrxsdNbrsM/4ufEQp4nhk7nkbxhD4LSE91UUEJexSq6/gpZ4Oo7jWdJTRB8EynuULPiQ=
+  bucket: dashboard.sub2home.com
+  region: eu-west-1
+  acl: public_read
