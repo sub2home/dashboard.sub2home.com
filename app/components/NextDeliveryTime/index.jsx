@@ -23,4 +23,3 @@ module.exports = React.createClass({
   },
 
 });
-
