@@ -4,6 +4,7 @@ var api = require('../utils/api');
 var actions = Reflux.createActions([
   // auth
   'login',
+  'loginSuccess',
   'logout',
   // deliveryTimes
   'fetchDeliveryTimes',
@@ -16,8 +17,25 @@ var actions = Reflux.createActions([
   'createTestOrder',
   'updateOrder',
   // stores
-  'list',
+  'fetchStores',
+  'storesUpdated',
 ]);
+
+
+/*
+ * auth actions
+ */
+actions.login.listen(function(number, password) {
+  api.post('login', {number, password}, { disableErrorHandlers: true })
+    .then(function(data) {
+      localStorage.setItem('token', data.token);
+      actions.loginSuccess();
+    });
+});
+
+actions.logout.listen(function() {
+  localStorage.removeItem('token');
+});
 
 
 /*
@@ -47,5 +65,14 @@ actions.createTestOrder.listen(function(storeAlias) {
 actions.updateOrder.listen(function(id, data, storeAlias) {
   api.put(`orders/${id}`, data).then(actions.fetchOrders.bind(null, storeAlias));
 });
+
+
+/*
+ * stores actions
+ */
+actions.fetchStores.listen(function() {
+  api.get('clients').then(data => actions.storesUpdated(data.storesCollection));
+});
+
 
 module.exports = actions;

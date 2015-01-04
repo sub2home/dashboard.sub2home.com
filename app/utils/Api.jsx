@@ -1,23 +1,30 @@
 var env = require('./env');
 
+var baseUrl = env.isProduction ? 'https://api.sub2home.com/' : `https://${location.hostname}:1070/`;
+var errorHandlers = [];
+
 module.exports = {
 
-  _api: env.isProduction ? 'https://api.sub2home.com/' : `https://${location.hostname}:1070/`,
-
-  get: function(path) {
-    return this._request(path, 'get');
+  registerErrorHandler: function(handler) {
+    errorHandlers.push(handler);
   },
 
-  post: function(path, data) {
-    return this._request(path, 'post', data);
+  get: function(path, options) {
+    return this._request(path, 'get', options);
   },
 
-  put: function(path, data) {
-    return this._request(path, 'put', data);
+  post: function(path, data, options) {
+    return this._request(path, 'post', data, options);
   },
 
-  _request: function(path, method, data) {
-    var url = this._api + path;
+  put: function(path, data, options) {
+    return this._request(path, 'put', data, options);
+  },
+
+  _request: function(path, method, data, options) {
+    options = options || {};
+
+    var url = baseUrl + path;
     var headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -28,8 +35,21 @@ module.exports = {
       headers.Token = token;
     }
     var body = JSON.stringify(data);
-    var promise = fetch(url, {method, headers, body});
-    return promise.then(response => response.status === 200 ? response.json() : null);
+    var promise = fetch(url, {method, headers, body})
+      .then(function(response) {
+        if (response.status === 200) {
+          return Promise.resolve(response.json());
+        } else {
+          return Promise.reject(response);
+        }
+      })
+      .catch(function(error) {
+        if (!options.disableErrorHandlers) {
+          errorHandlers.forEach(handler => handler(error));
+        }
+      });
+
+    return promise;
   },
 
 };

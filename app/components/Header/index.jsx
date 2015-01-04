@@ -1,5 +1,5 @@
 var React = require('react');
-var { State } = require('react-router');
+var { State, Navigation } = require('react-router');
 var actions = require('../../actions');
 var NextDeliveryTime = require('../NextDeliveryTime');
 
@@ -7,7 +7,7 @@ require('./index.less');
 
 module.exports = React.createClass({
 
-  mixins: [State],
+  mixins: [State, Navigation],
 
   propTypes: {
     currentCount: React.PropTypes.number.isRequired,
@@ -17,9 +17,9 @@ module.exports = React.createClass({
     }),
   },
 
-  _sendTest: function() {
-    var { storeAlias } = this.getParams();
-    actions.createTestOrder(storeAlias);
+  _logout: function() {
+    actions.logout();
+    this.replaceWith('/');
   },
 
   render: function() {
@@ -31,8 +31,8 @@ module.exports = React.createClass({
             <span className="counter">{this.props.currentCount}</span>
             <span>aktuelle Bestellungen</span>
           </div>
-          <div id="sendTestMail" onClick={this._sendTest} className="headerButton icn iMail emphasized"></div>
-          <div id="logout" className="headerButton icn iNav">
+          <div id="sendTestMail" className="headerButton icn iMail emphasized"></div>
+          <div id="logout" onClick={this._logout} className="headerButton icn iNav">
           </div>
         </div>
       </header>

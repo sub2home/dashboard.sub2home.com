@@ -4,7 +4,6 @@ var { Navigation, State } = require('react-router');
 var Header = require('../Header');
 var Order = require('../Order');
 var actions = require('../../actions');
-var AuthStore = require('../../stores/AuthStore');
 var ordersStore = require('../../stores/ordersStore');
 var nextDeliveryTimeStore = require('../../stores/nextDeliveryTimeStore');
 
@@ -27,10 +26,6 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    if (!AuthStore.isLoggedIn()) {
-      this.replaceWith('/');
-    }
-
     this.listenTo(ordersStore, this._onOrdersUpdate);
     this.listenTo(nextDeliveryTimeStore, this._onNextDeliveryTimeChange);
 

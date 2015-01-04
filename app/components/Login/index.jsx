@@ -2,8 +2,6 @@ var React = require('react');
 var { ListenerMixin } = require('reflux');
 var { Navigation } = require('react-router');
 var actions = require('../../actions');
-var AuthStore = require('../../stores/AuthStore');
-var StoresStore = require('../../stores/StoresStore');
 
 require('./index.less');
 
@@ -19,22 +17,16 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    this.listenTo(AuthStore, this._onAuthChange);
-    this.listenTo(StoresStore, this._onStoresChange);
-
-    if (AuthStore.isLoggedIn()) {
-      actions.list();
-    }
+    this.listenTo(actions.loginSuccess, this._onLoginSuccess);
+    this.listenTo(actions.storesUpdated, this._onStoresChange);
   },
 
-  _onAuthChange: function(status) {
-    if (status === AuthStore.LOGIN_SUCCESS) {
-      actions.list();
-    }
+  _onLoginSuccess: function() {
+    actions.fetchStores();
   },
 
   _onStoresChange: function(stores) {
-      this.replaceWith('/' + stores[0].alias);
+    this.replaceWith('/' + stores[0].alias);
   },
 
   _handleNumberChange: function(e) {
@@ -81,4 +73,3 @@ module.exports = React.createClass({
   },
 
 });
-
