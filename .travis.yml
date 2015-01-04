@@ -12,6 +12,7 @@ deploy:
   bucket: dashboard.sub2home.com
   region: eu-west-1
   local-dir: dist
+  skip_cleanup: true
   acl: public_read
 notifications:
   email: false
