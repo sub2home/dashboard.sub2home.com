@@ -27,7 +27,7 @@ module.exports = React.createClass({
         <svg width="50" height="50">
           <circle className="orderRemainingTimeStroke" style={{strokeDashoffset: dashoffset + 'px'}} strokeDasharray={dasharray + 'px'} cx="25" cy="25" r="20" />
         </svg>
-        {parseInt(minutesRemaining, 10)}
+        {parseInt(minutesRemaining + 1, 10)}
       </div>
     );
   },
