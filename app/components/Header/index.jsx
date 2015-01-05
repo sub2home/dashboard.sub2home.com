@@ -36,7 +36,7 @@ module.exports = React.createClass({
           </div>
         </div>
         
-        <div id="notificationCenter">
+      {/*<div id="notificationCenter">
           <div className="notification">
             Dies ist ein Feedback, für etwas, das du gerade getan hast.
             <div className="icn iClose"></div>
@@ -45,7 +45,7 @@ module.exports = React.createClass({
             Dies ist noch ein Feedback.
             <div className="icn iClose"></div>
           </div>
-        </div>
+        </div>*/}
       
       </header>
       
