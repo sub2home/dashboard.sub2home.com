@@ -56,7 +56,7 @@ module.exports = React.createClass({
     if (this.state.current.length > 0) {
       currentOrders = (
         <ul id="ordersList" className="list">
-          {this.state.current.map(order => <Order order={order} />)}
+          {this.state.current.map(order => <Order group="current" order={order} />)}
         </ul>
       );
     } else {
@@ -79,11 +79,11 @@ module.exports = React.createClass({
           {currentOrders}
           <div className="ordersAreaLabel"><span>Heute</span></div>
           <ul id="ordersList" className="list">
-            {this.state.today.map(order => <Order order={order} />)}
+            {this.state.today.map(order => <Order group="today" order={order} />)}
           </ul>
           <div className="ordersAreaLabel"><span>Ältere Bestellungen</span></div>
           <ul id="ordersList" className="list">
-            {this.state.old.map(order => <Order order={order} />)}
+            {this.state.old.map(order => <Order group="old" order={order} />)}
           </ul>
         </div>
       </div>

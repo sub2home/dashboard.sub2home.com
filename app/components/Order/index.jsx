@@ -13,6 +13,7 @@ module.exports = React.createClass({
 
   propTypes: {
     order: React.PropTypes.object.isRequired,
+    group: React.PropTypes.string.isRequired,
   },
 
   getInitialState: function() {
@@ -54,11 +55,21 @@ module.exports = React.createClass({
       );
     }
 
+    var status;
+    if (this.props.group === 'current') {
+      status = (
+        <OrderCountdown dueDate={new Date(this.props.order.dueAt)} timespan={this.props.order.deliveryAreaModel.minimumDuration} />
+      );
+    } else {
+      status = (
+        <div className={orderStatusClasses} onClick={this._toggleDelivered}></div>
+      );
+    }
+
     return (
       <li onClick={this._toggleDetails}>
-        <OrderCountdown dueDate={new Date(this.props.order.dueAt)} timespan={this.props.order.deliveryAreaModel.minimumDuration} />
-                                   {/* <div className={orderStatusClasses} onClick={this._toggleDelivered}></div> */}
         <div className="orderDestination">
+          {status}
           <span className="orderOrderer">({this.props.order.id}) {this.props.order.addressModel.firstName} {this.props.order.addressModel.lastName}</span>
           <span className="orderDeliveryArea">{this.props.order.addressModel.postal} {this.props.order.addressModel.city} {this.props.order.addressModel.district ? '(' + this.props.order.addressModel.district + ')' : ''}</span>
         </div>
