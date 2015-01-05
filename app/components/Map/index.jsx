@@ -1,12 +1,14 @@
 var React = require('react');
 var _ = require('lodash');
 var OrderCountdown = require('../OrderCountdown');
+var config = require('../../config/mapbox');
+
 require('mapbox.js');
 
 require('style!css!mapbox.js/theme/style.css');
 require('./index.less');
 
-L.mapbox.accessToken = 'pk.eyJ1Ijoic2NoaWNrbGluZyIsImEiOiJaVmVKYXNZIn0.xyixB3YzrJjM_u4rDIotDg';
+var toCoords = x => [x.addressModel.latitude, x.addressModel.longitude];
 
 module.exports = React.createClass({
 
@@ -23,7 +25,7 @@ module.exports = React.createClass({
     };
   },
 
-  componentWillReceiveProps: function(props) {
+  componentDidUpdate: function() {
     this._checkInitialized();
   },
 
@@ -33,26 +35,28 @@ module.exports = React.createClass({
 
   _checkInitialized: function() {
     if (!this.state.initialized && this.props.orders && this.props.store) {
+      L.mapbox.accessToken = config.token;
+
       var options = {
         zoomControl: false,
         attributionControl: false,
       };
+      var map = this._map = L.mapbox.map(this.refs.map.getDOMNode(), config.style, options);
 
-      this._map = L.mapbox.map(this.refs.map.getDOMNode(), 'schickling.km6mi09d', options);
-      this._map.dragging.disable();
-      this._map.touchZoom.disable();
-      this._map.doubleClickZoom.disable();
-      this._map.scrollWheelZoom.disable();
+      map.dragging.disable();
+      map.touchZoom.disable();
+      map.doubleClickZoom.disable();
+      map.scrollWheelZoom.disable();
 
       this.setState({ initialized: true });
     }
   },
 
   _alignMap: function() {
-    var latlngs = this.props.orders.map(o => [o.addressModel.latitude, o.addressModel.longitude]);
-    latlngs.push([this.props.store.addressModel.latitude, this.props.store.addressModel.longitude]);
+    var latlngs = this.props.orders.concat([this.props.store]).map(toCoords);
     var bounds = L.latLngBounds(latlngs);
-    this._map.fitBounds(bounds, { padding: [50, 50] });
+
+    this._map.fitBounds(bounds, { padding: [40, 40] });
   },
 
   render: function() {
@@ -61,13 +65,9 @@ module.exports = React.createClass({
     if (this.state.initialized) {
       this._alignMap();
 
-      var storeLatlng = [this.props.store.addressModel.latitude, this.props.store.addressModel.longitude];
-      var storeOffset = this._map.latLngToLayerPoint(storeLatlng);
-
-      var orderOffsets = this.props.orders.map(function(order) {
-        var latlng = [order.addressModel.latitude, order.addressModel.longitude];
-        return this._map.latLngToLayerPoint(latlng);
-      }, this);
+      var toOffset = x => this._map.latLngToLayerPoint([x.addressModel.latitude, x.addressModel.longitude]);
+      var storeOffset = toOffset(this.props.store);
+      var orderOffsets = this.props.orders.map(toOffset);
       var zippedOrders = _.zip(this.props.orders, orderOffsets);
 
       markers = (
@@ -76,7 +76,6 @@ module.exports = React.createClass({
           {zippedOrders.map(z => <OrderCountdown dueDate={new Date(z[0].dueAt)} timespan={z[0].deliveryAreaModel.minimumDuration} style={{top: z[1].y + 'px', left: z[1].x + 'px', position: 'absolute'}} />)}
         </div>
       );
-
     }
 
     return (
@@ -88,4 +87,3 @@ module.exports = React.createClass({
   },
 
 });
-
