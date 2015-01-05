@@ -73,7 +73,6 @@ module.exports = React.createClass({
             <div id="ordersSearch">
               <input type="text" onChange={this._onFilterChange} placeholder="Bestellungen filtern" />
             </div>
-            <div id="mapStoreMarker"></div>
             <div id="ordersRefresh" className="icn iNav"></div>
           </div>
           <div className="ordersAreaLabel"><span>Aktuell</span></div>
