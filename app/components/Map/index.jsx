@@ -71,11 +71,10 @@ module.exports = React.createClass({
       window.map = this._map;
 
       var latlng = [this.props.store.addressModel.latitude, this.props.store.addressModel.longitude];
-      var corner = this._map.getPixelBounds().max;
       var p = this._map.latLngToLayerPoint(latlng);
-      console.log(corner, p);
+      //console.log(corner, p);
       markers = (
-        <div id="mapStoreMarker"></div>
+        <div id="mapStoreMarker" style={{top: p.y + 'px', left: p.x + 'px'}}></div>
       );
     }
 
