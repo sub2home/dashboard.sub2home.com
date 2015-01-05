@@ -161,6 +161,27 @@
   }
 }
 
+
+// MAP -- move to own file
+
+#mapStoreMarker {
+  position: absolute;
+  .square(40px);
+  .circle;
+  background: @blue30;
+  border: 1px solid @blue;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -4px 0 0 -4px;
+    .square(8px);
+    .circle;
+    background: @blue;
+  }
+}
+
 // Module responsiveness
 // --------------------------
 
