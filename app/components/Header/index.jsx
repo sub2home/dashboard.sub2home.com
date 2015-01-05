@@ -35,7 +35,20 @@ module.exports = React.createClass({
           <div id="logout" onClick={this._logout} className="headerButton icn iNav">
           </div>
         </div>
+        
+        <div id="notificationCenter">
+          <div className="notification">
+            Dies ist ein Feedback, für etwas, das du gerade getan hast.
+            <div className="icn iClose"></div>
+          </div>
+          <div className="notification">
+            Dies ist noch ein Feedback.
+            <div className="icn iClose"></div>
+          </div>
+        </div>
+      
       </header>
+      
     );
   },
 

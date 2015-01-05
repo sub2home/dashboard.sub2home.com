@@ -68,8 +68,8 @@ module.exports = React.createClass({
 
     return (
       <li onClick={this._toggleDetails}>
+        {status}
         <div className="orderDestination">
-          {status}
           <span className="orderOrderer">({this.props.order.id}) {this.props.order.addressModel.firstName} {this.props.order.addressModel.lastName}</span>
           <span className="orderDeliveryArea">{this.props.order.addressModel.postal} {this.props.order.addressModel.city} {this.props.order.addressModel.district ? '(' + this.props.order.addressModel.district + ')' : ''}</span>
         </div>
