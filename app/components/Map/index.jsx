@@ -1,14 +1,12 @@
 var React = require('react');
+var _ = require('lodash');
+var OrderCountdown = require('../OrderCountdown');
 require('mapbox.js');
-require('style!css!mapbox.js/theme/style.css');
 
+require('style!css!mapbox.js/theme/style.css');
 require('./index.less');
 
 L.mapbox.accessToken = 'pk.eyJ1Ijoic2NoaWNrbGluZyIsImEiOiJaVmVKYXNZIn0.xyixB3YzrJjM_u4rDIotDg';
-
-function modelToKey(model) {
-  return '' + model.addressModel.latitude + model.addressModel.longitude;
-}
 
 module.exports = React.createClass({
 
@@ -50,32 +48,35 @@ module.exports = React.createClass({
     }
   },
 
-  _updateMap: function() {
-
+  _alignMap: function() {
     var latlngs = this.props.orders.map(o => [o.addressModel.latitude, o.addressModel.longitude]);
     latlngs.push([this.props.store.addressModel.latitude, this.props.store.addressModel.longitude]);
     var bounds = L.latLngBounds(latlngs);
-
     this._map.fitBounds(bounds, { padding: [50, 50] });
-
-    //latlngs.forEach(function(latlng) {
-      //markers.push(L.marker(latlng).addTo(this._map));
-    //}, this);
   },
 
   render: function() {
     var markers;
 
     if (this.state.initialized) {
-      this._updateMap();
-      window.map = this._map;
+      this._alignMap();
 
-      var latlng = [this.props.store.addressModel.latitude, this.props.store.addressModel.longitude];
-      var p = this._map.latLngToLayerPoint(latlng);
-      //console.log(corner, p);
+      var storeLatlng = [this.props.store.addressModel.latitude, this.props.store.addressModel.longitude];
+      var storeOffset = this._map.latLngToLayerPoint(storeLatlng);
+
+      var orderOffsets = this.props.orders.map(function(order) {
+        var latlng = [order.addressModel.latitude, order.addressModel.longitude];
+        return this._map.latLngToLayerPoint(latlng);
+      }, this);
+      var zippedOrders = _.zip(this.props.orders, orderOffsets);
+
       markers = (
-        <div id="mapStoreMarker" style={{top: p.y + 'px', left: p.x + 'px'}}></div>
+        <div>
+          <div id="mapStoreMarker" style={{top: storeOffset.y + 'px', left: storeOffset.x + 'px'}}></div>
+          {zippedOrders.map(z => <OrderCountdown dueDate={new Date(z[0].dueAt)} timespan={z[0].deliveryAreaModel.minimumDuration} style={{top: z[1].y + 'px', left: z[1].x + 'px', position: 'absolute'}} />)}
+        </div>
       );
+
     }
 
     return (

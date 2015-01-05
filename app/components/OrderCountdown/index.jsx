@@ -23,7 +23,7 @@ module.exports = React.createClass({
     });
 
     return (
-      <div className={orderCountdownCx}>
+      <div style={this.props.style} className={orderCountdownCx}>
         <div className="orderCountdownContainer fix-tc">
           <svg width="50" height="50">
             <circle className="orderCountdownBackground" cx="25" cy="25" r="20" />
