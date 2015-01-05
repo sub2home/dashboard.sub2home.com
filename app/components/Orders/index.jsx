@@ -3,6 +3,7 @@ var { ListenerMixin } = require('reflux');
 var { Navigation, State } = require('react-router');
 var Header = require('../Header');
 var Order = require('../Order');
+var Map = require('../Map');
 var actions = require('../../actions');
 var ordersStore = require('../../stores/ordersStore');
 var nextDeliveryTimeStore = require('../../stores/nextDeliveryTimeStore');
@@ -15,6 +16,7 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
+      store: null,
       current: [],
       today: [],
       old: [],
@@ -28,14 +30,20 @@ module.exports = React.createClass({
   componentWillMount: function() {
     this.listenTo(ordersStore, this._onOrdersUpdate);
     this.listenTo(nextDeliveryTimeStore, this._onNextDeliveryTimeChange);
+    this.listenTo(actions.storeUpdated, this._onStoreChange);
 
     var { storeAlias } = this.getParams();
     actions.listenToOrders(storeAlias);
     actions.fetchDeliveryTimes(storeAlias);
+    actions.fetchStore(storeAlias);
   },
 
   _onOrdersUpdate: function(data) {
     this.setState(data);
+  },
+
+  _onStoreChange: function(store) {
+    this.setState({ store });
   },
 
   _onNextDeliveryTimeChange: function(nextDeliveryTime) {
@@ -55,9 +63,13 @@ module.exports = React.createClass({
     var currentOrders;
     if (this.state.current.length > 0) {
       currentOrders = (
-        <ul id="ordersList" className="list">
-          {this.state.current.map(order => <Order group="current" order={order} />)}
-        </ul>
+        <div>
+          <Map orders={this.state.current} store={this.state.store} />
+          <div className="ordersAreaLabel"><span>Aktuell</span></div>
+          <ul id="ordersList" className="list">
+            {this.state.current.map(order => <Order group="current" order={order} />)}
+          </ul>
+        </div>
       );
     } else {
       currentOrders = (
@@ -67,7 +79,7 @@ module.exports = React.createClass({
 
     return (
       <div>
-        <Header nextDeliveryTime={this.state.nextDeliveryTime} currentCount={this.state.current.length}/>
+        <Header nextDeliveryTime={this.state.nextDeliveryTime} currentCount={this.state.current.length} />
         <div className="content">
           <div id="ordersControls" className="note above">
             <div id="ordersSearch">
@@ -75,7 +87,6 @@ module.exports = React.createClass({
             </div>
             <div id="ordersRefresh" className="icn iNav"></div>
           </div>
-          <div className="ordersAreaLabel"><span>Aktuell</span></div>
           {currentOrders}
           <div className="ordersAreaLabel"><span>Heute</span></div>
           <ul id="ordersList" className="list">

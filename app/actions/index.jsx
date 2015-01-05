@@ -19,6 +19,8 @@ var actions = Reflux.createActions([
   // stores
   'fetchStores',
   'storesUpdated',
+  'fetchStore',
+  'storeUpdated',
 ]);
 
 
@@ -72,6 +74,10 @@ actions.updateOrder.listen(function(id, data, storeAlias) {
  */
 actions.fetchStores.listen(function() {
   api.get('clients').then(data => actions.storesUpdated(data.storesCollection));
+});
+
+actions.fetchStore.listen(function(storeAlias) {
+  api.get(`stores/${storeAlias}/auth`).then(actions.storeUpdated);
 });
 
 
