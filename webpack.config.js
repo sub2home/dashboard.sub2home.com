@@ -16,10 +16,13 @@ module.exports = {
             test: /\.less$/,
             loader: 'style!css!less'
         }, {
+            test: /\.json$/,
+            loader: 'json'
+        }, {
             test: /\.jsx$/,
             loader: 'react-hot!jsx?harmony'
         }, {
-            test: /\.(svg|jpg)$/,
+            test: /\.(svg|jpg|png)$/,
             loader: 'url?limit=10000'
         }, {
             test: /\.(ttf|eot|woff)$/,
