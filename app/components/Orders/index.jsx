@@ -2,6 +2,7 @@ var React = require('react');
 var { ListenerMixin } = require('reflux');
 var { Navigation, State } = require('react-router');
 var Header = require('../Header');
+var NotificationCenter = require('../NotificationCenter');
 var Order = require('../Order');
 var Map = require('../Map');
 var actions = require('../../actions');
@@ -80,6 +81,7 @@ module.exports = React.createClass({
     return (
       <div>
         <Header nextDeliveryTime={this.state.nextDeliveryTime} currentCount={this.state.current.length} />
+        <NotificationCenter notifications={['hallo']} />
         <div className="content">
           <div id="ordersControls" className="note above">
             <div id="ordersSearch">

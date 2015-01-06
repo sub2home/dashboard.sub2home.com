@@ -1,21 +1,11 @@
 var React = require('react');
-var { State, Navigation } = require('react-router');
-var actions = require('../../actions');
-var NextDeliveryTime = require('../NextDeliveryTime');
 
 require('./index.less');
 
 module.exports = React.createClass({
 
-  mixins: [State, Navigation],
-
   propTypes: {
     notifications: React.PropTypes.array.isRequired,
-  },
-
-  _logout: function() {
-    actions.logout();
-    this.replaceWith('/');
   },
 
   render: function() {
