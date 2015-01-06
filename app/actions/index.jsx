@@ -4,7 +4,7 @@ var api = require('../utils/api');
 var actions = Reflux.createActions([
   // notifications
   'pushNotification',
-  'closeNotification',
+  'removeNotification',
   // auth
   'login',
   'loginSuccess',

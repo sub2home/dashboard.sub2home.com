@@ -2,3 +2,20 @@
 
 @import "~common-styles/less/modules/sc-notificationcenter.less";
 
+.slide-enter {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.slide-enter.slide-enter-active {
+  opacity: 1;
+}
+
+.slide-leave {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+.slide-leave.slide-leave-active {
+  opacity: 0.01;
+}

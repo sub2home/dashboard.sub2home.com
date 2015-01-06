@@ -1,7 +1,6 @@
 var Reflux = require('reflux');
 var actions = require('../actions');
 
-
 module.exports = Reflux.createStore({
 
   listenables: actions,
