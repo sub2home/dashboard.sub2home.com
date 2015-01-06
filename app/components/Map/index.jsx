@@ -68,13 +68,13 @@ module.exports = React.createClass({
       var toOffset = x => this._map.latLngToLayerPoint([x.addressModel.latitude, x.addressModel.longitude]);
       var storeOffset = toOffset(this.props.store);
       var orderOffsets = this.props.orders.map(toOffset);
-      var zippedOrders = _.zip(this.props.orders, orderOffsets);
+      var zippedOrders = _.zip(this.props.orders, orderOffsets).map(z => ({ order: z[0], offset: z[1] }));
 
       // markers to state
       markers = (
         <div>
           <div id="mapStoreMarker" style={{top: storeOffset.y + 'px', left: storeOffset.x + 'px'}}></div>
-          {zippedOrders.map(z => <OrderCountdown dueDate={new Date(z[0].dueAt)} timespan={z[0].deliveryAreaModel.minimumDuration} style={{top: z[1].y + 'px', left: z[1].x + 'px', position: 'absolute'}} />)}
+          {zippedOrders.map(z => <OrderCountdown dueDate={new Date(z.order.dueAt)} timespan={z.order.deliveryAreaModel.minimumDuration} style={{top: z.offset.y + 'px', left: z.offset.x + 'px', position: 'absolute'}} />)}
         </div>
       );
     }
