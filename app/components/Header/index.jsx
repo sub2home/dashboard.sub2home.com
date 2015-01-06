@@ -27,11 +27,14 @@ module.exports = React.createClass({
       <header id="header">
         <div id="headerContent">
           <NextDeliveryTime isNow={this.props.nextDeliveryTime.isNow} deliveryTime={this.props.nextDeliveryTime.deliveryTime} />
-          <div id="headerOutstandingOrders">
+      {/*<div id="headerOutstandingOrders">
             <span className="counter">{this.props.currentCount}</span>
             <span>aktuelle Bestellungen</span>
+          </div>*/}
+          <div id="headerFilterOrders" className="emphasized">
+            <input type="text" onChange={this._onFilterChange} placeholder="Bestellungen filtern" />
           </div>
-          <input type="text" onChange={this._onFilterChange} placeholder="Bestellungen filtern" />
+          <div id="headerToggleFilterOrders" className="headerButton icn iFire iSearch emphasized"></div>
           <div id="logout" onClick={this._logout} className="headerButton icn iNav">
           </div>
         </div>

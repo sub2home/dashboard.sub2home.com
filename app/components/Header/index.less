@@ -12,7 +12,9 @@
 // --------------------------
 
 #header {
-
+  .emphasized {
+    background: @darkHeader20;
+  }
 }
 
 #headerOutstandingOrders {
@@ -43,11 +45,31 @@
   }
   
   &.emphasized {
-    background: @darkHeader20;
-    
     &:active {
       background: @darkHeader40;
     }
+  }
+}
+
+#headerFilterOrders {
+  
+  padding-right: 0 !important;
+  
+  input {
+    padding: 10px 10px 8px;
+    width: 100%;
+    border-color: @darkHeader20;
+    background: @darkHeader20;
+    color: @onHeaderColor;
+  }
+}
+
+// Filter Toggle State
+
+#header.filterToggled {
+  .iSearch {
+    .iClose;
+    border-left: none;
   }
 }
 
