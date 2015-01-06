@@ -70,6 +70,7 @@ module.exports = React.createClass({
       var orderOffsets = this.props.orders.map(toOffset);
       var zippedOrders = _.zip(this.props.orders, orderOffsets);
 
+      // markers to state
       markers = (
         <div>
           <div id="mapStoreMarker" style={{top: storeOffset.y + 'px', left: storeOffset.x + 'px'}}></div>
