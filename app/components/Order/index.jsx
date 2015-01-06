@@ -64,14 +64,14 @@ module.exports = React.createClass({
         <div className="orderStatus upcoming"></div>
       );
     } else {
-      var orderStatusClasses = React.addons.classSet({
+      var orderStatusCx = React.addons.classSet({
         orderStatus: true,
         isDelivered: this.props.order.isDelivered,
         isLoading: this.state.isLoading,
       });
 
       status = (
-        <div className={orderStatusClasses} onClick={this._toggleDelivered}></div>
+        <div className={orderStatusCx} onClick={this._toggleDelivered}></div>
       );
     }
 

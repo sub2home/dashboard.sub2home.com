@@ -50,10 +50,6 @@ module.exports = React.createClass({
     this.setState({ nextDeliveryTime });
   },
 
-  _onFilterChange: function(e) {
-    actions.setOrdersFilter(e.target.value);
-  },
-
   _createTestOrder: function() {
     var { storeAlias } = this.getParams();
     actions.createTestOrder(storeAlias);
