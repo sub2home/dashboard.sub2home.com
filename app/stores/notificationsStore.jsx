@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var Reflux = require('reflux');
 var actions = require('../actions');
 
@@ -8,24 +9,24 @@ module.exports = Reflux.createStore({
   listenables: actions,
 
   init: function() {
-    this._notifications = [];
+    this._notifications = {};
   },
 
   pushNotification: function(text) {
     var notification = { text, id: ++idCounter };
-    this._notifications.push(notification);
+    this._notifications[notification.id] = notification;
     this._update();
 
     setTimeout(this.removeNotification.bind(this, notification), 5000);
   },
 
   removeNotification: function(notification) {
-    this._notifications.splice(this._notifications.indexOf(notification), 1);
+    delete(this._notifications[notification.id]);
     this._update();
   },
 
   _update: function() {
-    this.trigger(this._notifications);
+    this.trigger(_.values(this._notifications));
   },
 
 });
