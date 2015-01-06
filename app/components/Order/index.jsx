@@ -13,7 +13,6 @@ module.exports = React.createClass({
 
   propTypes: {
     order: React.PropTypes.object.isRequired,
-    group: React.PropTypes.string.isRequired,
   },
 
   getInitialState: function() {
@@ -42,11 +41,6 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var orderStatusClasses = React.addons.classSet({
-      orderStatus: true,
-      isDelivered: this.props.order.isDelivered,
-      isLoading: this.state.isLoading,
-    });
 
     var details;
     if (this.state.showDetails) {
@@ -55,12 +49,27 @@ module.exports = React.createClass({
       );
     }
 
+    var now = new Date();
+    var dueDate = new Date(this.props.order.dueAt);
+    var delta = (dueDate - now) / 60000;
+    var minimumDuration = this.props.order.deliveryAreaModel.minimumDuration;
+    var isToday = dueDate.toDateString() === now.toDateString();
     var status;
-    if (this.props.group === 'current') {
+    if (delta >= 0 && delta <= minimumDuration) {
       status = (
         <OrderCountdown dueDate={new Date(this.props.order.dueAt)} timespan={this.props.order.deliveryAreaModel.minimumDuration} />
       );
+    } else if (delta > minimumDuration && delta <= minimumDuration + 10) {
+      status = (
+        <div className="orderStatus upcoming"></div>
+      );
     } else {
+      var orderStatusClasses = React.addons.classSet({
+        orderStatus: true,
+        isDelivered: this.props.order.isDelivered,
+        isLoading: this.state.isLoading,
+      });
+
       status = (
         <div className={orderStatusClasses} onClick={this._toggleDelivered}></div>
       );

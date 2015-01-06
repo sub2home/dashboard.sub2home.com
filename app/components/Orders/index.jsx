@@ -67,7 +67,7 @@ module.exports = React.createClass({
           <Map orders={this.state.current} store={this.state.store} />
           <div className="ordersAreaLabel"><span>Aktuell</span></div>
           <ul id="ordersList" className="list">
-            {this.state.current.map(order => <Order group="current" order={order} />)}
+            {this.state.current.map(order => <Order order={order} />)}
           </ul>
         </div>
       );
@@ -90,11 +90,11 @@ module.exports = React.createClass({
           {currentOrders}
           <div className="ordersAreaLabel"><span>Heute</span></div>
           <ul id="ordersList" className="list">
-            {this.state.today.map(order => <Order group="today" order={order} />)}
+            {this.state.today.map(order => <Order order={order} />)}
           </ul>
           <div className="ordersAreaLabel"><span>Ältere Bestellungen</span></div>
           <ul id="ordersList" className="list">
-            {this.state.old.map(order => <Order group="old" order={order} />)}
+            {this.state.old.map(order => <Order order={order} />)}
           </ul>
         </div>
       </div>

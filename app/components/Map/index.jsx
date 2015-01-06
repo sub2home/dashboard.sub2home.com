@@ -1,14 +1,14 @@
 var React = require('react');
-require('mapbox.js');
-require('style!css!mapbox.js/theme/style.css');
+var _ = require('lodash');
+var OrderCountdown = require('../OrderCountdown');
+var config = require('../../config/mapbox');
 
+require('mapbox.js');
+
+require('style!css!mapbox.js/theme/style.css');
 require('./index.less');
 
-L.mapbox.accessToken = 'pk.eyJ1Ijoic2NoaWNrbGluZyIsImEiOiJaVmVKYXNZIn0.xyixB3YzrJjM_u4rDIotDg';
-
-function modelToKey(model) {
-  return '' + model.addressModel.latitude + model.addressModel.longitude;
-}
+var toCoords = x => [x.addressModel.latitude, x.addressModel.longitude];
 
 module.exports = React.createClass({
 
@@ -25,7 +25,7 @@ module.exports = React.createClass({
     };
   },
 
-  componentWillReceiveProps: function(props) {
+  componentDidUpdate: function() {
     this._checkInitialized();
   },
 
@@ -35,47 +35,47 @@ module.exports = React.createClass({
 
   _checkInitialized: function() {
     if (!this.state.initialized && this.props.orders && this.props.store) {
+      L.mapbox.accessToken = config.token;
+
       var options = {
         zoomControl: false,
         attributionControl: false,
       };
+      var map = this._map = L.mapbox.map(this.refs.map.getDOMNode(), config.style, options);
 
-      this._map = L.mapbox.map(this.refs.map.getDOMNode(), 'schickling.km6mi09d', options);
-      this._map.dragging.disable();
-      this._map.touchZoom.disable();
-      this._map.doubleClickZoom.disable();
-      this._map.scrollWheelZoom.disable();
+      map.dragging.disable();
+      map.touchZoom.disable();
+      map.doubleClickZoom.disable();
+      map.scrollWheelZoom.disable();
 
       this.setState({ initialized: true });
     }
   },
 
-  _updateMap: function() {
-
-    var latlngs = this.props.orders.map(o => [o.addressModel.latitude, o.addressModel.longitude]);
-    latlngs.push([this.props.store.addressModel.latitude, this.props.store.addressModel.longitude]);
+  _alignMap: function() {
+    var latlngs = this.props.orders.concat([this.props.store]).map(toCoords);
     var bounds = L.latLngBounds(latlngs);
 
-    this._map.fitBounds(bounds, { padding: [50, 50] });
-
-    //latlngs.forEach(function(latlng) {
-      //markers.push(L.marker(latlng).addTo(this._map));
-    //}, this);
+    this._map.fitBounds(bounds, { padding: [40, 40] });
   },
 
   render: function() {
     var markers;
 
     if (this.state.initialized) {
-      this._updateMap();
-      window.map = this._map;
+      this._alignMap();
 
-      var latlng = [this.props.store.addressModel.latitude, this.props.store.addressModel.longitude];
-      var corner = this._map.getPixelBounds().max;
-      var p = this._map.latLngToLayerPoint(latlng);
-      console.log(corner, p);
+      var toOffset = x => this._map.latLngToLayerPoint([x.addressModel.latitude, x.addressModel.longitude]);
+      var storeOffset = toOffset(this.props.store);
+      var orderOffsets = this.props.orders.map(toOffset);
+      var zippedOrders = _.zip(this.props.orders, orderOffsets).map(z => ({ order: z[0], offset: z[1] }));
+
+      // markers to state
       markers = (
-        <div id="mapStoreMarker"></div>
+        <div>
+          <div id="mapStoreMarker" style={{top: storeOffset.y + 'px', left: storeOffset.x + 'px'}}></div>
+          {zippedOrders.map(z => <OrderCountdown dueDate={new Date(z.order.dueAt)} timespan={z.order.deliveryAreaModel.minimumDuration} style={{top: z.offset.y + 'px', left: z.offset.x + 'px', position: 'absolute'}} />)}
+        </div>
       );
     }
 
@@ -88,4 +88,3 @@ module.exports = React.createClass({
   },
 
 });
-
