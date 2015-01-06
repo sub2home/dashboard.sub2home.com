@@ -36,8 +36,8 @@ module.exports = React.createClass({
   },
 
   _toggleDetails: function() {
-    var showDetails = !this.state.showDetails;
-    this.setState({ showDetails });
+    //var showDetails = !this.state.showDetails;
+    //this.setState({ showDetails });
   },
 
   render: function() {

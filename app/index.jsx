@@ -1,5 +1,6 @@
 var React = require('react');
 var Reflux = require('reflux');
+var fastclick = require('fastclick');
 var router = require('./config/router');
 var api = require('./utils/api');
 
@@ -19,3 +20,5 @@ api.registerErrorHandler(function(error) {
 router.run(function(Handler) {
   React.render(<Handler/>, document.body);
 });
+
+fastclick.attach(document.body);
