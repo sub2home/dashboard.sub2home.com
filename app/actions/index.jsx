@@ -8,6 +8,7 @@ var actions = Reflux.createActions([
   // auth
   'login',
   'loginSuccess',
+  'loginError',
   'logout',
   // deliveryTimes
   'fetchDeliveryTimes',
@@ -35,7 +36,8 @@ actions.login.listen(function(number, password) {
     .then(function(data) {
       localStorage.setItem('token', data.token);
       actions.loginSuccess();
-    });
+    })
+    .catch(actions.loginError);
 });
 
 actions.logout.listen(function() {

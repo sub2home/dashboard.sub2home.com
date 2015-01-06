@@ -2,12 +2,10 @@ var React = require('react');
 var { ListenerMixin } = require('reflux');
 var { Navigation, State } = require('react-router');
 var Header = require('../Header');
-var NotificationCenter = require('../NotificationCenter');
 var Order = require('../Order');
 var Map = require('../Map');
 var actions = require('../../actions');
 var ordersStore = require('../../stores/ordersStore');
-var notificationsStore = require('../../stores/notificationsStore');
 var nextDeliveryTimeStore = require('../../stores/nextDeliveryTimeStore');
 
 require('./index.less');
@@ -22,7 +20,6 @@ module.exports = React.createClass({
       current: [],
       today: [],
       old: [],
-      notifications: [],
       nextDeliveryTime: {
         deliveryTime: null,
         isNow: false,
@@ -32,7 +29,6 @@ module.exports = React.createClass({
 
   componentWillMount: function() {
     this.listenTo(ordersStore, this._onOrdersUpdate);
-    this.listenTo(notificationsStore, this._onNotificationsUpdate);
     this.listenTo(nextDeliveryTimeStore, this._onNextDeliveryTimeChange);
     this.listenTo(actions.storeUpdated, this._onStoreChange);
 
@@ -44,10 +40,6 @@ module.exports = React.createClass({
 
   _onOrdersUpdate: function(data) {
     this.setState(data);
-  },
-
-  _onNotificationsUpdate: function(notifications) {
-    this.setState({ notifications });
   },
 
   _onStoreChange: function(store) {
@@ -87,7 +79,6 @@ module.exports = React.createClass({
     return (
       <div>
         <Header nextDeliveryTime={this.state.nextDeliveryTime} currentCount={this.state.current.length} />
-        <NotificationCenter notifications={this.state.notifications} />
         <div className="content">
           <Map orders={this.state.current} store={this.state.store} />
           {currentOrders}

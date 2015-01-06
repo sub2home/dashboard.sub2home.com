@@ -2,6 +2,7 @@ var React = require('react');
 var { ListenerMixin } = require('reflux');
 var { Navigation } = require('react-router');
 var actions = require('../../actions');
+var text = require('../../utils/text');
 
 require('./index.less');
 
@@ -18,6 +19,7 @@ module.exports = React.createClass({
 
   componentDidMount: function() {
     this.listenTo(actions.loginSuccess, this._onLoginSuccess);
+    this.listenTo(actions.loginError, this._onLoginError);
     this.listenTo(actions.storesUpdated, this._onStoresChange);
   },
 
@@ -25,16 +27,20 @@ module.exports = React.createClass({
     actions.fetchStores();
   },
 
+  _onLoginError: function() {
+    actions.pushNotification(text.LOGIN_ERROR);
+  },
+
   _onStoresChange: function(stores) {
     this.replaceWith('/' + stores[0].alias);
   },
 
   _handleNumberChange: function(e) {
-    this.setState({number: e.target.value});
+    this.setState({ number: e.target.value });
   },
 
   _handlePasswordChange: function(e) {
-    this.setState({password: e.target.value});
+    this.setState({ password: e.target.value });
   },
 
   _handleEnter: function(e) {
