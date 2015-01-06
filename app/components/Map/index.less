@@ -37,27 +37,35 @@
 
 .mapOrderCountdown {
   position: absolute;
+  .square(67px);
+  .circle;
+  background: @greenLight30;
+  border: 1px solid @greenLight70;
+  padding: 10px;
+  
+  .orderCountdownContainer {
+    position: absolute;
+    .square(47px);
+    top: 50%;
+    left: 50%;
+    margin: -23.5px 0 0 -23.5px;
+  }
   
   &:before {
     content: "";
     position: absolute;
-    top: 7px;
-    left: 7px;
+    top: 50%;
+    left: 50%;
+    margin: -16.5px 0 0 -16.5px;
     .square(33px);
     .circle;
     background: @white;
   }
-  
-  &:after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    right: 50%;
-    .square(60px);
-    margin: -30px 0 0 -30px;
-    .circle;
-    background: @greenLight30;
-    border: 1px solid @greenLight70;
+
+  &.urgent {
+    background: @orange30;
+    border: 1px solid @orange70;
   }
+  
   
 }
