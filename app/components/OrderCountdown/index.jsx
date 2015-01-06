@@ -7,6 +7,7 @@ module.exports = React.createClass({
   propTypes: {
     dueDate: React.PropTypes.object.isRequired,
     timespan: React.PropTypes.number.isRequired,
+    inMap: React.PropTypes.bool,
   },
 
   render: function() {
@@ -20,6 +21,7 @@ module.exports = React.createClass({
     var orderCountdownCx = React.addons.classSet({
       orderCountdown: true,
       urgent: progress <= 0.2,
+      mapOrderCountdown: this.props.inMap || false,
     });
 
     return (
