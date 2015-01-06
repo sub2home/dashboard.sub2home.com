@@ -18,9 +18,8 @@ module.exports = React.createClass({
   },
 
   _logout: function() {
-    actions.pushNotification('#yolo swag');
-    //actions.logout();
-    //this.replaceWith('/');
+    actions.logout();
+    this.replaceWith('/');
   },
 
   render: function() {
