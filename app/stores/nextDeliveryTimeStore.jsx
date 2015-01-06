@@ -5,18 +5,28 @@ module.exports = Reflux.createStore({
 
   listenables: actions,
 
+  init: function() {
+    this._deliveryTimes = [];
+    setInterval(this._update.bind(this), 60000);
+  },
+
   deliveryTimesUpdated: function(deliveryTimes) {
+    this._deliveryTimes = deliveryTimes;
+    this._update();
+  },
+
+  _update: function() {
     var now = new Date();
     var min = now.getMinutes() + now.getHours() * 60;
     var day = now.getDay();
 
     var mod = x => (x + 7) % 7;
 
-    var deliveryTime = _.find(deliveryTimes, d => d.dayOfWeek === day && d.startMinutes <= min && min <= d.endMinutes);
+    var deliveryTime = _.find(this._deliveryTimes, d => d.dayOfWeek === day && d.startMinutes <= min && min <= d.endMinutes);
     var isNow = !!deliveryTime;
 
     if (!deliveryTime) {
-      deliveryTime = _(deliveryTimes)
+      deliveryTime = _(this._deliveryTimes)
         .filter(d => d.dayOfWeek !== day || d.startMinutes > min)
         .sort((a, b) => a.startMinutes - b.startMinutes)
         .sort((a, b) => mod(a.dayOfWeek - day) - mod(b.dayOfWeek - day))
