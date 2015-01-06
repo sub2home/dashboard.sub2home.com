@@ -16,7 +16,7 @@ module.exports = React.createClass({
   },
 
   propTypes: {
-    currentCount: React.PropTypes.number.isRequired,
+    orderCount: React.PropTypes.number.isRequired,
     nextDeliveryTime: React.PropTypes.shape({
       deliveryTime: React.PropTypes.object.isRequired,
       isNow: React.PropTypes.bool.isRequired,
@@ -35,6 +35,10 @@ module.exports = React.createClass({
   _toggleFilter: function() {
     var filterToggled = !this.state.filterToggled;
     this.setState({ filterToggled });
+
+    if (!filterToggled) {
+      actions.setOrdersFilter('');
+    }
   },
 
   render: function() {
@@ -45,14 +49,14 @@ module.exports = React.createClass({
     var filterOrInfo;
     if (this.state.filterToggled) {
       filterOrInfo = (
-          <div id="headerFilterOrders" className="emphasized">
-            <input type="text" onChange={this._onFilterChange} placeholder="Bestellungen filtern" />
-          </div>
+        <div id="headerFilterOrders" className="emphasized">
+          <input ref="filter" type="text" onChange={this._onFilterChange} placeholder="Bestellungen filtern" />
+        </div>
       );
     } else {
       filterOrInfo = (
         <div id="headerOutstandingOrders">
-          <span className="counter">{this.props.currentCount}</span>
+          <span className="counter">{this.props.orderCount}</span>
           <span>aktuelle Bestellungen</span>
         </div>
       );

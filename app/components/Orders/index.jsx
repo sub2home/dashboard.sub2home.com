@@ -18,6 +18,7 @@ module.exports = React.createClass({
     return {
       store: null,
       current: [],
+      upcoming: [],
       today: [],
       old: [],
       nextDeliveryTime: {
@@ -60,6 +61,7 @@ module.exports = React.createClass({
     if (this.state.current.length > 0) {
       currentOrders = (
         <div>
+          <Map orders={this.state.current} store={this.state.store} />
           <div className="ordersAreaLabel"><span>Aktuell</span></div>
           <ul id="ordersList" className="list">
             {this.state.current.map(order => <Order order={order} />)}
@@ -74,10 +76,12 @@ module.exports = React.createClass({
 
     return (
       <div>
-        <Header nextDeliveryTime={this.state.nextDeliveryTime} currentCount={this.state.current.length} />
+        <Header nextDeliveryTime={this.state.nextDeliveryTime} orderCount={this.state.current.length + this.state.upcoming.length} />
         <div className="content">
-          <Map orders={this.state.current} store={this.state.store} />
           {currentOrders}
+          <ul id="ordersList" className="list">
+            {this.state.upcoming.map(order => <Order order={order} />)}
+          </ul>
           <div className="ordersAreaLabel"><span>Heute</span></div>
           <ul id="ordersList" className="list">
             {this.state.today.map(order => <Order order={order} />)}

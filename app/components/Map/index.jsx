@@ -80,7 +80,7 @@ module.exports = React.createClass({
     }
 
     return (
-      <div id="map-container" style={{height: innerHeight / 2 + 'px'}}>
+      <div id="map-container" style={{height: (innerHeight - 95) / 2 + 'px'}}>
         <div id="mapbox-container" ref="map"></div>
         {markers}
       </div>
