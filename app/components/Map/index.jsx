@@ -74,7 +74,7 @@ module.exports = React.createClass({
       markers = (
         <div>
           <div id="mapStoreMarker" style={{top: storeOffset.y + 'px', left: storeOffset.x + 'px'}}></div>
-          {zippedOrders.map(z => <OrderCountdown dueDate={new Date(z.order.dueAt)} timespan={z.order.deliveryAreaModel.minimumDuration} style={{top: z.offset.y + 'px', left: z.offset.x + 'px', position: 'absolute'}} />)}
+          {zippedOrders.map(z => <OrderCountdown inMap={true} dueDate={new Date(z.order.dueAt)} timespan={z.order.deliveryAreaModel.minimumDuration} style={{top: z.offset.y + 'px', left: z.offset.x + 'px'}} />)}
         </div>
       );
     }

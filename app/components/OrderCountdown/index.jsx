@@ -27,11 +27,11 @@ module.exports = React.createClass({
     return (
       <div style={this.props.style} className={orderCountdownCx}>
         <div className="orderCountdownContainer fix-tc">
-          <svg width="50" height="50">
-            <circle className="orderCountdownBackground" cx="25" cy="25" r="20" />
+          <svg width="47" height="47">
+            <circle className="orderCountdownBackground" cx="23.5" cy="23.5" r="20" />
           </svg>
-          <svg width="50" height="50">
-            <circle className="orderCountdownStroke" style={{strokeDashoffset: dashoffset + 'px'}} strokeDasharray={dasharray + 'px'} cx="25" cy="25" r="20" />
+          <svg width="47" height="47">
+            <circle className="orderCountdownStroke" style={{strokeDashoffset: dashoffset + 'px'}} strokeDasharray={dasharray + 'px'} cx="23.5" cy="23.5" r="20" />
           </svg>
           <div className="orderCountdownNumber">{parseInt(minutesRemaining + 1, 10)}</div>
         </div>  

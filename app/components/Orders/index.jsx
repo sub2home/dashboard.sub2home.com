@@ -65,7 +65,6 @@ module.exports = React.createClass({
     if (this.state.current.length > 0) {
       currentOrders = (
         <div>
-          <Map orders={this.state.current} store={this.state.store} />
           <div className="ordersAreaLabel"><span>Aktuell</span></div>
           <ul id="ordersList" className="list">
             {this.state.current.map(order => <Order order={order} />)}
@@ -83,12 +82,7 @@ module.exports = React.createClass({
         <Header nextDeliveryTime={this.state.nextDeliveryTime} currentCount={this.state.current.length} />
         <NotificationCenter notifications={['hallo']} />
         <div className="content">
-          <div id="ordersControls" className="note above">
-            <div id="ordersSearch">
-              <input type="text" onChange={this._onFilterChange} placeholder="Bestellungen filtern" />
-            </div>
-            <div id="ordersRefresh" className="icn iNav"></div>
-          </div>
+          <Map orders={this.state.current} store={this.state.store} />
           {currentOrders}
           <div className="ordersAreaLabel"><span>Heute</span></div>
           <ul id="ordersList" className="list">
