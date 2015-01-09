@@ -1,4 +1,4 @@
-var pad = (str) => str.toString().length < 2 ? pad('0' + str) : str;
+var pad = (x) => x.toString().length < 2 ? pad('0' + x) : x;
 
 module.exports = {
 
@@ -19,7 +19,7 @@ module.exports = {
   },
 
   minutesToTime: function(minutes) {
-    return parseInt(minutes / 60, 10) + ':' + pad(minutes % 60);
+    return parseInt(minutes / 60, 10) + ':' + pad(parseInt(minutes, 10) % 60);
   },
 
 };
