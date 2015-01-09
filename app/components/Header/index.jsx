@@ -67,8 +67,8 @@ module.exports = React.createClass({
         <div id="headerContent">
           <NextDeliveryTime isNow={this.props.nextDeliveryTime.isNow} deliveryTime={this.props.nextDeliveryTime.deliveryTime} />
           {filterOrInfo}
-          <div id="headerToggleFilterOrders" onClick={this._toggleFilter} className="headerButton icn iFire iSearch emphasized"></div>
-          <div id="logout" onClick={this._logout} className="headerButton icn iNav">
+          <div id="headerToggleFilterOrders" onClick={this._toggleFilter} className="headerButton icn iSearch emphasized"></div>
+          <div id="logout" onClick={this._logout} className="headerButton icn iSignOut">
           </div>
         </div>
       </header>

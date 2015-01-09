@@ -61,10 +61,10 @@ module.exports = React.createClass({
     if (this.state.current.length + this.state.upcoming.length > 0) {
       pendingOrders = (
         <div>
-          <ul id="ordersList" className="list">
+          <ul id="ordersListCurrent" className="list">
             {this.state.current.map(order => <Order order={order} />)}
           </ul>
-          <ul id="ordersList" className="list">
+          <ul id="ordersListCurrent" className="list">
             {this.state.upcoming.map(order => <Order order={order} />)}
           </ul>
         </div>
@@ -88,7 +88,7 @@ module.exports = React.createClass({
     var todayOrders;
     if (this.state.today.length > 0) {
       todayOrders = (
-        <ul id="ordersList" className="list">
+        <ul id="ordersListToday" className="list">
           {this.state.today.map(order => <Order order={order} />)}
         </ul>
       );
@@ -101,7 +101,7 @@ module.exports = React.createClass({
     var oldOrders;
     if (this.state.old.length > 0) {
       oldOrders = (
-        <ul id="ordersList" className="list">
+        <ul id="ordersListOld" className="list">
           {this.state.old.map(order => <Order order={order} />)}
         </ul>
       );

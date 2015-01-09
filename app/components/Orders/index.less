@@ -12,29 +12,10 @@
 // Module styles
 // --------------------------
 
-
-#ordersControls {
-  display: table;
-  table-layout: fixed;
-  width: 100%;
-  .border-box;
-  
-  > div {
-    display: table-cell;
-  }
-}
-
 #ordersSearch {
   input {
     width: 100%;
   }
-}
-
-#ordersRefresh {
-  width: 35px;
-  text-align: center;
-  padding: 0 0 0 15px;
-  .border-box;
 }
 
 .ordersAreaLabel {
@@ -61,128 +42,6 @@
   }
 }
 
-.orderStatus {
-  width: 15px;
-  padding-right: 15px;
-  text-align: center;
-  overflow: visible !important;
-  
-  &:before {
-    content: "";
-    display: inline-block;
-    background: @grayLighter;
-    .square(15px);
-    .circle;
-    .positioned;
-    top: 1px;
-  }
-  
-  &.isLoading:before {
-    -webkit-animation: orderStatusIsLoading 1s ease-out infinite;
-    animation:         orderStatusIsLoading 1s ease-out infinite;
-    .transform-origin(50%, 50%, 0);
-  }
-  
-  &.isDelivered {
-    .icn;
-    .iCheck;
-    color: @greenLight;
-    font-size: 16px;
-    
-    &:before {
-      background: none;
-      top: -2px;
-    }
-  }
-}
-
-// Order-status is loading Keyframes
-
-/* Chrome, Safari, Opera */ 
-@-webkit-keyframes orderStatusIsLoading {
-    0%     {.scale(1)}
-    50%    {.scale(0.7)}
-    100%   {.scale(1)}
-} 
-
-/* Standard syntax */
-@keyframes orderStatusIsLoading {
-    0%     {.scale(1)}
-    50%    {.scale(0.7)}
-    100%   {.scale(1)}
-}
-
-
-.orderTime {
-  width: 50px;
-  text-overflow: clip;
-  &:after {
-    content: "";
-    height: 1px;
-    width: 30px;
-    display: inline-block;
-    background: @grayLighter;
-    margin-left: 5px;
-    vertical-align: middle;
-  }
-}
-
-.orderDestination {
-  padding-left: 5px;
-}
-
-.orderDeliveryArea {
-  &:before {
-    content: ", ";
-  }
-}
-
-.orderDueTime {
-  text-align: right !important;
-  width: 45px;
-  color: @orange;
-  
-  &:before {
-    content: "";
-  }
-}
-
-.orderClaim {
-  display: none !important;
-}
-
-.orderDestination,
-.orderOrderer,
-.orderDeliveryArea,
-.orderDueTime {
-  &:before {
-    color: @grayLight;
-  }
-}
-
-// Module responsiveness
-// --------------------------
-
-// Portrait Tablet
-
-@media only screen and (min-width : 450px) {
-
-  .orderStatus {
-
-    width: 20px;
-    padding-right: 25px;
-
-    &:before {
-      .square(20px);
-    }
-
-    &.isDelivered {
-      font-size: 22px;
-    }
-  }
-  
-  .orderDueTime {
-    width: 60px;
-  }
-  
+#ordersListCurrent {
+  li { padding-left: 13px; } // compensate width countdown-width (compared to status-width)
 }
