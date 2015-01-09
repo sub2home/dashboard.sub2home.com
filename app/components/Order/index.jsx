@@ -17,22 +17,8 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
-      isLoading: false,
       showDetails: false,
     };
-  },
-
-  componentWillReceiveProps: function() {
-    if (this.state.isLoading) {
-      this.setState({ isLoading: false });
-    }
-  },
-
-  _toggleDelivered: function() {
-    this.setState({isLoading: true});
-    var isDelivered = !this.props.order.isDelivered;
-    var { storeAlias } = this.getParams();
-    actions.updateOrder(this.props.order.id, { isDelivered }, storeAlias);
   },
 
   _toggleDetails: function() {
@@ -63,14 +49,8 @@ module.exports = React.createClass({
         <div className="orderStatus hot"></div>
       );
     } else {
-      var orderStatusCx = React.addons.classSet({
-        orderStatus: true,
-        isDelivered: this.props.order.isDelivered,
-        isLoading: this.state.isLoading,
-      });
-
       status = (
-        <div className={orderStatusCx} onClick={this._toggleDelivered}></div>
+        <div className="orderStatus"></div>
       );
     }
 
