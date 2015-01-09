@@ -57,21 +57,51 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var testMail;
+    var testMail, pendingOrders;
     if (this.state.current.length + this.state.upcoming.length === 0) {
       testMail = (
         <div id="sendTestMail" onClick={this._createTestOrder} className="icn iMail"></div>
       );
-    }
-
-    var currentOrders;
-    if (this.state.current.length > 0) {
-      currentOrders = (
+    } else {
+      pendingOrders = (
         <div>
-          <Map orders={this.state.current} store={this.state.store} />
           <div className="ordersAreaLabel"><span>Aktuell</span></div>
           <ul id="ordersList" className="list">
             {this.state.current.map(order => <Order order={order} />)}
+          </ul>
+          <ul id="ordersList" className="list">
+            {this.state.upcoming.map(order => <Order order={order} />)}
+          </ul>
+        </div>
+      );
+    }
+
+    var map;
+    if (this.state.current.length > 0) {
+      map = (
+        <Map orders={this.state.current} store={this.state.store} />
+      );
+    }
+
+    var todayOrders;
+    if (this.state.today.length > 0) {
+      todayOrders = (
+        <div>
+          <div className="ordersAreaLabel"><span>Heute</span></div>
+          <ul id="ordersList" className="list">
+            {this.state.today.map(order => <Order order={order} />)}
+          </ul>
+        </div>
+      );
+    }
+
+    var oldOrders;
+    if (this.state.old.length > 0) {
+      oldOrders = (
+        <div>
+          <div className="ordersAreaLabel"><span>Ältere Bestellungen</span></div>
+          <ul id="ordersList" className="list">
+            {this.state.old.map(order => <Order order={order} />)}
           </ul>
         </div>
       );
@@ -81,19 +111,11 @@ module.exports = React.createClass({
       <div>
         <Header nextDeliveryTime={this.state.nextDeliveryTime} orderCount={this.state.current.length + this.state.upcoming.length} />
         <div className="content">
+          {map}
           {testMail}
-          {currentOrders}
-          <ul id="ordersList" className="list">
-            {this.state.upcoming.map(order => <Order order={order} />)}
-          </ul>
-          <div className="ordersAreaLabel"><span>Heute</span></div>
-          <ul id="ordersList" className="list">
-            {this.state.today.map(order => <Order order={order} />)}
-          </ul>
-          <div className="ordersAreaLabel"><span>Ältere Bestellungen</span></div>
-          <ul id="ordersList" className="list">
-            {this.state.old.map(order => <Order order={order} />)}
-          </ul>
+          {pendingOrders}
+          {todayOrders}
+          {oldOrders}
         </div>
       </div>
     );
