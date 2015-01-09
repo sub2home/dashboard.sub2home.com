@@ -57,6 +57,13 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var testMail;
+    if (this.state.current.length + this.state.upcoming.length === 0) {
+      testMail = (
+        <div id="sendTestMail" onClick={this._createTestOrder} className="icn iMail"></div>
+      );
+    }
+
     var currentOrders;
     if (this.state.current.length > 0) {
       currentOrders = (
@@ -66,14 +73,7 @@ module.exports = React.createClass({
           <ul id="ordersList" className="list">
             {this.state.current.map(order => <Order order={order} />)}
           </ul>
-          <ul id="ordersList" className="list">
-            {this.state.upcoming.map(order => <Order order={order} />)}
-          </ul>
         </div>
-      );
-    } else {
-      currentOrders = (
-        <div id="sendTestMail" onClick={this._createTestOrder} className="icn iMail"></div>
       );
     }
 
@@ -81,7 +81,11 @@ module.exports = React.createClass({
       <div>
         <Header nextDeliveryTime={this.state.nextDeliveryTime} orderCount={this.state.current.length + this.state.upcoming.length} />
         <div className="content">
+          {testMail}
           {currentOrders}
+          <ul id="ordersList" className="list">
+            {this.state.upcoming.map(order => <Order order={order} />)}
+          </ul>
           <div className="ordersAreaLabel"><span>Heute</span></div>
           <ul id="ordersList" className="list">
             {this.state.today.map(order => <Order order={order} />)}
