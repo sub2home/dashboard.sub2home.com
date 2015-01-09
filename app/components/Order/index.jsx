@@ -1,6 +1,6 @@
 var React = require('react/addons');
 var { State } = require('react-router');
-var { timestampToTime } = require('../../utils/date');
+var { timestampToTime, timestampToDate } = require('../../utils/date');
 var actions = require('../../actions');
 var OrderDetails = require('../OrderDetails');
 var OrderCountdown = require('../OrderCountdown');
@@ -36,8 +36,8 @@ module.exports = React.createClass({
   },
 
   _toggleDetails: function() {
-    //var showDetails = !this.state.showDetails;
-    //this.setState({ showDetails });
+    var showDetails = !this.state.showDetails;
+    this.setState({ showDetails });
   },
 
   render: function() {
@@ -53,15 +53,14 @@ module.exports = React.createClass({
     var dueDate = new Date(this.props.order.dueAt);
     var delta = (dueDate - now) / 60000;
     var minimumDuration = this.props.order.deliveryAreaModel.minimumDuration;
-    var isToday = dueDate.toDateString() === now.toDateString();
     var status;
     if (delta >= 0 && delta <= minimumDuration) {
       status = (
-        <OrderCountdown dueDate={new Date(this.props.order.dueAt)} timespan={this.props.order.deliveryAreaModel.minimumDuration} />
+        <OrderCountdown dueDate={dueDate} timespan={minimumDuration} />
       );
     } else if (delta > minimumDuration && delta <= minimumDuration + 10) {
       status = (
-        <div className="orderStatus upcoming"></div>
+        <div className="orderStatus hot"></div>
       );
     } else {
       var orderStatusCx = React.addons.classSet({
@@ -75,6 +74,14 @@ module.exports = React.createClass({
       );
     }
 
+    var isToday = dueDate.toDateString() === now.toDateString();
+    var deliveryTime;
+    if (isToday) {
+      deliveryTime = timestampToTime(this.props.order.dueAt);
+    } else {
+      deliveryTime = timestampToDate(this.props.order.dueAt);
+    }
+
     return (
       <li onClick={this._toggleDetails}>
         {status}
@@ -82,7 +89,7 @@ module.exports = React.createClass({
           <span className="orderOrderer">({this.props.order.id}) {this.props.order.addressModel.firstName} {this.props.order.addressModel.lastName}</span>
           <span className="orderDeliveryArea">{this.props.order.addressModel.postal} {this.props.order.addressModel.city} {this.props.order.addressModel.district ? '(' + this.props.order.addressModel.district + ')' : ''}</span>
         </div>
-        <div className="orderDueTime">{timestampToTime(this.props.order.dueAt)}</div>
+        <div className="orderDueTime">{deliveryTime}</div>
         {details}
       </li>
     );
