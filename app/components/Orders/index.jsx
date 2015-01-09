@@ -57,21 +57,23 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var testMail, pendingOrders;
-    if (this.state.current.length + this.state.upcoming.length === 0) {
-      testMail = (
-        <div id="sendTestMail" onClick={this._createTestOrder} className="icn iMail"></div>
-      );
-    } else {
+    var pendingOrders;
+    if (this.state.current.length + this.state.upcoming.length > 0) {
       pendingOrders = (
         <div>
-          <div className="ordersAreaLabel"><span>Aktuell</span></div>
           <ul id="ordersList" className="list">
             {this.state.current.map(order => <Order order={order} />)}
           </ul>
           <ul id="ordersList" className="list">
             {this.state.upcoming.map(order => <Order order={order} />)}
           </ul>
+        </div>
+      );
+    } else {
+      pendingOrders = (
+        <div>
+          <div id="sendTestMail" onClick={this._createTestOrder} className="icn iMail"></div>
+          Gibt grad keine Arbeit. Testbestellung?
         </div>
       );
     }
@@ -86,24 +88,26 @@ module.exports = React.createClass({
     var todayOrders;
     if (this.state.today.length > 0) {
       todayOrders = (
-        <div>
-          <div className="ordersAreaLabel"><span>Heute</span></div>
-          <ul id="ordersList" className="list">
-            {this.state.today.map(order => <Order order={order} />)}
-          </ul>
-        </div>
+        <ul id="ordersList" className="list">
+          {this.state.today.map(order => <Order order={order} />)}
+        </ul>
+      );
+    } else {
+      todayOrders = (
+        <div>Keine fertigen Bestellungen heute</div>
       );
     }
 
     var oldOrders;
     if (this.state.old.length > 0) {
       oldOrders = (
-        <div>
-          <div className="ordersAreaLabel"><span>Ältere Bestellungen</span></div>
-          <ul id="ordersList" className="list">
-            {this.state.old.map(order => <Order order={order} />)}
-          </ul>
-        </div>
+        <ul id="ordersList" className="list">
+          {this.state.old.map(order => <Order order={order} />)}
+        </ul>
+      );
+    } else {
+      oldOrders = (
+        <div>Keine alten Bestellungen</div>
       );
     }
 
@@ -112,9 +116,11 @@ module.exports = React.createClass({
         <Header nextDeliveryTime={this.state.nextDeliveryTime} orderCount={this.state.current.length + this.state.upcoming.length} />
         <div className="content">
           {map}
-          {testMail}
+          <div className="ordersAreaLabel"><span>Aktuell</span></div>
           {pendingOrders}
+          <div className="ordersAreaLabel"><span>Heute</span></div>
           {todayOrders}
+          <div className="ordersAreaLabel"><span>Ältere Bestellungen</span></div>
           {oldOrders}
         </div>
       </div>
