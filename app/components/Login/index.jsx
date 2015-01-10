@@ -3,6 +3,7 @@ var { ListenerMixin } = require('reflux');
 var { Navigation } = require('react-router');
 var actions = require('../../actions');
 var text = require('../../utils/text');
+var session = require('../../utils/session');
 
 require('./index.less');
 
@@ -21,6 +22,10 @@ module.exports = React.createClass({
     this.listenTo(actions.loginSuccess, this._onLoginSuccess);
     this.listenTo(actions.loginError, this._onLoginError);
     this.listenTo(actions.storesUpdated, this._onStoresChange);
+
+    if (session.isLoggedIn()) {
+      actions.fetchStores();
+    }
   },
 
   _onLoginSuccess: function() {
