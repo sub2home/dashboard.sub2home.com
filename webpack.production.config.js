@@ -1,8 +1,10 @@
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
     entry: './app',
     output: {
         path: './dist',
-        filename: 'bundle.js',
+        filename: 'bundle.[hash].js',
         publicPath: '/'
     },
     module: {
@@ -23,6 +25,9 @@ module.exports = {
             loader: 'url?limit=100000'
         }]
     },
+    plugins: [new HtmlWebpackPlugin({
+        title: 'sub2home Dashboard'
+    })],
     resolve: {
         extensions: ['', '.js', '.jsx']
     },
