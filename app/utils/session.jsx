@@ -1,7 +1,7 @@
 module.exports = {
   
   login: function(token) {
-    localStorage.setItem('token', data.token);
+    localStorage.setItem('token', token);
   },
 
   logout: function() {

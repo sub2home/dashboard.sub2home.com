@@ -14,6 +14,7 @@ Reflux.nextTick(process.nextTick);
 
 api.registerErrorHandler(function(error) {
   if (error.status === 401) {
+    session.logout();
     location.pathname = '/';
   }
 });
