@@ -1,5 +1,6 @@
 var Reflux = require('reflux');
 var api = require('../utils/api');
+var session = require('../utils/session');
 
 var actions = Reflux.createActions([
   // notifications
@@ -34,15 +35,13 @@ var actions = Reflux.createActions([
 actions.login.listen(function(number, password) {
   api.post('login', {number, password}, { disableErrorHandlers: true })
     .then(function(data) {
-      localStorage.setItem('token', data.token);
+      session.login(data.token);
       actions.loginSuccess();
     })
     .catch(actions.loginError);
 });
 
-actions.logout.listen(function() {
-  localStorage.removeItem('token');
-});
+actions.logout.listen(session.logout);
 
 
 /*

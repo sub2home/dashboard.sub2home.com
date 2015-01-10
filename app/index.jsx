@@ -3,6 +3,7 @@ var Reflux = require('reflux');
 var fastclick = require('fastclick');
 var router = require('./config/router');
 var api = require('./utils/api');
+var session = require('./utils/session');
 
 // polyfills
 require('es6-promise').polyfill();

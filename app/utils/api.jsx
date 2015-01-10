@@ -1,4 +1,5 @@
 var env = require('./env');
+var session = require('./session');
 
 var baseUrl = env.isProduction ? 'https://api.sub2home.com/' : `https://${location.hostname}:1070/`;
 var errorHandlers = [];
@@ -29,10 +30,9 @@ module.exports = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     };
-    var token = localStorage.getItem('token');
-    if (token) {
+    if (session.isLoggedIn()) {
       // TODO rename to Authorization
-      headers.Token = token;
+      headers.Token = session.getToken();
     }
     var body = JSON.stringify(data);
     var promise = fetch(url, {method, headers, body})
