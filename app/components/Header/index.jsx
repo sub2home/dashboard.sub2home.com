@@ -38,6 +38,12 @@ module.exports = React.createClass({
     actions.setOrdersFilter(e.target.value);
   },
 
+  _onFilterKeyUp: function(e) {
+    if (e.keyCode === 27) {
+      this._toggleFilter();
+    }
+  },
+
   _toggleFilter: function() {
     var filterToggled = !this.state.filterToggled;
     this.setState({ filterToggled });
@@ -56,7 +62,7 @@ module.exports = React.createClass({
     if (this.state.filterToggled) {
       filterOrInfo = (
         <div id="headerFilterOrders" className="emphasized">
-          <input ref="filter" type="text" onChange={this._onFilterChange} placeholder="Bestellungen filtern" />
+          <input ref="filter" type="text" onKeyUp={this._onFilterKeyUp} onChange={this._onFilterChange} placeholder="Bestellungen filtern" />
         </div>
       );
     } else {

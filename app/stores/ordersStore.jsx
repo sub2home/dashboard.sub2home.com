@@ -63,8 +63,9 @@ module.exports = Reflux.createStore({
     upcoming = upcoming.sort((a, b) => new Date(a.dueAt) - new Date(b.dueAt));
     today = today.sort((a, b) => new Date(b.dueAt) - new Date(a.dueAt));
     old = old.sort((a, b) => new Date(b.dueAt) - new Date(a.dueAt));
+    isFiltered = this.filter !== '';
 
-    this.trigger({ current, upcoming, today, old });
+    this.trigger({ current, upcoming, today, old, isFiltered });
   },
 
 });

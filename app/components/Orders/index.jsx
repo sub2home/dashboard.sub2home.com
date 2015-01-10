@@ -21,6 +21,7 @@ module.exports = React.createClass({
       upcoming: [],
       today: [],
       old: [],
+      isFiltered: false,
       nextDeliveryTime: {
         deliveryTime: null,
         isNow: false,
@@ -69,7 +70,7 @@ module.exports = React.createClass({
           </ul>
         </div>
       );
-    } else {
+    } else if (!this.state.isFiltered) {
       pendingOrders = (
         <div>
           <div id="sendTestMail" onClick={this._createTestOrder} className="icn iMail"></div>
@@ -92,7 +93,7 @@ module.exports = React.createClass({
           {this.state.today.map(order => <Order order={order} />)}
         </ul>
       );
-    } else {
+    } else if (!this.state.isFiltered) {
       todayOrders = (
         <div>Heute wurde noch keine Bestellung ausgeliefert.</div>
       );
@@ -105,7 +106,7 @@ module.exports = React.createClass({
           {this.state.old.map(order => <Order order={order} />)}
         </ul>
       );
-    } else {
+    } else if (!this.state.isFiltered) {
       oldOrders = (
         <div>Es sind keine älteren Bestellungen vorhanden.</div>
       );
