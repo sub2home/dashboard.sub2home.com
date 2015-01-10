@@ -9,12 +9,6 @@ module.exports = React.createClass({
 
   mixins: [State, Navigation],
 
-  getInitialState: function() {
-    return {
-      filterToggled: false,
-    };
-  },
-
   propTypes: {
     orderCount: React.PropTypes.number.isRequired,
     nextDeliveryTime: React.PropTypes.shape({
@@ -22,6 +16,18 @@ module.exports = React.createClass({
       isNow: React.PropTypes.bool.isRequired,
     }),
   },
+
+  getInitialState: function() {
+    return {
+      filterToggled: false,
+    };
+  },
+
+  componentDidUpdate: function(prevProps, prevState) {
+    if (!prevState.filterToggled && this.state.filterToggled) {
+      this.refs.filter.getDOMNode().focus();
+    }
+  }, 
 
   _logout: function() {
     actions.logout();
