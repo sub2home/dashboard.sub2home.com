@@ -62,7 +62,7 @@ module.exports = React.createClass({
     if (this.state.filterToggled) {
       filterOrInfo = (
         <div id="headerFilterOrders" className="emphasized">
-          <input ref="filter" type="text" onKeyUp={this._onFilterKeyUp} onChange={this._onFilterChange} placeholder="Bestellungen filtern" />
+          <input ref="filter" type="text" onBlur={this._toggleFilter} onKeyUp={this._onFilterKeyUp} onChange={this._onFilterChange} placeholder="Bestellungen filtern" />
         </div>
       );
     } else {
