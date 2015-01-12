@@ -61,13 +61,14 @@ module.exports = React.createClass({
 
     var lazyToggleFilter = _.debounce(this._toggleFilter, 150);
 
-    var filterOrInfo;
+    var filterOrInfo, toggleFilter;
     if (this.state.filterToggled) {
       filterOrInfo = (
         <div id="headerFilterOrders" className="emphasized">
           <input ref="filter" type="text" onBlur={lazyToggleFilter} onKeyUp={this._onFilterKeyUp} onChange={this._onFilterChange} placeholder="Bestellungen filtern" />
         </div>
       );
+      toggleFilter = lazyToggleFilter;
     } else {
       var plural = this.props.orderCount === 1 ? '' : 'en';
       filterOrInfo = (
@@ -76,6 +77,7 @@ module.exports = React.createClass({
           <span>aktuelle Bestellung{plural}</span>
         </div>
       );
+      toggleFilter = this._toggleFilter;
     }
 
     return (
@@ -83,7 +85,7 @@ module.exports = React.createClass({
         <div id="headerContent">
           <NextDeliveryTime isNow={this.props.nextDeliveryTime.isNow} deliveryTime={this.props.nextDeliveryTime.deliveryTime} />
           {filterOrInfo}
-          <div id="headerToggleFilterOrders" onClick={lazyToggleFilter} className="headerButton icn iSearch emphasized"></div>
+          <div id="headerToggleFilterOrders" onClick={toggleFilter} className="headerButton icn iSearch emphasized"></div>
           <div id="logout" onClick={this._logout} className="headerButton icn iSignOut">
           </div>
         </div>
