@@ -60,11 +60,11 @@ module.exports = React.createClass({
       );
     } else if (isDifferentYear) {
       deliveryTime = (
-        <div className="orderDueTime differentYear">{timestampToDate(this.props.order.dueAt)}</div>
+        <div className="orderDueTime orderDueDateFullFormat">{timestampToDate(this.props.order.dueAt)}</div>
       );
     } else {
       deliveryTime = (
-        <div className="orderDueTime">{timestampToDate(this.props.order.dueAt)}</div>
+        <div className="orderDueTime orderDueDate">{timestampToDate(this.props.order.dueAt)}</div>
       );
     }
 
