@@ -44,6 +44,21 @@
 
 #ordersListCurrent {
   li { padding-left: 13px; } // compensate width countdown-width (compared to status-width)
+  
+  .orderDueTime {
+    .iDueTime;
+    width: 60px;
+
+    &:before {
+      .icn;
+      font-size: 9px;
+      top: 6px;
+      color: inherit !important;
+      vertical-align: top;
+
+      margin-right: 5px;
+    }
+  }
 }
 
 .ordersNone {
@@ -76,10 +91,20 @@
       font-size: 18px;
     }
     
-    .iTestmail {
+    #sendTestMail {
       font-size: 80px;
     }
     
+  }
+  
+  #ordersListCurrent .orderDueTime {
+    
+    width: 80px;
+    
+    &:before {
+      font-size: 13px;
+      top: 7px;
+    }
   }
 }
 
