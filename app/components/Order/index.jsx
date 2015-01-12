@@ -34,6 +34,7 @@ module.exports = React.createClass({
     var createdDelta = (createdDate - now) / 60000;
     var minimumDuration = this.props.order.deliveryAreaModel.minimumDuration;
     var isToday = dueDate.toDateString() === now.toDateString();
+    var isDifferentYear = dueDate.getFullYear() !== now.getFullYear();
     var isPending = dueDelta >= 0;
     var isCurrent = isPending && dueDelta <= minimumDuration;
     var isHot = dueDelta > minimumDuration && dueDelta <= minimumDuration + 5;
@@ -56,6 +57,10 @@ module.exports = React.createClass({
     } else if (isToday) {
       deliveryTime = (
         <div className="orderDueTime">{timestampToTime(this.props.order.dueAt)}</div>
+      );
+    } else if (isDifferentYear) {
+      deliveryTime = (
+        <div className="orderDueTime differentYear">{timestampToDate(this.props.order.dueAt)}</div>
       );
     } else {
       deliveryTime = (
