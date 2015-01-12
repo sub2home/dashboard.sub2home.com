@@ -1,4 +1,5 @@
 var React = require('react/addons');
+var _ = require('lodash');
 var { State, Navigation } = require('react-router');
 var actions = require('../../actions');
 var NextDeliveryTime = require('../NextDeliveryTime');
@@ -58,11 +59,13 @@ module.exports = React.createClass({
       filterToggled: this.state.filterToggled,
     });
 
+    var lazyToggleFilter = _.debounce(this._toggleFilter, 150);
+
     var filterOrInfo;
     if (this.state.filterToggled) {
       filterOrInfo = (
         <div id="headerFilterOrders" className="emphasized">
-          <input ref="filter" type="text" onBlur={this._toggleFilter} onKeyUp={this._onFilterKeyUp} onChange={this._onFilterChange} placeholder="Bestellungen filtern" />
+          <input ref="filter" type="text" onBlur={lazyToggleFilter} onKeyUp={this._onFilterKeyUp} onChange={this._onFilterChange} placeholder="Bestellungen filtern" />
         </div>
       );
     } else {
@@ -80,7 +83,7 @@ module.exports = React.createClass({
         <div id="headerContent">
           <NextDeliveryTime isNow={this.props.nextDeliveryTime.isNow} deliveryTime={this.props.nextDeliveryTime.deliveryTime} />
           {filterOrInfo}
-          <div id="headerToggleFilterOrders" onClick={this._toggleFilter} className="headerButton icn iSearch emphasized"></div>
+          <div id="headerToggleFilterOrders" onClick={lazyToggleFilter} className="headerButton icn iSearch emphasized"></div>
           <div id="logout" onClick={this._logout} className="headerButton icn iSignOut">
           </div>
         </div>
