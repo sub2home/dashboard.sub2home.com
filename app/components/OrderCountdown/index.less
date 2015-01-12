@@ -15,6 +15,7 @@
 
 .orderCountdownContainer {
   height: 47px;
+  .fix-tc;
 }
 
 .orderCountdownBackground, .orderCountdownStroke {
@@ -50,5 +51,16 @@
   
   .orderCountdownNumber {
     color: @orange;
+  }
+}
+
+.orderCountdown.waiting {
+  
+  .orderCountdownStroke {
+    stroke: @grayLighter;
+  }
+  
+  .orderCountdownNumber {
+    color: @grayLighter;
   }
 }

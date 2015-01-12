@@ -51,7 +51,7 @@ module.exports = React.createClass({
     var deliveryTime;
     if (isPending && !isCurrent) {
       deliveryTime = (
-        <div className="orderDueTime">{timestampToTime(this.props.order.dueAt)} (in {minutesToTime(dueDelta)})</div>
+        <div className="orderDueTime">{timestampToTime(this.props.order.dueAt)}<span className="orderTimeToDueTime">(in {minutesToTime(dueDelta)})</span></div>
       );
     } else if (isToday) {
       deliveryTime = (
@@ -67,6 +67,17 @@ module.exports = React.createClass({
     if (isCurrent) {
       status = (
         <OrderCountdown dueDate={dueDate} timespan={minimumDuration} />
+      );
+    } else if (isPending) {
+      status = (
+        <div className="orderCountdown waiting">
+          <div className="orderCountdownContainer">
+            <svg width="47" height="47">
+              <circle className="orderCountdownStroke" cx="23.5" cy="23.5" r="20" />
+            </svg>
+            <div className="orderCountdownNumber">{minimumDuration}</div>
+          </div>  
+        </div>
       );
     } else {
       status = (

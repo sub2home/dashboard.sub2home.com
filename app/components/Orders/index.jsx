@@ -72,9 +72,9 @@ module.exports = React.createClass({
       );
     } else if (!this.state.isFiltered) {
       pendingOrders = (
-        <div>
-          <div id="sendTestMail" onClick={this._createTestOrder} className="icn iMail"></div>
-          Es liegen keine aktuellen Bestellungen vor. Magst du eine Testbestellung losschicken?
+        <div className="ordersNone noCurrentOrders">
+          Es liegen keine aktuellen Bestellungen vor.<span className="small">Beunruhigt? Senden Sie eine Testbestellung, um zu sehen, ob es an der Technik liegt:</span>
+          <div id="sendTestMail" onClick={this._createTestOrder} className="icn iTestmail"></div>
         </div>
       );
     }
@@ -95,7 +95,7 @@ module.exports = React.createClass({
       );
     } else if (!this.state.isFiltered) {
       todayOrders = (
-        <div>Heute wurde noch keine Bestellung ausgeliefert.</div>
+        <div className="ordersNone">Heute wurde noch keine Bestellung ausgeliefert.</div>
       );
     }
 
@@ -108,7 +108,7 @@ module.exports = React.createClass({
       );
     } else if (!this.state.isFiltered) {
       oldOrders = (
-        <div>Es sind keine älteren Bestellungen vorhanden.</div>
+        <div className="ordersNone">Es sind keine älteren Bestellungen vorhanden.</div>
       );
     }
 

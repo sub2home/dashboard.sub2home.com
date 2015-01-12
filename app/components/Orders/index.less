@@ -45,3 +45,42 @@
 #ordersListCurrent {
   li { padding-left: 13px; } // compensate width countdown-width (compared to status-width)
 }
+
+.ordersNone {
+  margin: 30px 0;
+  color: @grayLighter;
+  padding: 0 10%;
+  
+  .small {
+    display: block;
+    margin-top: 10px;
+    font-size: 13px;
+  }
+}
+
+#sendTestMail {
+  margin-top: 20px;
+  font-size: 60px;
+  color: @greenLight30;
+}
+
+// Module responsiveness
+// --------------------------
+
+// Portrait Tablet
+
+@media only screen and (min-width : 450px) {
+
+  .ordersNone {
+    .small {
+      font-size: 18px;
+    }
+    
+    .iTestmail {
+      font-size: 80px;
+    }
+    
+  }
+  
+}
+

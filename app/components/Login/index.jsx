@@ -61,9 +61,9 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <div id="login" className="content note fillPage sc-tr">
+      <div id="login" className="content note fillPage">
           <div id="loginAppTitle" className="fillSpace">
-              <div className="fix-tr">
+              <div>
                   <div id="loginAppTitleContainer">
                       <div className="logo"></div>
                       <h2>Dashboard</h2>
