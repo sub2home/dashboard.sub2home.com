@@ -66,10 +66,11 @@ module.exports = React.createClass({
         </div>
       );
     } else {
+      var plural = this.props.orderCount === 1 ? '' : 'en';
       filterOrInfo = (
         <div id="headerOutstandingOrders">
           <span className="counter">{this.props.orderCount}</span>
-          <span>aktuelle Bestellungen</span>
+          <span>aktuelle Bestellung{plural}</span>
         </div>
       );
     }
