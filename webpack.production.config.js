@@ -26,7 +26,7 @@ module.exports = {
         }]
     },
     plugins: [new HtmlWebpackPlugin({
-        title: 'sub2home Dashboard'
+        template: 'index.html'
     })],
     resolve: {
         extensions: ['', '.js', '.jsx']
