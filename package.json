@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "webpack -p --config webpack.production.config.js",
+    "build": "webpack -p",
     "prestart": "npm install",
-    "start": "node server.js"
+    "start": "webpack-dev-server --hot --inline --history-api-fallback --devtool source-map --port 8000"
   },
   "jest": {
     "scriptPreprocessor": "node_modules/6to5-jest",

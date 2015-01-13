@@ -1,14 +1,10 @@
-var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: [
-        'webpack-dev-server/client?http://0.0.0.0:8000',
-        'webpack/hot/only-dev-server',
-        './app',
-    ],
+    entry: './app',
     output: {
-        path: __dirname,
-        filename: 'bundle.js',
+        path: './build',
+        filename: 'bundle.[hash].js',
         publicPath: '/'
     },
     module: {
@@ -29,10 +25,9 @@ module.exports = {
             loader: 'url?limit=100000'
         }]
     },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
-    ],
+    plugins: [new HtmlWebpackPlugin({
+        template: 'index.html'
+    })],
     resolve: {
         extensions: ['', '.js', '.jsx']
     },
