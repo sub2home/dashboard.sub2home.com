@@ -10,7 +10,9 @@
     "start": "node server.js"
   },
   "jest": {
-    "scriptPreprocessor": "node_modules/6to5-jest"
+    "scriptPreprocessor": "node_modules/6to5-jest",
+    "testFileExtensions": ["jsx"],
+    "moduleFileExtensions": ["jsx"]
   },
   "repository": {
     "type": "git",

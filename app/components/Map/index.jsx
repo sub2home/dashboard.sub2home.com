@@ -2,6 +2,7 @@ var React = require('react');
 var _ = require('lodash');
 var OrderCountdown = require('../OrderCountdown');
 var config = require('../../config/mapbox');
+var cluster = require('../../utils/cluster');
 
 require('mapbox.js');
 
@@ -68,13 +69,14 @@ module.exports = React.createClass({
       var toOffset = x => this._map.latLngToLayerPoint([x.addressModel.latitude, x.addressModel.longitude]);
       var storeOffset = toOffset(this.props.store);
       var orderOffsets = this.props.orders.map(toOffset);
-      var zippedOrders = _.zip(this.props.orders, orderOffsets).map(z => ({ order: z[0], offset: z[1] }));
+      var zippedOrders = _.zip(this.props.orders, orderOffsets).map(z => ({ x: z[1].x, y: z[1].y, order: z[0] }));
+      var clusteredOrders = cluster(zippedOrders, 25);
 
       // markers to state
       markers = (
         <div>
           <div id="mapStoreMarker" style={{top: storeOffset.y + 'px', left: storeOffset.x + 'px'}}></div>
-          {zippedOrders.map(z => <OrderCountdown inMap={true} dueDate={new Date(z.order.dueAt)} timespan={z.order.deliveryAreaModel.minimumDuration} style={{top: z.offset.y + 'px', left: z.offset.x + 'px'}} />)}
+          {clusteredOrders.map(c => <OrderCountdown inMap={true} dueDate={new Date(c.points[0].order.dueAt)} timespan={c.points[0].order.deliveryAreaModel.minimumDuration} style={{top: c.center.y + 'px', left: c.center.x + 'px'}} />)}
         </div>
       );
     }
