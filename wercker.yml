@@ -17,4 +17,4 @@ deploy:
         secret: $SECRET
         bucket: $BUCKET
         region: $REGION
-        source-dir: ./dist
+        source-dir: ./build
