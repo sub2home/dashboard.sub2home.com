@@ -8,7 +8,7 @@ var session = require('./utils/session');
 // polyfills
 require('es6-promise').polyfill();
 require('setimmediate');
-require('fetch');
+require('whatwg-fetch');
 
 Reflux.nextTick(process.nextTick);
 

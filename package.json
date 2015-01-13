@@ -11,8 +11,12 @@
   },
   "jest": {
     "scriptPreprocessor": "node_modules/6to5-jest",
-    "testFileExtensions": ["jsx"],
-    "moduleFileExtensions": ["jsx"]
+    "testFileExtensions": [
+      "jsx"
+    ],
+    "moduleFileExtensions": [
+      "jsx"
+    ]
   },
   "repository": {
     "type": "git",
@@ -43,13 +47,13 @@
     "common-styles": "sub2home/common-styles",
     "es6-promise": "^2.0.1",
     "fastclick": "^1.0.3",
-    "fetch": "github/fetch",
     "lodash": "^2.4.1",
     "lunr": "^0.5.7",
     "mapbox.js": "^2.1.4",
     "react": "^0.12.2",
     "react-router": "^0.11.6",
     "reflux": "^0.2.1",
-    "setimmediate": "^1.0.2"
+    "setimmediate": "^1.0.2",
+    "whatwg-fetch": "^0.6.0"
   }
 }
