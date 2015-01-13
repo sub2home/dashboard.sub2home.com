@@ -42,10 +42,11 @@ module.exports = Reflux.createStore({
       var dueDate = new Date(order.dueAt);
       var delta = (dueDate - now) / 60000;
       var isToday = dueDate.toDateString() === now.toDateString();
+      var hasCredit = !!order.creditModel;
 
-      if (delta >= 0 && delta <= order.deliveryAreaModel.minimumDuration) {
+      if (!hasCredit && delta >= 0 && delta <= order.deliveryAreaModel.minimumDuration) {
         return 'current';
-      } else if (delta > order.deliveryAreaModel.minimumDuration) {
+      } else if (!hasCredit && delta > order.deliveryAreaModel.minimumDuration) {
         return 'upcoming';
       } else if (isToday) {
         return 'today';
