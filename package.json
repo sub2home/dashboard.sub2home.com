@@ -9,6 +9,9 @@
     "prestart": "npm install",
     "start": "node server.js"
   },
+  "jest": {
+    "scriptPreprocessor": "node_modules/6to5-jest"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/sub2home/dashboard.sub2home.com.git"
@@ -20,6 +23,7 @@
   },
   "homepage": "https://github.com/sub2home/dashboard.sub2home.com",
   "devDependencies": {
+    "6to5-jest": "^1.0.0",
     "css-loader": "^0.9.0",
     "file-loader": "^0.8.1",
     "html-webpack-plugin": "^1.1.0",
