@@ -40,8 +40,9 @@ module.exports = React.createClass({
     var isHot = dueDelta > minimumDuration && dueDelta <= minimumDuration + 5;
     var isNew = createdDelta < 0.5;
     var credit = this.props.order.creditModel;
-    var hasWaitingCredit = credit && !credit.isAccepted;
-    var hasAcceptedCredit = credit && credit.isAccepted;
+    var hasCredit = !!credit;
+    var hasWaitingCredit = hasCredit && !credit.isAccepted;
+    var hasAcceptedCredit = hasCredit && credit.isAccepted;
 
     var cx;
     if (hasWaitingCredit) {
@@ -76,11 +77,11 @@ module.exports = React.createClass({
     }
 
     var status;
-    if (isCurrent) {
+    if (!hasCredit && isCurrent) {
       status = (
         <OrderCountdown dueDate={dueDate} timespan={minimumDuration} />
       );
-    } else if (isPending) {
+    } else if (!hasCredit && isPending) {
       status = (
         <div className="orderCountdown waiting">
           <div className="orderCountdownContainer">
