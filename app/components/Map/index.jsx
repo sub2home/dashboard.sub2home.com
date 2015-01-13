@@ -76,7 +76,21 @@ module.exports = React.createClass({
       markers = (
         <div>
           <div id="mapStoreMarker" style={{top: storeOffset.y + 'px', left: storeOffset.x + 'px'}}></div>
-          {clusteredOrders.map(c => <OrderCountdown inMap={true} dueDate={new Date(c.points[0].order.dueAt)} timespan={c.points[0].order.deliveryAreaModel.minimumDuration} style={{top: c.center.y + 'px', left: c.center.x + 'px'}} />)}
+          {clusteredOrders.map(function(c) {
+            var counter;
+            if (c.points.length > 1) {
+              counter = (
+                <span className="counter">{c.points.length}</span>
+              );
+            }
+
+            return (
+              <div>
+                {counter}
+                <OrderCountdown inMap={true} dueDate={new Date(c.points[0].order.dueAt)} timespan={c.points[0].order.deliveryAreaModel.minimumDuration} style={{top: c.center.y + 'px', left: c.center.x + 'px'}} />
+              </div>
+            );
+          })}
         </div>
       );
     }
