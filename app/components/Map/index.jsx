@@ -85,9 +85,9 @@ module.exports = React.createClass({
             }
 
             return (
-              <div>
+              <div className="mapOrderDestination" style={{top: c.center.y + 'px', left: c.center.x + 'px'}}>
                 {counter}
-                <OrderCountdown inMap={true} dueDate={new Date(c.points[0].order.dueAt)} timespan={c.points[0].order.deliveryAreaModel.minimumDuration} style={{top: c.center.y + 'px', left: c.center.x + 'px'}} />
+                <OrderCountdown inMap={true} dueDate={new Date(c.points[0].order.dueAt)} timespan={c.points[0].order.deliveryAreaModel.minimumDuration} />
               </div>
             );
           })}
@@ -102,5 +102,4 @@ module.exports = React.createClass({
       </div>
     );
   },
-
 });
