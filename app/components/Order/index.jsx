@@ -39,9 +39,16 @@ module.exports = React.createClass({
     var isCurrent = isPending && dueDelta <= minimumDuration;
     var isHot = dueDelta > minimumDuration && dueDelta <= minimumDuration + 5;
     var isNew = createdDelta < 0.5;
+    var credit = this.props.order.creditModel;
+    var hasWaitingCredit = credit && !credit.isAccepted;
+    var hasAcceptedCredit = credit && credit.isAccepted;
 
     var cx;
-    if (isCurrent) {
+    if (hasWaitingCredit) {
+      cx = 'hasWaitingCredit';
+    } else if (hasAcceptedCredit) {
+      cx = 'hasAcceptedCredit';
+    } else if (isCurrent) {
       cx = 'isCurrent';
     } else if (isHot) {
       cx = 'isHot';
@@ -81,7 +88,7 @@ module.exports = React.createClass({
               <circle className="orderCountdownStroke" cx="23.5" cy="23.5" r="20" />
             </svg>
             <div className="orderCountdownNumber">{minimumDuration}</div>
-          </div>  
+          </div>
         </div>
       );
     } else {

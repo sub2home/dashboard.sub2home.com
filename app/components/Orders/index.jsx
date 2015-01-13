@@ -95,7 +95,7 @@ module.exports = React.createClass({
       );
     } else if (!this.state.isFiltered) {
       todayOrders = (
-        <div className="ordersNone">Heute wurde noch keine Bestellung ausgeliefert.</div>
+        <div className="ordersNone">Heute wurden noch keine Bestellungen ausgeliefert.</div>
       );
     }
 
