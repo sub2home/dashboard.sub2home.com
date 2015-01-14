@@ -80,10 +80,17 @@ module.exports = React.createClass({
       toggleFilter = this._toggleFilter;
     }
 
+    var nextDeliveryTime;
+    if (window.innerWidth >= 550) {
+      nextDeliveryTime = (
+        <NextDeliveryTime isNow={this.props.nextDeliveryTime.isNow} deliveryTime={this.props.nextDeliveryTime.deliveryTime} />
+      );
+    }
+
     return (
       <header id="header" className={orderStatusCx}>
         <div id="headerContent">
-          <NextDeliveryTime isNow={this.props.nextDeliveryTime.isNow} deliveryTime={this.props.nextDeliveryTime.deliveryTime} />
+          {nextDeliveryTime}
           {filterOrInfo}
           <div id="headerToggleFilterOrders" onClick={toggleFilter} className="headerButton icn iSearch emphasized"></div>
           <div id="logout" onClick={this._logout} className="headerButton icn iSignOut">
