@@ -25,11 +25,11 @@ module.exports = Reflux.createStore({
     var deliveryTime = _.find(this._deliveryTimes, d => d.dayOfWeek === day && d.startMinutes <= min && min <= d.endMinutes);
     var isNow = !!deliveryTime;
 
-    if (!deliveryTime) {
+    if (!isNow) {
       deliveryTime = _(this._deliveryTimes)
         .filter(d => d.dayOfWeek !== day || d.startMinutes > min)
-        .sort((a, b) => a.startMinutes - b.startMinutes)
-        .sort((a, b) => mod(a.dayOfWeek - day) - mod(b.dayOfWeek - day))
+        .sortBy('startMinutes')
+        .sortBy(d => mod(d.dayOfWeek - day))
         .first();
     }
 
