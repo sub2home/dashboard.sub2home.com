@@ -28,7 +28,7 @@ api.registerErrorHandler(function(error) {
 });
 
 router.run(function(Handler) {
-  React.render(<Handler/>, document.body);
+  React.render(<Handler/>, document.getElementById('app'));
 });
 
 fastclick.attach(document.body);
