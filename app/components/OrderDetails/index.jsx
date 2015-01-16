@@ -1,4 +1,5 @@
 var React = require('react');
+var { timestampToTime, timestampToDate } = require('../../utils/date');
 
 require('./index.less');
 
@@ -13,7 +14,7 @@ module.exports = React.createClass({
       <div className="orderDetails"> 
         <div className="orderDetailsContent">
           <section className="orderDetailsHead">
-            Best.-Nr. <span>008978</span> (eingegangen um <span>20:24</span> - 10.01.2015)
+            Best.-Nr. <span>{this.props.order.id}</span> (eingegangen um <span>{timestampToTime(this.props.order.createdAt)}</span> - {timestampToDate(this.props.order.createdAt)})
           </section>
 
 
@@ -27,20 +28,20 @@ module.exports = React.createClass({
                       <p>
                           An<br/>
                           <span>
-                              Marcus Harzenetter<br/>
-                              Beim Samesbauer 4 <br/>
-                              87700 Memmingen<br/>
+                              {this.props.order.addressModel.firstName} {this.props.order.addressModel.lastName}<br/>
+                              {this.props.order.addressModel.street} {this.props.order.addressModel.streetNumber} {this.props.order.addressModel.streetAdditional}<br/>
+                              {this.props.order.addressModel.postal} {this.props.order.addressModel.city}<br/>
                           </span>
                       </p>
 
                       <p className="ordererDeliveryArea">
-                          Dickenreishausen
+                          {this.props.order.addressModel.district}
                       </p>
 
                   </div>
                   <div className="ordererContact">
-                      Tel: 015164044539<br/>
-                      random@mail.org
+                      Tel: {this.props.order.addressModel.phone}<br/>
+                      {this.props.order.addressModel.email}
                   </div>
 
 
@@ -48,7 +49,7 @@ module.exports = React.createClass({
 
               </div><div className="orderDeliveryDetails">
                   <div className="orderTimeQrCode">
-                      Bis 21:05
+                      Bis {timestampToTime(this.props.order.dueAt)}
                       <img className="orderQrCode" src="" alt=""/>
                   </div>
                   <div className="orderPaymentMethod">
