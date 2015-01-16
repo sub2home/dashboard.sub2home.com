@@ -1,4 +1,5 @@
-var pad = (x) => x.toString().length < 2 ? pad('0' + x) : x;
+var { pad } = require('./format');
+var pad2 = x => pad(x, 2);
 
 module.exports = {
 
@@ -10,16 +11,16 @@ module.exports = {
     var year = now.getFullYear() === fullYear ? '' : fullYear % 100;
     var day = date.getDate();
     var month = date.getMonth() + 1;
-    return pad(day) + '.' + pad(month) + '.' + year;
+    return pad2(day) + '.' + pad2(month) + '.' + year;
   },
 
   timestampToTime: function(timestamp) {
     var date = new Date(timestamp);
-    return date.getHours() + ':' + pad(date.getMinutes());
+    return date.getHours() + ':' + pad2(date.getMinutes());
   },
 
   minutesToTime: function(minutes) {
-    return parseInt(minutes / 60, 10) + ':' + pad(parseInt(minutes, 10) % 60);
+    return parseInt(minutes / 60, 10) + ':' + pad2(parseInt(minutes, 10) % 60);
   },
 
 };

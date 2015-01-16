@@ -3,6 +3,7 @@ var React = require('react');
 var { ListenerMixin } = require('reflux');
 var actions = require('../../actions');
 var { timestampToTime, timestampToDate } = require('../../utils/date');
+var { pad, phoneNumber } = require('../../utils/format');
 
 require('./index.less');
 
@@ -27,7 +28,6 @@ module.exports = React.createClass({
 
   _onOrderUpdated: function(order) {
     this.setState({ order });
-    console.log(order);
   },
 
   render: function() {
@@ -119,7 +119,7 @@ module.exports = React.createClass({
       <div className="orderDetails"> 
         <div className="orderDetailsContent">
           <section className="orderDetailsHead">
-            Best.-Nr. <span>{order.id}</span> (eingegangen um <span>{timestampToTime(order.createdAt)}</span> - {timestampToDate(order.createdAt)})
+            Best.-Nr. <span>{pad(order.id, 8)}</span> (eingegangen um <span>{timestampToTime(order.createdAt)}</span> - {timestampToDate(order.createdAt)})
           </section>
           <section className="orderDetailsAbstract">
               <div className="ordererDetails">
@@ -137,7 +137,7 @@ module.exports = React.createClass({
                       </p>
                   </div>
                   <div className="ordererContact">
-                      Tel: {address.phone}<br/>
+                      Tel: {phoneNumber(address.phone)}<br/>
                       {address.email}
                   </div>
               </div><div className="orderDeliveryDetails">
