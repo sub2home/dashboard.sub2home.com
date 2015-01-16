@@ -1,0 +1,226 @@
+@import (reference) "~common-styles/less/common/common.less";
+
+
+// Module Variables
+
+
+// Module Styles
+
+.orderDetails {
+  padding: 10px 25px;
+  
+}
+
+
+.orderDetailsContent {
+  padding: 0;
+  text-align: left;
+  border: 1px solid @grayLighter;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px !important;
+  .box-shadow(0 1px 5px 0 rgba(0,0,0,0.1));
+  .border-radius(3px);
+
+  a, a:hover {
+    color: @grayDark;
+  }
+  
+  //    CLASSES USED IN WHOLE ORDER
+
+  .cat, .extra, .amount {
+    font-size: 11px !important;
+    font-weight: normal;
+    padding: 2px 3px;
+    .border-radius(2px);
+    position: relative;
+    top: -2px;
+  }
+
+  .cat {
+    background: @grayDark;
+    text-transform: uppercase;
+    color: @white;
+  }
+  .extra {
+    border: 1px solid @grayDark;
+  }
+
+  .amount {
+    border: 2px solid @grayDark;
+    font-weight: bold;
+  }
+}
+
+.orderDetailsHead {
+  border-bottom: 1px solid @grayLighter;
+  padding: 20px;
+
+  span {
+    font-weight: bold;
+  }
+}
+
+.orderDetailsAbstract {
+    overflow: hidden;
+    border-bottom: 3px double @gray;
+
+    .ordererDetails, .orderDeliveryDetails {
+      display: inline-block;
+      vertical-align: top;
+
+      .border-box;
+      width: 50%;
+
+//    True-Layout-Hack
+      margin-bottom: -99999px;
+      padding-bottom: 99999px;
+    }
+
+    .ordererAddress, .ordererContact, .ordererMessage {
+      padding: 20px;
+      border-bottom: 1px solid @grayLighter;
+    }
+
+    .ordererDetails {
+      border-right: 1px solid @grayLighter;
+
+      font-size: 24px !important;
+      line-height: 1.2;
+
+      span {
+        font-weight: bold;
+      }
+
+      .ordererDeliveryArea {
+        margin-top: 25px;
+        font-style: italic;
+      }
+
+      >div:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .orderTimeQrCode, .orderPaymentMethod, .orderedArticlesListing {
+      padding: 20px;
+    }
+
+    .orderTimeQrCode, .orderPaymentMethod {
+      border-bottom: 1px solid @grayLighter;
+    }
+
+    .orderTimeQrCode {
+      position: relative;
+      font-size: 30px !important;
+      line-height: 1.2;
+      font-weight: bold;
+    }
+
+    .orderQrCode {
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 40px;
+      background: @darkerWhite;
+      border-left: 1px solid @grayLighter;
+    }
+
+    .orderPaymentMethod {
+      font-size: 24px !important;
+    }
+
+    .orderedArticlesListing {
+        ol {
+
+        }
+        li {
+          position: relative;
+        }
+        h4 {
+          font-size: 16px !important;
+          color: inherit;
+          font-weight: bold;
+        }
+        p {
+          position: absolute;
+          right: 5px;
+          top: 0;
+        }
+
+        .overallSum {
+            text-align: right;
+            font-weight: bold;
+            border-top: 1px solid @grayDark;
+            padding: 5px;
+        }
+
+        .amount {
+            border: none;
+            font-weight: normal;
+            padding: 0;
+            margin-right: 5px;
+            font-size: 16px !important;
+            top: 0;
+        }
+    }
+}
+
+.articleInOrder, .menuInOrder {
+    padding: 10px 20px;
+    border-bottom: 1px dashed @gray;
+    &:last-child {
+        border-bottom: none;
+    }
+
+    h3 {
+        font-size: 24px !important;
+        color: @grayDark;
+        font-weight: inherit;
+
+        .cat, .amount {
+            font-size: 19px !important;
+        }
+        .amount {
+            background: @white;
+            margin-right: 10px;
+        }
+    }
+}
+
+.menuInOrder {
+    padding: 0;
+    header {
+        padding: 10px 20px 5px;
+        background: @grayLighter;
+        font-weight: bold;
+    }
+    .articleInOrder {
+        border-top: 1px solid @grayLighter;
+        border-bottom: none;
+        padding: 20px 50px;
+    }
+}
+
+.ingredientsInOrder {
+    padding: 10px 0 5px;
+    line-height: 2.5;
+
+    div {
+        display: inline-block;
+        margin-right: 30px;
+        &:last-child {
+            margin-right: 0;
+        }
+        span {
+            font-size: 19px !important;
+            padding: 2px 3px;
+            border: 1px solid @grayDark;
+            .border-radius(2px);
+            &:first-child {
+                margin-left: 10px;
+            }
+        }
+    }
+}

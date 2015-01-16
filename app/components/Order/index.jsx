@@ -44,17 +44,17 @@ module.exports = React.createClass({
     var hasWaitingCredit = hasCredit && !credit.isAccepted;
     var hasAcceptedCredit = hasCredit && credit.isAccepted;
 
-    var cx;
+    var cx = 'order';
     if (hasWaitingCredit) {
-      cx = 'hasWaitingCredit';
+      cx += ' hasWaitingCredit';
     } else if (hasAcceptedCredit) {
-      cx = 'hasAcceptedCredit';
+      cx += ' hasAcceptedCredit';
     } else if (isCurrent) {
-      cx = 'isCurrent';
+      cx += ' isCurrent';
     } else if (isHot) {
-      cx = 'isHot';
+      cx += ' isHot';
     } else if (isNew) {
-      cx = 'isNew';
+      cx += ' isNew';
     }
 
     var deliveryTime;
@@ -107,12 +107,14 @@ module.exports = React.createClass({
 
     return (
       <li className={cx} onClick={this._toggleDetails}>
-        {status}
-        <div className="orderDestination">
-          <span className="orderOrderer">{this.props.order.addressModel.firstName} {this.props.order.addressModel.lastName}</span>
-          <span className="orderDeliveryArea">{this.props.order.addressModel.postal} {this.props.order.addressModel.city} {this.props.order.addressModel.district ? '(' + this.props.order.addressModel.district + ')' : ''}</span>
+        <div className="orderHeader">
+          {status}
+          <div className="orderDestination">
+            <span className="orderOrderer">{this.props.order.addressModel.firstName} {this.props.order.addressModel.lastName}</span>
+            <span className="orderDeliveryArea">{this.props.order.addressModel.postal} {this.props.order.addressModel.city} {this.props.order.addressModel.district ? '(' + this.props.order.addressModel.district + ')' : ''}</span>
+          </div>
+          {deliveryTime}
         </div>
-        {deliveryTime}
         {details}
       </li>
     );
