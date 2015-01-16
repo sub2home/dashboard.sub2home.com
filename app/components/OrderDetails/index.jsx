@@ -1,71 +1,123 @@
+var _ = require('lodash');
 var React = require('react');
+var { ListenerMixin } = require('reflux');
+var actions = require('../../actions');
 var { timestampToTime, timestampToDate } = require('../../utils/date');
 
 require('./index.less');
 
 module.exports = React.createClass({
 
+  mixins: [ListenerMixin],
+
   propTypes: {
     order: React.PropTypes.object.isRequired,
   },
 
+  getInitialState: function() {
+    return {
+      order: this.props.order,
+    };
+  },
+
+  componentWillMount: function() {
+    this.listenTo(actions.orderUpdated, this._onOrderUpdated);
+    actions.fetchOrder(this.state.order.id);
+  },
+
+  _onOrderUpdated: function(order) {
+    this.setState({ order });
+    console.log(order);
+  },
+
   render: function() {
+    var order = this.state.order;
+    var address = order.addressModel;
+    var orderedItems = order.orderedItemsCollection;
+
+    var summaryListing, detailListing;
+    if (orderedItems && orderedItems.length > 0) {
+      var summaryListing = (
+        <ol className="orderedArticlesList">
+          {orderedItems.map(function(orderedItem) {
+            var articles = orderedItem.orderedArticlesCollection.map(o => o.articleModel).map(function(article) {
+              var paidIngredients = _(article.ingredientCategoriesCollection)
+                                      .map('ingredientsCollection')
+                                      .flatten()
+                                      .filter(i => i.price > 0)
+                                      .value();
+              return (
+                <span>
+                  <span className="cat">{article.categoryModel.title}</span> {article.title}
+                  {paidIngredients.map(i => <span className="extra">{i.shortcut}</span>)}
+                </span>
+              );
+            });
+            var menu = orderedItem.menuBundleModel || orderedItem.menuUpgradeModel;
+            var amount = orderedItem.amount > 1 ? <span class="amount">{orderedItem.amount}x</span> : '';
+            var h4String = menu ? menu.title : articles;
+            var menuString = menu ? articles : '';
+            return (
+              <li>
+                <header>
+                    <h4>
+                      {amount}
+                      {h4String}
+                    </h4>
+                    <p>{orderedItem.total} €</p>
+                </header>
+                {menuString}
+              </li>
+            );
+          })}
+        </ol>
+      );
+
+
+    }
+
+    var paymentMethods = {
+      cash: 'Bar',
+      ec: 'EC Karte',
+    };
+    var paymentMethod = paymentMethods[order.paymentMethod];
+
     return (
       <div className="orderDetails"> 
         <div className="orderDetailsContent">
           <section className="orderDetailsHead">
-            Best.-Nr. <span>{this.props.order.id}</span> (eingegangen um <span>{timestampToTime(this.props.order.createdAt)}</span> - {timestampToDate(this.props.order.createdAt)})
+            Best.-Nr. <span>{order.id}</span> (eingegangen um <span>{timestampToTime(order.createdAt)}</span> - {timestampToDate(order.createdAt)})
           </section>
-
-
-
           <section className="orderDetailsAbstract">
-
-
-
               <div className="ordererDetails">
                   <div className="ordererAddress">
                       <p>
                           An<br/>
                           <span>
-                              {this.props.order.addressModel.firstName} {this.props.order.addressModel.lastName}<br/>
-                              {this.props.order.addressModel.street} {this.props.order.addressModel.streetNumber} {this.props.order.addressModel.streetAdditional}<br/>
-                              {this.props.order.addressModel.postal} {this.props.order.addressModel.city}<br/>
+                              {address.firstName} {address.lastName}<br/>
+                              {address.street} {address.streetNumber} {address.streetAdditional}<br/>
+                              {address.postal} {address.city}<br/>
                           </span>
                       </p>
-
                       <p className="ordererDeliveryArea">
-                          {this.props.order.addressModel.district}
+                          {address.district}
                       </p>
-
                   </div>
                   <div className="ordererContact">
-                      Tel: {this.props.order.addressModel.phone}<br/>
-                      {this.props.order.addressModel.email}
+                      Tel: {address.phone}<br/>
+                      {address.email}
                   </div>
-
-
-
-
               </div><div className="orderDeliveryDetails">
                   <div className="orderTimeQrCode">
-                      Bis {timestampToTime(this.props.order.dueAt)}
+                      Bis {timestampToTime(order.dueAt)}
                       <img className="orderQrCode" src="" alt=""/>
                   </div>
                   <div className="orderPaymentMethod">
-                      Bezahlmethode: Bar
+                      Bezahlmethode: {paymentMethod}
                   </div>
                   <div className="orderedArticlesListing">
-                    <ol className="orderedArticlesList">
-                      <li>
-                        <header>
-                            <h4>Familienmenü</h4>
-                            <p>21.89 €</p>
-                        </header>
-                          <span className="cat">Subs</span> Chicken Teriyaki <span className="extra">DM</span> <span className="extra">ExBa</span> <span className="extra">ExSk</span>, <span className="cat">Subs</span> Veggie Patty <span className="extra">ExSk</span>, <span className="cat">Snacks</span> Double Chocolate Chip, <span className="cat">Snacks</span> Chocolate Chip, <span className="cat">Getränke</span> Coca Cola, <span className="cat">Getränke</span> Coca Cola
-                      </li>
-                    </ol>
-                    <div className="overallSum">21.89 €</div>
+                    {summaryListing}
+                    <div className="overallSum">{order.total} €</div>
                   </div>
               </div>
           </section>
@@ -78,7 +130,6 @@ module.exports = React.createClass({
                 <h3>
                   <span className="cat">Subs</span> Chicken Teriyaki (footlong)
                 </h3>
-
                 <div className="ingredientsInOrder">
                   <div>Brot <span>CO</span> </div>
                   <div>Käse <span>CC</span> </div>
