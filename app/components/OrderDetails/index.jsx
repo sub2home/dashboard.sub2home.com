@@ -37,43 +37,76 @@ module.exports = React.createClass({
 
     var summaryListing, detailListing;
     if (orderedItems && orderedItems.length > 0) {
-      var summaryListing = (
-        <ol className="orderedArticlesList">
-          {orderedItems.map(function(orderedItem) {
-            var articles = orderedItem.orderedArticlesCollection.map(o => o.articleModel).map(function(article) {
-              var paidIngredients = _(article.ingredientCategoriesCollection)
-                                      .map('ingredientsCollection')
-                                      .flatten()
-                                      .filter(i => i.price > 0)
-                                      .value();
-              return (
-                <span>
-                  <span className="cat">{article.categoryModel.title}</span> {article.title}
-                  {paidIngredients.map(i => <span className="extra">{i.shortcut}</span>)}
-                </span>
-              );
+      var summaryListing = orderedItems.map(function(orderedItem) {
+        var articles = orderedItem.orderedArticlesCollection.map(o => o.articleModel).map(function(article) {
+          var paidIngredients = _(article.ingredientCategoriesCollection)
+                                  .map('ingredientsCollection')
+                                  .flatten()
+                                  .filter(i => i.price > 0)
+                                  .value();
+          return (
+            <span>
+              <span className="cat">{article.categoryModel.title}</span> {article.title}
+              {paidIngredients.map(i => <span className="extra">{i.shortcut}</span>)}
+            </span>
+          );
+        });
+        var menu = orderedItem.menuBundleModel || orderedItem.menuUpgradeModel;
+        var amount = orderedItem.amount > 1 ? <span class="amount">{orderedItem.amount}x</span> : '';
+        var h4String = menu ? menu.title : articles;
+        var menuString = menu ? articles : '';
+        return (
+          <li>
+            <header>
+                <h4>
+                  {amount}
+                  {h4String}
+                </h4>
+                <p>{orderedItem.total} €</p>
+            </header>
+            {menuString}
+          </li>
+        );
+      });
+
+      var detailListing = orderedItems.map(function(orderedItem) {
+        var menu = orderedItem.menuBundleModel || orderedItem.menuUpgradeModel;
+        var articles = orderedItem.orderedArticlesCollection.map(o => o.articleModel).map(function(article) {
+          var ingredientCategories;
+          if (article.ingredientCategoriesCollection) {
+            ingredientCategories = article.ingredientCategoriesCollection.map(function(ingredientCategory) {
+              var ingredients = ingredientCategory.ingredientsCollection.map(i => <span>{i.title}</span>);
+              return <div>{ingredientCategory.title} {ingredients}</div>;
             });
-            var menu = orderedItem.menuBundleModel || orderedItem.menuUpgradeModel;
-            var amount = orderedItem.amount > 1 ? <span class="amount">{orderedItem.amount}x</span> : '';
-            var h4String = menu ? menu.title : articles;
-            var menuString = menu ? articles : '';
-            return (
-              <li>
-                <header>
-                    <h4>
-                      {amount}
-                      {h4String}
-                    </h4>
-                    <p>{orderedItem.total} €</p>
-                </header>
-                {menuString}
-              </li>
-            );
-          })}
-        </ol>
-      );
+          }
+          var info = article.info ? '(' + article.info + ')' : '';
+          var amount = menu ? '' : <span className="amount">{orderedItem.amount}x</span>;
+          return (
+            <div className="articleInOrder">
+              <h3>
+                {amount}
+                <span className="cat">{article.categoryModel.title}</span> {article.title} {info}
+              </h3>
+              <div className="ingredientsInOrder">
+              {ingredientCategories}
+              </div>
+            </div>
+          );
+        });
 
-
+        if (menu) {
+          return (
+            <div className="menuInOrder">
+              <header>
+                <h3><span className="amount">{orderedItem.amount}x</span>{menu.title}</h3>
+              </header>
+              {articles}
+            </div>
+          );
+        } else {
+          return articles;
+        }
+      });
     }
 
     var paymentMethods = {
@@ -116,53 +149,15 @@ module.exports = React.createClass({
                       Bezahlmethode: {paymentMethod}
                   </div>
                   <div className="orderedArticlesListing">
+                    <ol className="orderedArticlesList">
                     {summaryListing}
+                    </ol>
                     <div className="overallSum">{order.total} €</div>
                   </div>
               </div>
           </section>
           <section className="orderDetailsItems">
-            <div className="menuInOrder">
-              <header>
-                <h3><span className="amount">1x</span>Familienmenü</h3>
-              </header>
-              <div className="articleInOrder">
-                <h3>
-                  <span className="cat">Subs</span> Chicken Teriyaki (footlong)
-                </h3>
-                <div className="ingredientsInOrder">
-                  <div>Brot <span>CO</span> </div>
-                  <div>Käse <span>CC</span> </div>
-                  <div>Gemüse <span>Sa</span> <span>Gu</span> </div>
-                  <div>Extras <span>Toa</span> <span>DM</span> <span>ExBa</span> <span>ExSk</span> </div>
-                  <div>Sauce <span>HM</span> </div>
-                </div>
-              </div>
-              <div className="articleInOrder">
-                <h3>
-                  <span className="cat">Subs</span> Veggie Patty (footlong)
-                </h3>
-                <div className="ingredientsInOrder">
-                  <div>Brot <span>CO</span> </div>
-                  <div>Käse <span>CC</span> </div>
-                  <div>Gemüse <span>Sa</span> <span>Gu</span> <span>Es</span> <span>Zw</span></div>
-                  <div>Extras <span>Toa</span> <span>ExSk</span> </div>
-                  <div>Sauce <span>SO</span> <span>HM</span> </div>
-                </div>
-              </div>
-              <div className="articleInOrder">
-                <h3><span className="cat">Snacks</span> Double Chocolate Chip</h3>
-              </div>
-              <div className="articleInOrder">
-                <h3><span className="cat">Snacks</span> Chocolate Chip</h3>
-              </div>
-              <div className="articleInOrder">
-                <h3><span className="cat">Getränke</span> Coca Cola (0.5l)</h3>
-              </div>
-              <div className="articleInOrder">
-                <h3><span className="cat">Getränke</span> Coca Cola (0.5l)</h3>
-              </div>
-            </div>    
+          {detailListing}
           </section>
         </div>
       </div>
