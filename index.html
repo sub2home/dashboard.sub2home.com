@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>sub2home Dashboard</title>
-</head>
-
-<body>
     {% for (var chunk in o.htmlWebpackPlugin.assets) { %}
     <script src="{%=o.htmlWebpackPlugin.assets[chunk]%}"></script>
     {% } %}
+</head>
+
+<body>
 </body>
 
 </html>
