@@ -125,7 +125,35 @@
 .orderDeliveryArea,
 .orderDueTime {
   &:before {
-    color: @grayLight;
+    .opacity(50);
+  }
+}
+
+.order {
+  
+  &.hasWaitingCredit {
+    
+    .orderHeader {
+      color: @orange;
+    }
+    
+    .orderStatus {
+      .iAlert;
+      color: @orange;
+    }
+  }
+  
+  &.hasAcceptedCredit {
+
+    .orderHeader {
+      height: 35px;
+      .opacity(50);
+    }
+    
+    .orderStatus {
+      color: @red;
+      .iClose;
+    }
   }
 }
 
@@ -162,6 +190,10 @@
   
   .orderTimeToDueTime {
     font-size: 18px;
+  }
+  
+  .order.hasAcceptedCredit .orderHeader {
+    height: 50px;
   }
   
 }

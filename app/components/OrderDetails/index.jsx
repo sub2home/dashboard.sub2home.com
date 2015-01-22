@@ -45,26 +45,27 @@ module.exports = React.createClass({
                                   .filter(i => i.price > 0)
                                   .value();
           return (
-            <span>
-              <span className="cat">{article.categoryModel.title}</span> {article.title}
-              {paidIngredients.map(i => <span className="extra">{i.shortcut}</span>)}
+            <span className="orderedArticlesListItemRow">
+              <span className="orderDetailsCategory">{article.categoryModel.title}</span>{article.title}{paidIngredients.map(i => <span className="orderDetailsExtra">{i.shortcut}</span>)}
             </span>
           );
         });
         var menu = orderedItem.menuBundleModel || orderedItem.menuUpgradeModel;
-        var amount = orderedItem.amount > 1 ? <span class="amount">{orderedItem.amount}x</span> : '';
+        var amount = orderedItem.amount > 1 ? <span className="orderDetailsAmount">{orderedItem.amount}</span> : '';
         var h4String = menu ? menu.title : articles;
         var menuString = menu ? articles : '';
         return (
           <li>
-            <header>
+            <div className="orderedArticlesListItem">
+              <header>
                 <h4>
                   {amount}
                   {h4String}
                 </h4>
-                <p>{orderedItem.total} €</p>
-            </header>
-            {menuString}
+                <div className="orderedArticlesListItemPrice">{orderedItem.total}</div>
+              </header>
+              {menuString}
+            </div>
           </li>
         );
       });
@@ -80,12 +81,12 @@ module.exports = React.createClass({
             });
           }
           var info = article.info ? '(' + article.info + ')' : '';
-          var amount = menu ? '' : <span className="amount">{orderedItem.amount}x</span>;
+          var amount = menu ? '' : <span className="orderDetailsAmount">{orderedItem.amount}</span>;
           return (
             <div className="articleInOrder">
               <h3>
                 {amount}
-                <span className="cat">{article.categoryModel.title}</span> {article.title} {info}
+                <span className="orderDetailsCategory">{article.categoryModel.title}</span> {article.title} {info}
               </h3>
               <div className="ingredientsInOrder">
               {ingredientCategories}
@@ -98,7 +99,7 @@ module.exports = React.createClass({
           return (
             <div className="menuInOrder">
               <header>
-                <h3><span className="amount">{orderedItem.amount}x</span>{menu.title}</h3>
+                <h3><span className="orderDetailsAmount">{orderedItem.amount}</span>{menu.title}</h3>
               </header>
               {articles}
             </div>
@@ -119,42 +120,46 @@ module.exports = React.createClass({
       <div className="orderDetails"> 
         <div className="orderDetailsContent">
           <section className="orderDetailsHead">
-            Best.-Nr. <span>{pad(order.id, 8)}</span> (eingegangen um <span>{timestampToTime(order.createdAt)}</span> - {timestampToDate(order.createdAt)})
+            Best.-Nr. <span>{pad(order.id, 8)}</span> (eingegangen am {timestampToDate(order.createdAt)} um {timestampToTime(order.createdAt)})
           </section>
+          
           <section className="orderDetailsAbstract">
-              <div className="ordererDetails">
-                  <div className="ordererAddress">
-                      <p>
-                          An<br/>
-                          <span>
-                              {address.firstName} {address.lastName}<br/>
-                              {address.street} {address.streetNumber} {address.streetAdditional}<br/>
-                              {address.postal} {address.city}<br/>
-                          </span>
-                      </p>
-                      <p className="ordererDeliveryArea">
-                          {address.district}
-                      </p>
-                  </div>
-                  <div className="ordererContact">
-                      Tel: {phoneNumber(address.phone)}<br/>
-                      {address.email}
-                  </div>
-              </div><div className="orderDeliveryDetails">
-                  <div className="orderTimeQrCode">
-                      Bis {timestampToTime(order.dueAt)}
-                      <img className="orderQrCode" src="" alt=""/>
-                  </div>
-                  <div className="orderPaymentMethod">
-                      Bezahlmethode: {paymentMethod}
-                  </div>
-                  <div className="orderedArticlesListing">
-                    <ol className="orderedArticlesList">
-                    {summaryListing}
-                    </ol>
-                    <div className="overallSum">{order.total} €</div>
-                  </div>
+            <div className="ordererDetails">
+              <div className="ordererAddress">
+                {address.firstName} {address.lastName}<br/>
+                {address.street} {address.streetNumber} {address.streetAdditional}<br/>
+
+                <span className="ordererDeliveryArea">
+                  {address.postal} {address.city}<br/>
+                  {address.district}
+                </span>
               </div>
+              <div className="ordererContact">
+                <i className="icn iPhone"></i>{phoneNumber(address.phone)}<br/>
+                <i className="icn iMail"></i>{address.email}
+              </div>
+              <div className="ordererMessage">
+                <i className="icn iNav"></i>
+                <div className="ordererMessageContent">
+                  Hier noch eine kurze Nachricht. Die bestimmt mehrere Zeilen lang ist, aber das ist ja auch gut so.
+                </div>
+              </div>
+            </div>
+            <div className="orderDeliveryDetails">
+              <div className="orderTimeQrCode">
+                {timestampToTime(order.dueAt)}
+                <img className="orderQrCode" src="" alt=""/>
+              </div>
+              <div className="orderPaymentMethod">
+                <i className="icn iSubcard"></i>{paymentMethod}
+              </div>
+              <div className="orderedArticlesListing">
+                <ol className="orderedArticlesList">
+                {summaryListing}
+                </ol>
+                <div className="orderArticlesListOverallSum">{order.total}</div>
+              </div>
+            </div>
           </section>
           <section className="orderDetailsItems">
           {detailListing}

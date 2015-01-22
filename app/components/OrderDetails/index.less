@@ -3,224 +3,403 @@
 
 // Module Variables
 
+@orderDetailsMobileSmallerFontSize:13px;
+@orderDetailsMobileSmallFontSize:  17px;
+@orderDetailsMobileBaseFontSize:   20px;
+@orderDetailsMobileBigFontSize:    30px;
 
 // Module Styles
 
 .orderDetails {
   padding: 10px 25px;
-  
 }
-
 
 .orderDetailsContent {
   padding: 0;
+  overflow: hidden; // keep edges round
   text-align: left;
   border: 1px solid @grayLighter;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 16px !important;
+  
+  font-size: @orderDetailsMobileBaseFontSize; // set base font size for order details
+  
   .box-shadow(0 1px 5px 0 rgba(0,0,0,0.1));
   .border-radius(3px);
 
-  a, a:hover {
-    color: @grayDark;
+  .icn {
+    display: inline-block;
+    font-size: @orderDetailsMobileSmallFontSize;
+    color: @grayLight;
+    margin-right: 15px;
   }
   
-  //    CLASSES USED IN WHOLE ORDER
-
-  .cat, .extra, .amount {
-    font-size: 11px !important;
-    font-weight: normal;
-    padding: 2px 3px;
-    .border-radius(2px);
-    position: relative;
-    top: -2px;
-  }
-
-  .cat {
+  .orderDetailsAmount {
+    .positioned;
+    top: 0px;
+    font-size: @orderDetailsMobileSmallFontSize;
+    padding: 4px 4px 0;
+    min-width: 23px;
+    text-align: center;
+    .border-box;
+    .circle;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 5px;
     background: @grayDark;
-    text-transform: uppercase;
     color: @white;
+    height: 23px;
   }
-  .extra {
-    border: 1px solid @grayDark;
-  }
-
-  .amount {
-    border: 2px solid @grayDark;
-    font-weight: bold;
+  
+  .orderDetailsCategory {
+    .positioned;
+//    top: -1px;
+    font-size: @orderDetailsMobileSmallFontSize;
+    padding: 2px 2px 0;
+    .border-box;
+    .border-radius(2px);
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 5px;
+    border: 1px solid @gray;
+    text-transform: uppercase;
+    height: 23px;
   }
 }
 
+  
 .orderDetailsHead {
   border-bottom: 1px solid @grayLighter;
-  padding: 20px;
-
-  span {
-    font-weight: bold;
-  }
+  padding: 20px 20px 18px;
+  background: @darkWhite;
+  font-size: @orderDetailsMobileSmallFontSize;
 }
 
 .orderDetailsAbstract {
-    overflow: hidden;
-    border-bottom: 3px double @gray;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  
+  border-bottom: 3px double @grayLighter;
+  
+  > div {
+    display: table-cell;
 
-    .ordererDetails, .orderDeliveryDetails {
-      display: inline-block;
-      vertical-align: top;
+    font-size: @orderDetailsMobileBaseFontSize;
 
-      .border-box;
-      width: 50%;
-
-//    True-Layout-Hack
-      margin-bottom: -99999px;
-      padding-bottom: 99999px;
-    }
-
-    .ordererAddress, .ordererContact, .ordererMessage {
-      padding: 20px;
+    > div {
+      padding: 20px 20px 18px;
       border-bottom: 1px solid @grayLighter;
-    }
 
-    .ordererDetails {
-      border-right: 1px solid @grayLighter;
-
-      font-size: 24px !important;
-      line-height: 1.2;
-
-      span {
-        font-weight: bold;
-      }
-
-      .ordererDeliveryArea {
-        margin-top: 25px;
-        font-style: italic;
-      }
-
-      >div:last-child {
+      &:last-child {
         border-bottom: none;
       }
     }
-
-    .orderTimeQrCode, .orderPaymentMethod, .orderedArticlesListing {
-      padding: 20px;
-    }
-
-    .orderTimeQrCode, .orderPaymentMethod {
-      border-bottom: 1px solid @grayLighter;
-    }
-
-    .orderTimeQrCode {
-      position: relative;
-      font-size: 30px !important;
-      line-height: 1.2;
-      font-weight: bold;
-    }
-
-    .orderQrCode {
-      display: block;
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 40px;
-      background: @darkerWhite;
-      border-left: 1px solid @grayLighter;
-    }
-
-    .orderPaymentMethod {
-      font-size: 24px !important;
-    }
-
-    .orderedArticlesListing {
-        ol {
-
-        }
-        li {
-          position: relative;
-        }
-        h4 {
-          font-size: 16px !important;
-          color: inherit;
-          font-weight: bold;
-        }
-        p {
-          position: absolute;
-          right: 5px;
-          top: 0;
-        }
-
-        .overallSum {
-            text-align: right;
-            font-weight: bold;
-            border-top: 1px solid @grayDark;
-            padding: 5px;
-        }
-
-        .amount {
-            border: none;
-            font-weight: normal;
-            padding: 0;
-            margin-right: 5px;
-            font-size: 16px !important;
-            top: 0;
-        }
-    }
+  }
 }
 
-.articleInOrder, .menuInOrder {
-    padding: 10px 20px;
-    border-bottom: 1px dashed @gray;
-    &:last-child {
-        border-bottom: none;
-    }
-
-    h3 {
-        font-size: 24px !important;
-        color: @grayDark;
-        font-weight: inherit;
-
-        .cat, .amount {
-            font-size: 19px !important;
-        }
-        .amount {
-            background: @white;
-            margin-right: 10px;
-        }
-    }
+.ordererDetails {
+  width: 50%;
+  border-right: 1px solid @grayLighter;
 }
 
-.menuInOrder {
-    padding: 0;
+.ordererAddress {
+  
+  &:before {
+    content: "AN";
+    font-size: @orderDetailsMobileSmallerFontSize;
+    display: block;
+    margin-bottom: 5px;
+    color: @gray;
+  }
+}
+
+.ordererDeliveryArea {
+  display: block;
+  margin-top: 5px;
+}
+
+.ordererMessage {
+  display: table;
+  
+  .icn { display: table-cell}
+  
+  .ordererMessageContent {
+    display: table-cell;
+    padding-left: 15px;
+  }
+}
+
+.orderTimeQrCode {
+  color: @blue;
+  font-size: @orderDetailsMobileBigFontSize;
+  
+  &:before {
+    content: "BIS";
+    font-size: @orderDetailsMobileSmallFontSize;
+    display: inline-block;
+    margin-right: 5px;
+  }
+}
+
+  
+
+.orderedArticlesList {
+  
+  padding: 0;
+  border-bottom: 1px solid @grayLight;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  
+  li {
+    margin-left: 0;
+    display: list-item;
+    margin-left: 25px;
+    color: @grayLight;
+    padding-left: 0 !important; // override #ordersList li.current padding
+    
     header {
-        padding: 10px 20px 5px;
-        background: @grayLighter;
-        font-weight: bold;
+      display: table;
+      width: 100%;
+      table-layout: fixed;
     }
-    .articleInOrder {
-        border-top: 1px solid @grayLighter;
-        border-bottom: none;
-        padding: 20px 50px;
+    
+    h4 {
+      display: table-cell;
+      font-size: @orderDetailsMobileBaseFontSize;
     }
+    
+    .orderedArticlesListItemPrice {
+      display: table-cell;
+      text-align: right;
+      width: 70px;
+      padding-right: 5px;
+      
+      &:after {
+        content: "€";
+      }
+    }
+  }
 }
 
-.ingredientsInOrder {
-    padding: 10px 0 5px;
-    line-height: 2.5;
-
-    div {
-        display: inline-block;
-        margin-right: 30px;
-        &:last-child {
-            margin-right: 0;
-        }
-        span {
-            font-size: 19px !important;
-            padding: 2px 3px;
-            border: 1px solid @grayDark;
-            .border-radius(2px);
-            &:first-child {
-                margin-left: 10px;
-            }
-        }
-    }
+.orderedArticlesListItem {
+  display: inline-block;
+  vertical-align: top;
+  color: @grayDark;
 }
+
+.orderedArticlesListItemRow {
+  display: block;
+}
+
+.orderArticlesListOverallSum {
+  text-align: right;
+  padding-right: 5px;
+  color: @blue;
+  
+  &:after {
+    content: "€"
+  }
+}
+
+
+
+
+//  
+//  //    CLASSES USED IN WHOLE ORDER
+//
+//  .cat, .extra, .amount {
+//    font-size: 11px !important;
+//    font-weight: normal;
+//    padding: 2px 3px;
+//    .border-radius(2px);
+//    position: relative;
+//    top: -2px;
+//  }
+//
+//  .cat {
+//    background: @grayDark;
+//    text-transform: uppercase;
+//    color: @white;
+//  }
+//  .extra {
+//    border: 1px solid @grayDark;
+//  }
+//
+//  .amount {
+//    border: 2px solid @grayDark;
+//    font-weight: bold;
+//  }
+//}
+//
+//.orderDetailsHead {
+//  border-bottom: 1px solid @grayLighter;
+//  padding: 20px;
+//
+//  span {
+//    font-weight: bold;
+//  }
+//}
+//
+//.orderDetailsAbstract {
+//    overflow: hidden;
+//    border-bottom: 3px double @gray;
+//
+//    .ordererDetails, .orderDeliveryDetails {
+//      display: inline-block;
+//      vertical-align: top;
+//
+//      .border-box;
+//      width: 50%;
+//
+////    True-Layout-Hack
+//      margin-bottom: -99999px;
+//      padding-bottom: 99999px;
+//    }
+//
+//    .ordererAddress, .ordererContact, .ordererMessage {
+//      padding: 20px;
+//      border-bottom: 1px solid @grayLighter;
+//    }
+//
+//    .ordererDetails {
+//      border-right: 1px solid @grayLighter;
+//
+//      font-size: 24px !important;
+//      line-height: 1.2;
+//
+//      span {
+//        font-weight: bold;
+//      }
+//
+//      .ordererDeliveryArea {
+//        margin-top: 25px;
+//        font-style: italic;
+//      }
+//
+//      >div:last-child {
+//        border-bottom: none;
+//      }
+//    }
+//
+//    .orderTimeQrCode, .orderPaymentMethod, .orderedArticlesListing {
+//      padding: 20px;
+//    }
+//
+//    .orderTimeQrCode, .orderPaymentMethod {
+//      border-bottom: 1px solid @grayLighter;
+//    }
+//
+//    .orderTimeQrCode {
+//      position: relative;
+//      font-size: 30px !important;
+//      line-height: 1.2;
+//      font-weight: bold;
+//    }
+//
+//    .orderQrCode {
+//      display: block;
+//      position: absolute;
+//      right: 0;
+//      top: 0;
+//      bottom: 0;
+//      width: 40px;
+//      background: @darkerWhite;
+//      border-left: 1px solid @grayLighter;
+//    }
+//
+//    .orderPaymentMethod {
+//      font-size: 24px !important;
+//    }
+//
+//    .orderedArticlesListing {
+//        ol {
+//
+//        }
+//        li {
+//          position: relative;
+//        }
+//        h4 {
+//          font-size: 16px !important;
+//          color: inherit;
+//          font-weight: bold;
+//        }
+//        p {
+//          position: absolute;
+//          right: 5px;
+//          top: 0;
+//        }
+//
+//        .overallSum {
+//            text-align: right;
+//            font-weight: bold;
+//            border-top: 1px solid @grayDark;
+//            padding: 5px;
+//        }
+//
+//        .amount {
+//            border: none;
+//            font-weight: normal;
+//            padding: 0;
+//            margin-right: 5px;
+//            font-size: 16px !important;
+//            top: 0;
+//        }
+//    }
+//}
+//
+//.articleInOrder, .menuInOrder {
+//    padding: 10px 20px;
+//    border-bottom: 1px dashed @gray;
+//    &:last-child {
+//        border-bottom: none;
+//    }
+//
+//    h3 {
+//        font-size: 24px !important;
+//        color: @grayDark;
+//        font-weight: inherit;
+//
+//        .cat, .amount {
+//            font-size: 19px !important;
+//        }
+//        .amount {
+//            background: @white;
+//            margin-right: 10px;
+//        }
+//    }
+//}
+//
+//.menuInOrder {
+//    padding: 0;
+//    header {
+//        padding: 10px 20px 5px;
+//        background: @grayLighter;
+//        font-weight: bold;
+//    }
+//    .articleInOrder {
+//        border-top: 1px solid @grayLighter;
+//        border-bottom: none;
+//        padding: 20px 50px;
+//    }
+//}
+//
+//.ingredientsInOrder {
+//    padding: 10px 0 5px;
+//    line-height: 2.5;
+//
+//    div {
+//        display: inline-block;
+//        margin-right: 30px;
+//        &:last-child {
+//            margin-right: 0;
+//        }
+//        span {
+//            font-size: 19px !important;
+//            padding: 2px 3px;
+//            border: 1px solid @grayDark;
+//            .border-radius(2px);
+//            &:first-child {
+//                margin-left: 10px;
+//            }
+//        }
+//    }
+//}
