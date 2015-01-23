@@ -81,7 +81,7 @@ module.exports = React.createClass({
     }
 
     var nextDeliveryTime;
-    if (window.innerWidth >= 550) {
+    if (window.innerWidth >= 450) {
       nextDeliveryTime = (
         <NextDeliveryTime isNow={this.props.nextDeliveryTime.isNow} deliveryTime={this.props.nextDeliveryTime.deliveryTime} />
       );

@@ -1,10 +1,11 @@
 @import (reference) "~common-styles/less/common/common.less";
 
+@import "~common-styles/less/modules/e-label.less";
 
 // Module Variables
 
 @orderDetailsMobileSmallerFontSize:13px;
-@orderDetailsMobileSmallFontSize:  17px;
+@orderDetailsMobileSmallFontSize:  16px;
 @orderDetailsMobileBaseFontSize:   20px;
 @orderDetailsMobileBigFontSize:    30px;
 
@@ -32,36 +33,17 @@
     margin-right: 15px;
   }
   
-  .orderDetailsAmount {
-    .positioned;
-    top: 0px;
-    font-size: @orderDetailsMobileSmallFontSize;
-    padding: 4px 4px 0;
-    min-width: 23px;
-    text-align: center;
-    .border-box;
-    .circle;
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 5px;
-    background: @grayDark;
+  .orderDetailsAmount, .orderDetailsCategory {
     color: @white;
-    height: 23px;
+//    height: 24px;
+  }
+  
+  .orderDetailsAmount {
+    background: @gray;
   }
   
   .orderDetailsCategory {
-    .positioned;
-//    top: -1px;
-    font-size: @orderDetailsMobileSmallFontSize;
-    padding: 2px 2px 0;
-    .border-box;
-    .border-radius(2px);
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 5px;
-    border: 1px solid @gray;
-    text-transform: uppercase;
-    height: 23px;
+    background: @grayDark;
   }
 }
 
@@ -140,8 +122,6 @@
   }
 }
 
-  
-
 .orderedArticlesList {
   
   padding: 0;
@@ -149,45 +129,67 @@
   padding-bottom: 5px;
   margin-bottom: 5px;
   
+  counter-reset: articlesListCounter; // initialize counter
+  
   li {
+    .positioned;
     margin-left: 0;
-    display: list-item;
-    margin-left: 25px;
+    display: block;
     color: @grayLight;
-    padding-left: 0 !important; // override #ordersList li.current padding
+    font-size: @orderDetailsMobileSmallFontSize;
+    padding: 10px 0 0 25px !important; // override #ordersList li.current padding
     
-    header {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
-    }
+    counter-increment: articlesListCounter; // set counter increment to li
     
-    h4 {
-      display: table-cell;
-      font-size: @orderDetailsMobileBaseFontSize;
-    }
-    
-    .orderedArticlesListItemPrice {
-      display: table-cell;
-      text-align: right;
-      width: 70px;
-      padding-right: 5px;
-      
-      &:after {
-        content: "€";
-      }
+    &:before {
+      content: counter(articlesListCounter)")"; // set counter as pseudocontent
+      position: absolute;
+      top: 22px;
+      left: 5px;
+      width: 10px;
+      display: block;
+      font-size: @orderDetailsMobileSmallerFontSize;
     }
   }
 }
 
 .orderedArticlesListItem {
-  display: inline-block;
-  vertical-align: top;
+//  .positioned;
+  display: block;
+  padding-bottom: 10px;
   color: @grayDark;
+  header { 
+    .sc-tc100;
+  }
 }
 
-.orderedArticlesListItemRow {
-  display: block;
+.orderedArticlesListItemInfo {
+  .sc-tc;
+  background: @darkerWhite;
+  .border-radius(2px);
+  overflow: hidden;
+  
+  > div {
+    padding: 10px 10px 7px;
+  }
+}
+
+// For menu:
+
+.orderedArticlesListItem {
+  > .orderedArticlesListItemInfo {
+    margin-bottom: 10px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.orderedArticlesListItemPrice {
+  width: 50px;
+  .price;
+  text-align: right;
+  padding-right: 5px;
 }
 
 .orderArticlesListOverallSum {
@@ -195,12 +197,19 @@
   padding-right: 5px;
   color: @blue;
   
+  span {
+    vertical-align: middle;
+  }
+  
   &:after {
-    content: "€"
+    content: " €"
   }
 }
 
-
+.orderPaymentMethod {
+  background: @blue;
+  margin-right: 10px;
+}
 
 
 //  

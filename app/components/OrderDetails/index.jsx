@@ -45,23 +45,24 @@ module.exports = React.createClass({
                                   .filter(i => i.price > 0)
                                   .value();
           return (
-            <span className="orderedArticlesListItemRow">
-              <span className="orderDetailsCategory">{article.categoryModel.title}</span>{article.title}{paidIngredients.map(i => <span className="orderDetailsExtra">{i.shortcut}</span>)}
-            </span>
+            <div className="orderedArticlesListItemInfo">
+              <div className="orderDetailsAmount">{orderedItem.amount}x</div>
+              <div className="orderDetailsCategory">{article.categoryModel.title}</div>
+              <div className="orderDetailsTitle">{article.title}</div>{paidIngredients.map(i => <span className="orderDetailsExtra">{i.shortcut}</span>)}
+            </div>
           );
         });
         var menu = orderedItem.menuBundleModel || orderedItem.menuUpgradeModel;
-        var amount = orderedItem.amount > 1 ? <span className="orderDetailsAmount">{orderedItem.amount}</span> : '';
-        var h4String = menu ? menu.title : articles;
+        // var amount = orderedItem.amount > 1 ? : '';
+        var orderItemInfo = menu ? menu.title : articles;
         var menuString = menu ? articles : '';
         return (
           <li>
             <div className="orderedArticlesListItem">
               <header>
-                <h4>
-                  {amount}
-                  {h4String}
-                </h4>
+                <div className="orderedArticlesListItemBase">
+                  {orderItemInfo}
+                </div>
                 <div className="orderedArticlesListItemPrice">{orderedItem.total}</div>
               </header>
               {menuString}
@@ -81,7 +82,7 @@ module.exports = React.createClass({
             });
           }
           var info = article.info ? '(' + article.info + ')' : '';
-          var amount = menu ? '' : <span className="orderDetailsAmount">{orderedItem.amount}</span>;
+          var amount = menu ? '' : <span className="orderDetailsAmount">{orderedItem.amount}x</span>;
           return (
             <div className="articleInOrder">
               <h3>
@@ -99,7 +100,7 @@ module.exports = React.createClass({
           return (
             <div className="menuInOrder">
               <header>
-                <h3><span className="orderDetailsAmount">{orderedItem.amount}</span>{menu.title}</h3>
+                <h3><span className="orderDetailsAmount">{orderedItem.amount}x</span>{menu.title}</h3>
               </header>
               {articles}
             </div>
@@ -112,7 +113,7 @@ module.exports = React.createClass({
 
     var paymentMethods = {
       cash: 'Bar',
-      ec: 'EC Karte',
+      ec: 'EC-Karte',
     };
     var paymentMethod = paymentMethods[order.paymentMethod];
 
@@ -139,7 +140,7 @@ module.exports = React.createClass({
                 <i className="icn iMail"></i>{address.email}
               </div>
               <div className="ordererMessage">
-                <i className="icn iNav"></i>
+                <i className="icn iComment"></i>
                 <div className="ordererMessageContent">
                   Hier noch eine kurze Nachricht. Die bestimmt mehrere Zeilen lang ist, aber das ist ja auch gut so.
                 </div>
@@ -150,14 +151,11 @@ module.exports = React.createClass({
                 {timestampToTime(order.dueAt)}
                 <img className="orderQrCode" src="" alt=""/>
               </div>
-              <div className="orderPaymentMethod">
-                <i className="icn iSubcard"></i>{paymentMethod}
-              </div>
               <div className="orderedArticlesListing">
                 <ol className="orderedArticlesList">
                 {summaryListing}
                 </ol>
-                <div className="orderArticlesListOverallSum">{order.total}</div>
+                <div className="orderArticlesListOverallSum"><span className="label orderPaymentMethod">{paymentMethod}</span><span>{order.total}</span></div>
               </div>
             </div>
           </section>
