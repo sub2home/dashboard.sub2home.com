@@ -33,16 +33,16 @@
     margin-right: 15px;
   }
   
-  .orderDetailsAmount, .orderDetailsCategory {
+  .orderedItemAmount, .orderedItemCategory {
     color: @white;
 //    height: 24px;
   }
   
-  .orderDetailsAmount {
+  .orderedItemAmount {
     background: @gray;
   }
   
-  .orderDetailsCategory {
+  .orderedItemCategory {
     background: @grayDark;
   }
 }
@@ -53,6 +53,7 @@
   padding: 20px 20px 18px;
   background: @darkWhite;
   font-size: @orderDetailsMobileSmallFontSize;
+  .sc-tc100;
 }
 
 .orderDetailsAbstract {
@@ -64,7 +65,7 @@
   
   > div {
     display: table-cell;
-
+    vertical-align: top;
     font-size: @orderDetailsMobileBaseFontSize;
 
     > div {
@@ -126,8 +127,7 @@
   
   padding: 0;
   border-bottom: 1px solid @grayLight;
-  padding-bottom: 5px;
-  margin-bottom: 5px;
+  margin: 10px 0 5px 0;
   
   counter-reset: articlesListCounter; // initialize counter
   
@@ -135,74 +135,127 @@
     .positioned;
     margin-left: 0;
     display: block;
-    color: @grayLight;
     font-size: @orderDetailsMobileSmallFontSize;
-    padding: 10px 0 0 25px !important; // override #ordersList li.current padding
+    padding: 0 0 10px 25px !important; // override #ordersList li.current padding
     
     counter-increment: articlesListCounter; // set counter increment to li
     
     &:before {
       content: counter(articlesListCounter)")"; // set counter as pseudocontent
       position: absolute;
-      top: 22px;
-      left: 5px;
-      width: 10px;
+      top: 8px;
+      left: 0;
+      width: 15px;
+      text-align: right;
       display: block;
+      color: @grayLight;
       font-size: @orderDetailsMobileSmallerFontSize;
     }
   }
 }
 
-.orderedArticlesListItem {
-//  .positioned;
-  display: block;
-  padding-bottom: 10px;
-  color: @grayDark;
-  header { 
-    .sc-tc100;
-  }
+.orderedArticleBase, .orderedMenu > header {
+  .sc-tc100;
 }
 
-.orderedArticlesListItemInfo {
+.orderedItemBase {
   .sc-tc;
   background: @darkerWhite;
   .border-radius(2px);
-  overflow: hidden;
   
   > div {
-    padding: 10px 10px 7px;
-  }
-}
-
-// For menu:
-
-.orderedArticlesListItem {
-  > .orderedArticlesListItemInfo {
-    margin-bottom: 10px;
-    &:last-child {
-      margin-bottom: 0;
+    padding: 5px 5px 3px;
+    vertical-align: middle;
+    
+    &:first-child {
+      .border-radius(2px 0px 0 2px); // to not override the border-radius of the parent-element
     }
   }
 }
 
-.orderedArticlesListItemPrice {
-  width: 50px;
-  .price;
-  text-align: right;
-  padding-right: 5px;
+.orderedItemLabel {
+  padding-left: 0 !important;
+  vertical-align: top !important;
+  .label {
+    white-space: nowrap;
+  }
 }
 
-.orderArticlesListOverallSum {
+.orderedItemPaidExtras {
+  .label {
+    font-size: inherit;
+    color: @orange;
+    border-color: @orange;
+    margin: 5px 0 0 5px;
+  }
+}
+
+
+
+.orderedItemPrice {
+  width: 60px; // width for "000.00 €"
+  .price;
+  text-align: right;
+  padding: 5px 5px 3px;
+  vertical-align: middle;
+}
+
+//// For menu:
+//
+//.ordered
+//
+//.orderedArticle {
+//  > .orderedItem {
+//    margin-bottom: 10px;
+//    &:last-child {
+//      margin-bottom: 0;
+//    }
+//  }
+//}
+
+.orderedMenu {
+
+  header {
+    .orderedItemTitle {
+      width: 100%;
+    }
+  }
+  
+  > .orderedItem {
+    margin: 10px 0 0 5px;
+    
+//    &:first-of-type {
+//      margin-top: 10px;
+//    }
+    
+    .orderedItemBase {
+      .positioned;
+      
+      &:before {
+        content: "";
+        background: @blue;
+        .square(4px);
+        .circle;
+        margin-top: -2px;
+        position: absolute;
+        top: 50%;
+        left: -19px;
+      }
+    }
+  }
+}
+
+
+
+
+.orderedArticlesListOverallSum {
   text-align: right;
   padding-right: 5px;
   color: @blue;
+  .price;
   
   span {
     vertical-align: middle;
-  }
-  
-  &:after {
-    content: " €"
   }
 }
 

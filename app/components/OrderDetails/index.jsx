@@ -46,10 +46,14 @@ module.exports = React.createClass({
                                   .filter(i => i.price > 0)
                                   .value();
           return (
-            <div className="orderedArticlesListItemInfo">
-              <div className="orderDetailsAmount">{orderedItem.amount}x</div>
-              <div className="orderDetailsCategory">{article.categoryModel.title}</div>
-              <div className="orderDetailsTitle">{article.title}</div>{paidIngredients.map(i => <span className="orderDetailsExtra">{i.shortcut}</span>)}
+            <div className="orderedArticleItem">
+              <div className="orderedArticleItemBase">
+                <div className="orderedArticleItemAmount">{orderedItem.amount}x</div>
+                <div className="orderedArticleItemCategory">{article.categoryModel.title}</div>
+                <div className="orderedArticleItemTitle">{article.title}</div>
+                <div className="orderedArticleItemLabel"><span className="label">6-inch</span></div>
+              </div>
+              <div className="orderedArticleItemPaidExtras">{paidIngredients.map(i => <span className="label framed">{i.shortcut}</span>)}</div>
             </div>
           );
         });
@@ -59,16 +63,75 @@ module.exports = React.createClass({
         var menuString = menu ? articles : '';
         return (
           <li>
-            <div className="orderedArticlesListItem">
+          {/* <div className="orderedArticle">
               <header>
-                <div className="orderedArticlesListItemBase">
+                <div className="orderedArticleBase">
                   {orderItemInfo}
                 </div>
-                <div className="orderedArticlesListItemPrice">{orderedItem.total}</div>
+                <div className="orderedArticlePrice">{orderedItem.total}</div>
               </header>
               {menuString}
+            </div>  */}
+            
+            {/* ordered Article – Change to previous version: moved .orderedArticleItemPaidExtras from .orderedArticleItems to .orderedArticleBase
+            
+            <div className="orderedArticle">
+              <div className="orderedArticleBase">
+                <div className="orderedItem">
+                  <div className="orderedItemBase">
+                    <div className="orderedItemAmount">3x</div>
+                    <div className="orderedItemCategory">Subs</div>
+                    <div className="orderedItemTitle">BBQ-Rib</div>
+                    <div className="orderedItemLabel"><span className="label">6-inch</span></div>
+                  </div>
+                </div>
+                <div className="orderedItemPrice">15,56</div>
+              </div>
+              <div className="orderedItemPaidExtras"><span className="label framed">DM</span><span className="label framed">ExSk</span></div>
             </div>
+            
+            */}
+            
+            {/* ordered Menu – orderedItem stays the same, orderedMenu header is different */}
+            
+            <div className="orderedMenu">
+              <header>
+                <div className="orderedItem">
+                  <div className="orderedItemBase">
+                    <div className="orderedItemAmount">3x</div>
+                    <div className="orderedItemCategory">Menü</div>
+                    <div className="orderedItemTitle">Familienmenü</div>
+                  </div>
+                </div>
+                <div className="orderedItemPrice">15,56</div>
+              </header>
+              <div className="orderedItem">
+                <div className="orderedItemBase">
+                  <div className="orderedItemCategory">Subs</div>
+                  <div className="orderedItemTitle">BBQ-Rib</div>
+                  <div className="orderedItemLabel"><span className="label">6-inch</span></div>
+                </div>
+                <div className="orderedItemPaidExtras"><span className="label framed">DM</span><span className="label framed">ExSk</span></div>
+              </div>
+              <div className="orderedItem">
+                <div className="orderedItemBase">
+                  <div className="orderedItemCategory">Subs</div>
+                  <div className="orderedItemTitle">Chicken Teriyaki</div>
+                  <div className="orderedItemLabel"><span className="label">footlong</span></div>
+                </div>
+              </div>
+              <div className="orderedItem">
+                <div className="orderedItemBase">
+                  <div className="orderedItemCategory">Getränke</div>
+                  <div className="orderedItemTitle">Coca-Cola</div>
+                  <div className="orderedItemLabel"><span className="label">0,5l</span></div>
+                </div>
+              </div>
+            </div>
+            
+            
           </li>
+
         );
       });
 
@@ -122,7 +185,12 @@ module.exports = React.createClass({
       <div className="orderDetails"> 
         <div className="orderDetailsContent">
           <section className="orderDetailsHead">
-            Best.-Nr. <span>{pad(order.id, 8)}</span> (eingegangen am {timestampToDate(order.createdAt)} um {timestampToTime(order.createdAt)})
+            <div className="orderNumber">
+              Best.-Nr. <span>{pad(order.id, 8)}</span> (eingegangen am {timestampToDate(order.createdAt)} um {timestampToTime(order.createdAt)}) <span className="orderDetailsDueTime">{timestampToTime(order.dueAt)}</span>
+            </div>
+            <div className="icn i"></div>
+            <div className="icn iMail"></div>
+            
           </section>
           
           <section className="orderDetailsAbstract">
@@ -148,15 +216,13 @@ module.exports = React.createClass({
               </div>
             </div>
             <div className="orderDeliveryDetails">
-              <div className="orderTimeQrCode">
-                {timestampToTime(order.dueAt)}
-                <img className="orderQrCode" src="" alt=""/>
-              </div>
               <div className="orderedArticlesListing">
                 <ol className="orderedArticlesList">
                 {summaryListing}
                 </ol>
-                <div className="orderArticlesListOverallSum"><span className="label orderPaymentMethod">{paymentMethod}</span><span>{order.total}</span></div>
+                <div className="orderedArticlesListOverallSum">
+                  <span className="label orderPaymentMethod">{paymentMethod}</span><span>{order.total}</span>
+                </div>
               </div>
             </div>
           </section>
