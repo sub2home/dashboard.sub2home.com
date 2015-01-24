@@ -28,6 +28,7 @@ module.exports = React.createClass({
 
   _onOrderUpdated: function(order) {
     this.setState({ order });
+    this.stopListeningTo(actions.orderUpdated);
   },
 
   render: function() {
@@ -142,7 +143,7 @@ module.exports = React.createClass({
               <div className="ordererMessage">
                 <i className="icn iComment"></i>
                 <div className="ordererMessageContent">
-                  Hier noch eine kurze Nachricht. Die bestimmt mehrere Zeilen lang ist, aber das ist ja auch gut so.
+                  {order.comment}
                 </div>
               </div>
             </div>
