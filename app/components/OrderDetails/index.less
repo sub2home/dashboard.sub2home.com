@@ -252,25 +252,42 @@
   }
   
   > .orderedItem {
+    .positioned;
     margin: 10px 0 0 10px;
     
-//    &:first-of-type {
-//      margin-top: 10px;
-//    }
+    &:before {
+      content: "";
+      background: @grayLighter;
+      width: 1px;
+      top: -10px;
+      bottom: 0;
+
+      position: absolute;
+
+      left: -25px;
+    }
+
+    &:last-child {
+      
+      &:before {
+        bottom: auto;
+        height: 25px;
+      }
+    }
     
     .orderedItemBase {
       .positioned;
       
-//      &:before {
-//        content: "";
-//        background: @blue;
-//        .square(4px);
-//        .circle;
-//        margin-top: -2px;
-//        position: absolute;
-//        top: 50%;
-//        left: -19px;
-//      }
+      &:before {
+        content: "";
+        background: @grayLighter;
+        width: 20px;
+        height: 1px;
+        margin-top: 0;
+        position: absolute;
+        top: 50%;
+        left: -25px;
+      }
     }
   }
 }
@@ -367,6 +384,22 @@
     > .orderedItem {
       margin: 0;
       padding-left: 60px;
+      
+      &:before {
+        left: 25px;
+        top: 0;
+      }
+
+      &:last-child:before {
+        height: 38px;
+      }
+    }
+    
+    .orderedItemBase {
+      &:before {
+        width: 25px;
+        left: -35px;
+      }
     }
     
   }
