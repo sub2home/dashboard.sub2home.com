@@ -270,8 +270,19 @@
     &:last-child {
       
       &:before {
-        bottom: auto;
-        height: 25px;
+        display: none;
+      }
+      
+      .orderedItemBase:after {
+        content: "";
+        background: @grayLighter;
+        width: 1px;
+        top: -10px;
+        bottom: 50%;
+
+        position: absolute;
+
+        left: -25px;
       }
     }
     
@@ -384,24 +395,29 @@
     > .orderedItem {
       margin: 0;
       padding-left: 60px;
+      padding-top: 10px;
       
       &:before {
         left: 25px;
         top: 0;
       }
-
-      &:last-child:before {
-        height: 38px;
+      
+      &:first-of-type {
+        padding-top: 20px;
       }
-    }
-    
-    .orderedItemBase {
-      &:before {
-        width: 25px;
+
+      &:last-child .orderedItemBase:after {
         left: -35px;
       }
+      
+      .orderedItemBase {
+        
+        &:before {
+          width: 25px;
+          left: -35px;
+        }
+      } 
     }
-    
   }
 }
 

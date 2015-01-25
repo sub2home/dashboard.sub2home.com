@@ -245,7 +245,7 @@ module.exports = React.createClass({
                     <div className="orderedItemLabel"><span className="label">Menü</span></div>
                   </div>
                 </div>
-              </header>            
+              </header>          
               <div className="orderedItem">
                 <div className="orderedItemBase">
                   <div className="orderedItemCategory">Subs</div>
