@@ -63,7 +63,8 @@ module.exports = React.createClass({
         var menuString = menu ? articles : '';
         return (
           <li>
-          {/* <div className="orderedArticle">
+            {/* Original
+            <div className="orderedArticle">
               <header>
                 <div className="orderedArticleBase">
                   {orderItemInfo}
@@ -71,7 +72,8 @@ module.exports = React.createClass({
                 <div className="orderedArticlePrice">{orderedItem.total}</div>
               </header>
               {menuString}
-            </div>  */}
+            </div>  
+            */}
             
             {/* ordered Article – Change to previous version: moved .orderedArticleItemPaidExtras from .orderedArticleItems to .orderedArticleBase
             
@@ -145,28 +147,163 @@ module.exports = React.createClass({
               return <div>{ingredientCategory.title} {ingredients}</div>;
             });
           }
+          
+
+//            <div className="articleInOrder"> 
+//              <h3>
+//                {amount}
+//                <span className="orderDetailsCategory">{article.categoryModel.title}</span> {article.title} {info}
+//              </h3>
+//              <div className="ingredientsInOrder">
+//              {ingredientCategories}
+//              </div>
+//            </div> 
+            
+          
           var info = article.info ? '(' + article.info + ')' : '';
           var amount = menu ? '' : <span className="orderDetailsAmount">{orderedItem.amount}x</span>;
           return (
-            <div className="articleInOrder">
-              <h3>
-                {amount}
-                <span className="orderDetailsCategory">{article.categoryModel.title}</span> {article.title} {info}
-              </h3>
-              <div className="ingredientsInOrder">
-              {ingredientCategories}
+
+            <div className="orderedItem">
+              <div className="orderedItemBase">
+                <div className="orderedItemAmount">3x</div>
+                <div className="orderedItemCategory">Subs</div>
+                <div className="orderedItemTitle">BBQ-Rib</div>
+                <div className="orderedItemLabel"><span className="label">6-inch</span></div>
+              </div>
+              <div className="orderedItemIngredients">
+                <div className="orderedItemIngredientCategory">
+                  <header>Brot</header>
+                  <div className="orderedItemIngredientLabels">
+                    <div>
+                      <span className="label framed">IT</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="orderedItemIngredientCategory">
+                  <header>Käse</header>
+                  <div className="orderedItemIngredientLabels">
+                    <div>
+                      <span className="label framed">Sc</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="orderedItemIngredientCategory">
+                  <header>Gemüse</header>
+                  <div className="orderedItemIngredientLabels">
+                    <div>
+                      <span className="label framed">To</span>
+                      <span className="label framed">Sa</span>
+                      <span className="label framed">Ja</span>
+                      <span className="label framed">Pa</span>
+                      <span className="label framed">Zw</span>
+                      <span className="label framed">Ol</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="orderedItemIngredientCategory">
+                  <header>Extras</header>
+                  <div className="orderedItemIngredientLabels">
+                    <div>
+                      <span className="label framed">DM</span>
+                      <span className="label framed">ExSc</span>
+                      <span className="label framed">ExBc</span>
+                      <span className="label framed">Öl</span>
+                      <span className="label framed">Es</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="orderedItemIngredientCategory">
+                  <header>Sauce</header>
+                  <div className="orderedItemIngredientLabels">
+                    <div>
+                      <span className="label framed">Ma</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+
           );
         });
 
+//        <div className="menuInOrder">
+//          <header>
+//            <h3><span className="orderDetailsAmount">{orderedItem.amount}x</span>{menu.title}</h3>
+//          </header>
+//          {articles}
+//        </div>
+       
         if (menu) {
           return (
-            <div className="menuInOrder">
+            <div className="orderedMenu">
               <header>
-                <h3><span className="orderDetailsAmount">{orderedItem.amount}x</span>{menu.title}</h3>
-              </header>
-              {articles}
+                <div className="orderedItem">
+                  <div className="orderedItemBase">
+                    <div className="orderedItemAmount">1x</div>
+                    <div className="orderedItemTitle">Familienmenü</div>
+                    <div className="orderedItemLabel"><span className="label">Menü</span></div>
+                  </div>
+                </div>
+              </header>            
+              <div className="orderedItem">
+                <div className="orderedItemBase">
+                  <div className="orderedItemCategory">Subs</div>
+                  <div className="orderedItemTitle">BBQ-Rib</div>
+                  <div className="orderedItemLabel"><span className="label">6-inch</span></div>
+                </div>
+                <div className="orderedItemIngredients">
+                  <div className="orderedItemIngredientCategory">
+                    <header>Brot</header>
+                    <div className="orderedItemIngredientLabels">
+                      <div>
+                        <span className="label framed">IT</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="orderedItemIngredientCategory">
+                    <header>Käse</header>
+                    <div className="orderedItemIngredientLabels">
+                      <div>
+                        <span className="label framed">Sc</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="orderedItemIngredientCategory">
+                    <header>Gemüse</header>
+                    <div className="orderedItemIngredientLabels">
+                      <div>
+                        <span className="label framed">To</span>
+                        <span className="label framed">Sa</span>
+                        <span className="label framed">Ja</span>
+                        <span className="label framed">Pa</span>
+                        <span className="label framed">Zw</span>
+                        <span className="label framed">Ol</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="orderedItemIngredientCategory">
+                    <header>Extras</header>
+                    <div className="orderedItemIngredientLabels">
+                      <div>
+                        <span className="label framed">DM</span>
+                        <span className="label framed">ExSc</span>
+                        <span className="label framed">ExBc</span>
+                        <span className="label framed">Öl</span>
+                        <span className="label framed">Es</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="orderedItemIngredientCategory">
+                    <header>Sauce</header>
+                    <div className="orderedItemIngredientLabels">
+                      <div>
+                        <span className="label framed">Ma</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           );
         } else {
@@ -186,9 +323,9 @@ module.exports = React.createClass({
         <div className="orderDetailsContent">
           <section className="orderDetailsHead">
             <div className="orderNumber">
-              Best.-Nr. <span>{pad(order.id, 8)}</span> (eingegangen am {timestampToDate(order.createdAt)} um {timestampToTime(order.createdAt)}) <span className="orderDetailsDueTime">{timestampToTime(order.dueAt)}</span>
+              Best.-Nr. <span>{pad(order.id, 8)}</span> (eingegangen am {timestampToDate(order.createdAt)} um {timestampToTime(order.createdAt)})
             </div>
-            <div className="icn i"></div>
+            <div className="orderDetailsDueTime">{timestampToTime(order.dueAt)}</div>
             <div className="icn iMail"></div>
             
           </section>

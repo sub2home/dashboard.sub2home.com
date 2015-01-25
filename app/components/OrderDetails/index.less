@@ -12,7 +12,7 @@
 // Module Styles
 
 .orderDetails {
-  padding: 10px 25px;
+  padding: 0 25px 25px;
 }
 
 .orderDetailsContent {
@@ -35,7 +35,6 @@
   
   .orderedItemAmount, .orderedItemCategory {
     color: @white;
-//    height: 24px;
   }
   
   .orderedItemAmount {
@@ -47,14 +46,45 @@
   }
 }
 
-  
 .orderDetailsHead {
   border-bottom: 1px solid @grayLighter;
-  padding: 20px 20px 18px;
+  padding: 0;
   background: @darkWhite;
   font-size: @orderDetailsMobileSmallFontSize;
   .sc-tc100;
+  .border-box;
+  
+  > div {
+    vertical-align: middle;
+    padding: 20px 20px 18px;
+  }
+  
+  .icn {
+    display: table-cell; // overrid inline-block default style
+    width: 30px;
+    font-size: 30px;
+    padding: 10px 20px;
+    border-left: 1px solid @grayLighter;
+  }
 }
+
+.orderDetailsDueTime {
+  width: 100px;
+  font-size: @orderDetailsMobileBigFontSize;
+//  color: @orange;
+  text-align: right;
+  padding: 10px 20px 0 !important;
+  
+  &:before {
+    content: "BIS";
+    display: inline-block;
+//    vertical-align: middle;
+    margin-right: 5px;
+    color: @gray;
+    font-size: @orderDetailsMobileSmallerFontSize;
+  }
+}
+
 
 .orderDetailsAbstract {
   display: table;
@@ -133,7 +163,7 @@
   
   li {
     .positioned;
-    margin-left: 0;
+    margin: 0 0 10px;
     display: block;
     font-size: @orderDetailsMobileSmallFontSize;
     padding: 0 0 10px 25px !important; // override #ordersList li.current padding
@@ -222,7 +252,7 @@
   }
   
   > .orderedItem {
-    margin: 10px 0 0 5px;
+    margin: 10px 0 0 10px;
     
 //    &:first-of-type {
 //      margin-top: 10px;
@@ -231,16 +261,16 @@
     .orderedItemBase {
       .positioned;
       
-      &:before {
-        content: "";
-        background: @blue;
-        .square(4px);
-        .circle;
-        margin-top: -2px;
-        position: absolute;
-        top: 50%;
-        left: -19px;
-      }
+//      &:before {
+//        content: "";
+//        background: @blue;
+//        .square(4px);
+//        .circle;
+//        margin-top: -2px;
+//        position: absolute;
+//        top: 50%;
+//        left: -19px;
+//      }
     }
   }
 }
@@ -264,204 +294,118 @@
   margin-right: 10px;
 }
 
+// Order Details Items (overrides standard styles)
 
-//  
-//  //    CLASSES USED IN WHOLE ORDER
-//
-//  .cat, .extra, .amount {
-//    font-size: 11px !important;
-//    font-weight: normal;
-//    padding: 2px 3px;
-//    .border-radius(2px);
-//    position: relative;
-//    top: -2px;
-//  }
-//
-//  .cat {
-//    background: @grayDark;
-//    text-transform: uppercase;
-//    color: @white;
-//  }
-//  .extra {
-//    border: 1px solid @grayDark;
-//  }
-//
-//  .amount {
-//    border: 2px solid @grayDark;
-//    font-weight: bold;
-//  }
-//}
-//
-//.orderDetailsHead {
-//  border-bottom: 1px solid @grayLighter;
-//  padding: 20px;
-//
-//  span {
-//    font-weight: bold;
-//  }
-//}
-//
-//.orderDetailsAbstract {
-//    overflow: hidden;
-//    border-bottom: 3px double @gray;
-//
-//    .ordererDetails, .orderDeliveryDetails {
-//      display: inline-block;
-//      vertical-align: top;
-//
-//      .border-box;
-//      width: 50%;
-//
-////    True-Layout-Hack
-//      margin-bottom: -99999px;
-//      padding-bottom: 99999px;
-//    }
-//
-//    .ordererAddress, .ordererContact, .ordererMessage {
-//      padding: 20px;
-//      border-bottom: 1px solid @grayLighter;
-//    }
-//
-//    .ordererDetails {
-//      border-right: 1px solid @grayLighter;
-//
-//      font-size: 24px !important;
-//      line-height: 1.2;
-//
-//      span {
-//        font-weight: bold;
-//      }
-//
-//      .ordererDeliveryArea {
-//        margin-top: 25px;
-//        font-style: italic;
-//      }
-//
-//      >div:last-child {
-//        border-bottom: none;
-//      }
-//    }
-//
-//    .orderTimeQrCode, .orderPaymentMethod, .orderedArticlesListing {
-//      padding: 20px;
-//    }
-//
-//    .orderTimeQrCode, .orderPaymentMethod {
-//      border-bottom: 1px solid @grayLighter;
-//    }
-//
-//    .orderTimeQrCode {
-//      position: relative;
-//      font-size: 30px !important;
-//      line-height: 1.2;
-//      font-weight: bold;
-//    }
-//
-//    .orderQrCode {
-//      display: block;
-//      position: absolute;
-//      right: 0;
-//      top: 0;
-//      bottom: 0;
-//      width: 40px;
-//      background: @darkerWhite;
-//      border-left: 1px solid @grayLighter;
-//    }
-//
-//    .orderPaymentMethod {
-//      font-size: 24px !important;
-//    }
-//
-//    .orderedArticlesListing {
-//        ol {
-//
-//        }
-//        li {
-//          position: relative;
-//        }
-//        h4 {
-//          font-size: 16px !important;
-//          color: inherit;
-//          font-weight: bold;
-//        }
-//        p {
-//          position: absolute;
-//          right: 5px;
-//          top: 0;
-//        }
-//
-//        .overallSum {
-//            text-align: right;
-//            font-weight: bold;
-//            border-top: 1px solid @grayDark;
-//            padding: 5px;
-//        }
-//
-//        .amount {
-//            border: none;
-//            font-weight: normal;
-//            padding: 0;
-//            margin-right: 5px;
-//            font-size: 16px !important;
-//            top: 0;
-//        }
-//    }
-//}
-//
-//.articleInOrder, .menuInOrder {
-//    padding: 10px 20px;
-//    border-bottom: 1px dashed @gray;
-//    &:last-child {
-//        border-bottom: none;
-//    }
-//
-//    h3 {
-//        font-size: 24px !important;
-//        color: @grayDark;
-//        font-weight: inherit;
-//
-//        .cat, .amount {
-//            font-size: 19px !important;
-//        }
-//        .amount {
-//            background: @white;
-//            margin-right: 10px;
-//        }
-//    }
-//}
-//
-//.menuInOrder {
-//    padding: 0;
-//    header {
-//        padding: 10px 20px 5px;
-//        background: @grayLighter;
-//        font-weight: bold;
-//    }
-//    .articleInOrder {
-//        border-top: 1px solid @grayLighter;
-//        border-bottom: none;
-//        padding: 20px 50px;
-//    }
-//}
-//
-//.ingredientsInOrder {
-//    padding: 10px 0 5px;
-//    line-height: 2.5;
-//
-//    div {
-//        display: inline-block;
-//        margin-right: 30px;
-//        &:last-child {
-//            margin-right: 0;
-//        }
-//        span {
-//            font-size: 19px !important;
-//            padding: 2px 3px;
-//            border: 1px solid @grayDark;
-//            .border-radius(2px);
-//            &:first-child {
-//                margin-left: 10px;
-//            }
-//        }
-//    }
-//}
+.orderDetailsItems {
+  
+  counter-reset: orderDetailsItemsCounter;
+  
+  > div {
+    counter-increment: orderDetailsItemsCounter;
+    position: relative;
+    border-bottom: 1px dashed @grayLight;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    &:before {
+      content: counter(orderDetailsItemsCounter)")";
+      position: absolute;
+      top: 29px;
+      left: 10px;
+      width: 20px;
+      text-align: right;
+      display: block;
+      color: @grayLight;
+      font-size: @orderDetailsMobileSmallFontSize;
+    }
+  }
+  
+  .orderedItem {
+    padding: 20px 20px 20px 40px;
+  }
+  
+  .orderedItemBase {  
+    
+    width: 100%;
+    > div {
+      
+      padding: 5px 10px;
+      
+      &:last-child {
+        width: 100%; // stretches header to full width
+      }
+    }
+  }
+  
+  .orderedItemTitle {
+    white-space: nowrap;
+
+    > span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .orderedItemLabel {
+    line-height: 1;
+    vertical-align: middle !important;
+  }
+  
+  .orderedMenu {
+    header {
+      .orderedItem {
+        padding-bottom: 0;
+      }
+      
+      .orderedItemLabel {
+        padding: 7px;
+      }
+    }
+    
+    > .orderedItem {
+      margin: 0;
+      padding-left: 60px;
+    }
+    
+  }
+}
+
+.orderedItemIngredients {
+  .sc-tc100;
+  table-layout: auto;
+  margin: 10px 0 0;
+  .border-box;
+  
+  > div {
+    text-align: center;
+    padding: 5px 20px;
+    border-right: 1px solid @grayLighter;
+    
+    &:last-child {
+      border-right: none;
+    }
+  }
+  
+  header {
+    font-size: @orderDetailsMobileSmallerFontSize;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: @grayLight;
+  }
+  
+  .orderedItemIngredientLabels {
+    
+    > div {
+      display: inline-block;
+      text-align: left;
+    }
+  }
+  
+  .label {
+    color: @blue;
+    border-color: @blue;
+    margin: 0 3px 3px;
+  }
+}
