@@ -98,14 +98,16 @@ module.exports = React.createClass({
             
             <div className="orderedMenu">
               <header>
-                <div className="orderedItem">
-                  <div className="orderedItemBase">
-                    <div className="orderedItemAmount">3x</div>
-                    <div className="orderedItemCategory">Menü</div>
-                    <div className="orderedItemTitle">Familienmenü</div>
+                <div className="orderedMenuBase">
+                  <div className="orderedItem">
+                    <div className="orderedItemBase">
+                      <div className="orderedItemAmount">3x</div>
+                      <div className="orderedItemCategory">Menü</div>
+                      <div className="orderedItemTitle">Familienmenü</div>
+                    </div>
                   </div>
+                  <div className="orderedItemPrice">15,56</div>
                 </div>
-                <div className="orderedItemPrice">15,56</div>
               </header>
               <div className="orderedItem">
                 <div className="orderedItemBase">

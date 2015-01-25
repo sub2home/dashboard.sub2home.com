@@ -184,7 +184,7 @@
   }
 }
 
-.orderedArticleBase, .orderedMenu > header {
+.orderedArticleBase, .orderedMenuBase {
   .sc-tc100;
 }
 
@@ -246,8 +246,21 @@
 .orderedMenu {
 
   header {
+    .positioned;
     .orderedItemTitle {
       width: 100%;
+    }
+    
+    &:before {
+      content: "";
+      background: @grayLighter;
+      width: 1px;
+      top: 27px;
+      bottom: -10px;
+
+      position: absolute;
+
+      left: -15px;
     }
   }
   
@@ -265,6 +278,10 @@
       position: absolute;
 
       left: -25px;
+    }
+    
+    &:first-of-type:before {
+      top: 0;
     }
 
     &:last-child {
@@ -389,6 +406,11 @@
       
       .orderedItemLabel {
         padding: 7px;
+      }
+      
+      &:before {
+        top: 55px;
+        left: 25px;
       }
     }
     
