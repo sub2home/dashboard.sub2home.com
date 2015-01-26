@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var React = require('react');
 var { ListenerMixin } = require('reflux');
+var text = require('../../utils/text');
 var actions = require('../../actions');
 var { timestampToTime, timestampToDate } = require('../../utils/date');
 var { pad, phoneNumber } = require('../../utils/format');
@@ -29,6 +30,16 @@ module.exports = React.createClass({
   _onOrderUpdated: function(order) {
     this.setState({ order });
     this.stopListeningTo(actions.orderUpdated);
+  },
+
+  _resendMail: function() {
+    this.listenTo(actions.resendOrderMailSuccess, this._onResendMailSuccess);
+    actions.resendOrderMail(this.state.order.id);
+  },
+
+  _onResendMailSuccess: function() {
+    actions.pushNotification(text.RESEND_MAIL_SUCCESS);
+    this.stopListeningTo(actions.resendOrderMailSuccess);
   },
 
   render: function() {
@@ -168,7 +179,7 @@ module.exports = React.createClass({
               Best.-Nr. <span>{pad(order.id, 8)}</span> (eingegangen am {timestampToDate(order.createdAt)} um {timestampToTime(order.createdAt)})
             </div>
             <div className="orderDetailsDueTime">{timestampToTime(order.dueAt)}</div>
-            <div className="icn iResendMail"></div>
+            <div className="icn iResendMail" onClick={this._resendMail}></div>
           </section>
           <section className="orderDetailsAbstract">
             <div className="ordererDetails">

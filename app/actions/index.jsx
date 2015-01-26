@@ -21,6 +21,8 @@ var actions = Reflux.createActions([
   'setOrdersFilter',
   'ordersUpdated',
   'orderUpdated',
+  'resendOrderMail',
+  'resendOrderMailSuccess',
   'createTestOrder',
   //'updateOrder',
   // stores
@@ -74,9 +76,9 @@ actions.fetchOrder.listen(function(id) {
   api.get(`orders/${id}`).then(actions.orderUpdated);
 });
 
-//actions.updateOrder.listen(function(id, data, storeAlias) {
-  //api.put(`orders/${id}`, data).then(actions.fetchOrders.bind(null, storeAlias));
-//});
+actions.resendOrderMail.listen(function(id) {
+  api.post(`orders/${id}/resendmail`).then(actions.resendOrderMailSuccess);
+});
 
 
 /*
