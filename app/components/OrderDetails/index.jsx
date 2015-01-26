@@ -71,8 +71,8 @@ module.exports = React.createClass({
                     <div className="orderedItemCategory">Menü</div>
                     <div className="orderedItemTitle">{menu.title}</div>
                   </div>
+                  <div className="orderedItemPrice">15,56</div>
                 </div>
-                <div className="orderedItemPrice">15,56</div>
               </header>
               {articles}
             </div>
