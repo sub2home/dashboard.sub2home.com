@@ -56,7 +56,9 @@ module.exports = React.createClass({
                 <div className="orderedItemTitle">{article.title}</div>
                 {info}
               </div>
-              <div className="orderedItemPaidExtras">{paidIngredients.map(i => <span className="label framed">{i.shortcut}</span>)}</div>
+              <div className="orderedItemPaidExtras">
+              {paidIngredients.map(i => <span className="label framed">{i.shortcut}</span>)}
+              </div>
             </div>
           );
         });
@@ -133,11 +135,13 @@ module.exports = React.createClass({
           return (
             <div className="orderedMenu">
               <header>
-                <div className="orderedItem">
-                  <div className="orderedItemBase">
-                    <div className="orderedItemAmount">{orderedItem.amount}x</div>
-                    <div className="orderedItemTitle">{menu.title}</div>
-                    <div className="orderedItemLabel"><span className="label">Menü</span></div>
+                <div className="orderedMenuBase">
+                  <div className="orderedItem">
+                    <div className="orderedItemBase">
+                      <div className="orderedItemAmount">{orderedItem.amount}x</div>
+                      <div className="orderedItemTitle">{menu.title}</div>
+                      <div className="orderedItemLabel"><span className="label">Menü</span></div>
+                    </div>
                   </div>
                 </div>
               </header>
