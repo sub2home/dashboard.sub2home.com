@@ -63,27 +63,31 @@ module.exports = React.createClass({
 
         if (menu) {
           return (
-            <div className="orderedMenu">
-              <header>
-                <div className="orderedItem">
-                  <div className="orderedItemBase">
-                    <div className="orderedItemAmount">{orderedItem.amount}x</div>
-                    <div className="orderedItemCategory">Menü</div>
-                    <div className="orderedItemTitle">{menu.title}</div>
+            <li>
+              <div className="orderedMenu">
+                <header>
+                  <div className="orderedItem">
+                    <div className="orderedItemBase">
+                      <div className="orderedItemAmount">{orderedItem.amount}x</div>
+                      <div className="orderedItemCategory">Menü</div>
+                      <div className="orderedItemTitle">{menu.title}</div>
+                    </div>
+                    <div className="orderedItemPrice">15,56</div>
                   </div>
-                  <div className="orderedItemPrice">15,56</div>
-                </div>
-              </header>
-              {articles}
-            </div>
+                </header>
+                {articles}
+              </div>
+            </li>
           );
         } else {
           return (
-            <div className="orderedArticle">
-              <div className="orderedArticleBase">
-              {articles}
+            <li>
+              <div className="orderedArticle">
+                <div className="orderedArticleBase">
+                {articles}
+                </div>
               </div>
-            </div>
+            </li>
           );
         }
       });
@@ -153,7 +157,7 @@ module.exports = React.createClass({
     var paymentMethod = paymentMethods[order.paymentMethod];
 
     return (
-      <div className="orderDetails"> 
+      <div className="orderDetails">
         <div className="orderDetailsContent">
           <section className="orderDetailsHead">
             <div className="orderNumber">
@@ -161,15 +165,12 @@ module.exports = React.createClass({
             </div>
             <div className="orderDetailsDueTime">{timestampToTime(order.dueAt)}</div>
             <div className="icn iResendMail"></div>
-            
           </section>
-          
           <section className="orderDetailsAbstract">
             <div className="ordererDetails">
               <div className="ordererAddress">
                 {address.firstName} {address.lastName}<br/>
                 {address.street} {address.streetNumber} {address.streetAdditional}<br/>
-
                 <span className="ordererDeliveryArea">
                   {address.postal} {address.city}<br/>
                   {address.district}
@@ -189,7 +190,7 @@ module.exports = React.createClass({
             <div className="orderDeliveryDetails">
               <div className="orderedArticlesListing">
                 <ol className="orderedArticlesList">
-                {summaryListing}
+                  {summaryListing}
                 </ol>
                 <div className="orderedArticlesListOverallSum">
                   <span className="label orderPaymentMethod">{paymentMethod}</span><span>{order.total}</span>
@@ -198,7 +199,7 @@ module.exports = React.createClass({
             </div>
           </section>
           <section className="orderDetailsItems">
-          {detailListing}
+            {detailListing}
           </section>
         </div>
       </div>
