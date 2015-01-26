@@ -106,8 +106,8 @@ module.exports = React.createClass({
     }
 
     return (
-      <li className={cx} onClick={this._toggleDetails}>
-        <div className="orderHeader">
+      <li className={cx}>
+        <div className="orderHeader" onClick={this._toggleDetails}>
           {status}
           <div className="orderDestination">
             <span className="orderOrderer">{this.props.order.addressModel.firstName} {this.props.order.addressModel.lastName}</span>
