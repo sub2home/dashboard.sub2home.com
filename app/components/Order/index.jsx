@@ -58,7 +58,7 @@ module.exports = React.createClass({
     }
 
     var deliveryTime;
-    if (isPending && !isCurrent) {
+    if (!hasCredit & isPending && !isCurrent) {
       deliveryTime = (
         <div className="orderDueTime">{timestampToTime(this.props.order.dueAt)}<span className="orderTimeToDueTime">(in {minutesToTime(dueDelta)})</span></div>
       );
