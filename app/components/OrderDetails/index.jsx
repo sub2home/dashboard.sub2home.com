@@ -40,7 +40,7 @@ module.exports = React.createClass({
     if (orderedItems && orderedItems.length > 0) {
       var summaryListing = orderedItems.map(function(orderedItem) {
         var menu = orderedItem.menuBundleModel || orderedItem.menuUpgradeModel;
-        var amount = menu ? '' : <span className="orderedItemAmount">{orderedItem.amount}x</span>;
+        var amount = menu ? '' : <div className="orderedItemAmount">{orderedItem.amount}x</div>;
         var articles = orderedItem.orderedArticlesCollection.map(o => o.articleModel).map(function(article) {
           var info = article.info ? <div className="orderedItemLabel"><span className="label">{article.info}</span></div> : '';
           var paidIngredients = _(article.ingredientCategoriesCollection)
@@ -96,7 +96,7 @@ module.exports = React.createClass({
 
       var detailListing = orderedItems.map(function(orderedItem) {
         var menu = orderedItem.menuBundleModel || orderedItem.menuUpgradeModel;
-        var amount = menu ? '' : <span className="orderedItemAmount">{orderedItem.amount}x</span>;
+        var amount = menu ? '' : <div className="orderedItemAmount">{orderedItem.amount}x</div>;
         var articles = orderedItem.orderedArticlesCollection.map(o => o.articleModel).map(function(article) {
           var ingredientCategories;
           if (article.ingredientCategoriesCollection) {
