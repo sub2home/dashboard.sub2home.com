@@ -27,6 +27,7 @@ module.exports = Reflux.createStore({
 
     if (this._filter) {
       var keys = [
+        'id',
         'addressModel.firstName',
         'addressModel.lastName',
         'addressModel.postal',
