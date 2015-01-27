@@ -1,5 +1,4 @@
 var React = require('react/addons');
-var _ = require('lodash');
 var { State, Navigation } = require('react-router');
 var actions = require('../../actions');
 var NextDeliveryTime = require('../NextDeliveryTime');
@@ -28,7 +27,7 @@ module.exports = React.createClass({
     if (!prevState.filterToggled && this.state.filterToggled) {
       this.refs.filter.getDOMNode().focus();
     }
-  }, 
+  },
 
   _logout: function() {
     actions.logout();
@@ -59,13 +58,11 @@ module.exports = React.createClass({
       filterToggled: this.state.filterToggled,
     });
 
-    var lazyToggleFilter = _.debounce(this._toggleFilter, 150);
-
     var filterOrInfo, toggleFilter;
     if (this.state.filterToggled) {
       filterOrInfo = (
         <div id="headerFilterOrders" className="emphasized">
-          <input ref="filter" type="text" onBlur={lazyToggleFilter} onKeyUp={this._onFilterKeyUp} onChange={this._onFilterChange} placeholder="Bestellungen filtern" />
+          <input ref="filter" type="text" onKeyUp={this._onFilterKeyUp} onChange={this._onFilterChange} placeholder="Bestellungen filtern" />
         </div>
       );
       toggleFilter = lazyToggleFilter;
