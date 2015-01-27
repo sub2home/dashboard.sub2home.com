@@ -30,6 +30,7 @@ module.exports = Reflux.createStore({
         'id',
         'addressModel.firstName',
         'addressModel.lastName',
+        'addressModel.steet',
         'addressModel.postal',
         'addressModel.city',
         'addressModel.district',
