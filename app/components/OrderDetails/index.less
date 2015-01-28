@@ -170,16 +170,16 @@
     margin: 0 0 10px;
     display: block;
     font-size: @orderDetailsMobileSmallFontSize;
-    padding: 0 0 10px 20px !important; // override #ordersList li.current padding
+    padding: 0 0 10px 15px !important; // override #ordersList li.current padding
     
     counter-increment: articlesListCounter; // set counter increment to li
-    
+  
     &:before {
       content: counter(articlesListCounter)")"; // set counter as pseudocontent
       position: absolute;
-      top: 8px;
-      left: 0;
-      width: 8px;
+      top: 7px;
+      left: -7px;
+      width: 15px;
       text-align: right;
       display: block;
       color: @grayLight;
@@ -283,7 +283,7 @@
 
       position: absolute;
 
-      left: -15px;
+      left: -10px;
     }
   }
   
@@ -300,7 +300,7 @@
 
       position: absolute;
 
-      left: -25px;
+      left: -20px;
     }
     
     &:first-of-type:before {
@@ -322,7 +322,7 @@
 
         position: absolute;
 
-        left: -25px;
+        left: -20px;
       }
     }
     
@@ -332,12 +332,12 @@
       &:before {
         content: "";
         background: @grayLighter;
-        width: 20px;
+        width: 15px;
         height: 1px;
         margin-top: 0;
         position: absolute;
         top: 50%;
-        left: -25px;
+        left: -20px;
       }
     }
   }
