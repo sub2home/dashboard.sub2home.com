@@ -4,15 +4,20 @@
 
 // Module Variables
 
-@orderDetailsMobileSmallerFontSize:13px;
-@orderDetailsMobileSmallFontSize:  16px;
-@orderDetailsMobileBaseFontSize:   20px;
-@orderDetailsMobileBigFontSize:    30px;
+@orderDetailsMobileSmallerFontSize: 9px;
+@orderDetailsMobileSmallFontSize:  11px;
+@orderDetailsMobileBaseFontSize:   14px;
+@orderDetailsMobileBigFontSize:    21px;
+
+@orderDetailsTabletSmallerFontSize:13px;
+@orderDetailsTabletSmallFontSize:  16px;
+@orderDetailsTabletBaseFontSize:   20px;
+@orderDetailsTabletBigFontSize:    30px;
 
 // Module Styles
 
 .orderDetails {
-  padding: 0 25px 25px;
+  padding: 0 5px 5px;
 }
 
 .orderDetailsContent {
@@ -30,7 +35,7 @@
     display: inline-block;
     font-size: @orderDetailsMobileSmallFontSize;
     color: @grayLight;
-    margin-right: 15px;
+    margin-right: 10px;
   }
   
   .orderedItemAmount, .orderedItemCategory {
@@ -56,24 +61,24 @@
   
   > div {
     vertical-align: middle;
-    padding: 20px 20px 18px;
+    padding: 10px 10px 8px;
   }
   
   .icn {
     display: table-cell; // overrid inline-block default style
-    width: 30px;
-    font-size: 30px;
-    padding: 10px 20px;
+    width: 21px;
+    font-size: @orderDetailsMobileBigFontSize;
+    padding: 5px 15px;
     border-left: 1px solid @grayLighter;
   }
 }
 
 .orderDetailsDueTime {
-  width: 100px;
+  width: 70px;
   font-size: @orderDetailsMobileBigFontSize;
 //  color: @orange;
   text-align: right;
-  padding: 10px 20px 0 !important;
+  padding: 5px 15px 0 !important;
   
   &:before {
     content: "BIS";
@@ -96,10 +101,10 @@
   > div {
     display: table-cell;
     vertical-align: top;
-    font-size: @orderDetailsMobileBaseFontSize;
+//    font-size: @orderDetailsMobileBaseFontSize;
 
     > div {
-      padding: 20px 20px 18px;
+      padding: 10px 10px 8px;
       border-bottom: 1px solid @grayLighter;
 
       &:last-child {
@@ -110,7 +115,6 @@
 }
 
 .ordererDetails {
-  width: 50%;
   border-right: 1px solid @grayLighter;
 }
 
@@ -137,21 +141,21 @@
   
   .ordererMessageContent {
     display: table-cell;
-    padding-left: 15px;
+    padding-left: 10px;
   }
 }
 
-.orderTimeQrCode {
-  color: @blue;
-  font-size: @orderDetailsMobileBigFontSize;
-  
-  &:before {
-    content: "BIS";
-    font-size: @orderDetailsMobileSmallFontSize;
-    display: inline-block;
-    margin-right: 5px;
-  }
-}
+//.orderTimeQrCode {
+//  color: @blue;
+//  font-size: @orderDetailsMobileBigFontSize;
+//  
+//  &:before {
+//    content: "BIS";
+//    font-size: @orderDetailsMobileSmallFontSize;
+//    display: inline-block;
+//    margin-right: 5px;
+//  }
+//}
 
 .orderedArticlesList {
   
@@ -166,7 +170,7 @@
     margin: 0 0 10px;
     display: block;
     font-size: @orderDetailsMobileSmallFontSize;
-    padding: 0 0 10px 25px !important; // override #ordersList li.current padding
+    padding: 0 0 10px 20px !important; // override #ordersList li.current padding
     
     counter-increment: articlesListCounter; // set counter increment to li
     
@@ -175,7 +179,7 @@
       position: absolute;
       top: 8px;
       left: 0;
-      width: 15px;
+      width: 8px;
       text-align: right;
       display: block;
       color: @grayLight;
@@ -186,10 +190,17 @@
 
 .orderedArticleBase, .orderedMenuBase {
   .sc-tc100;
+  table-layout: auto;
 }
+
+.orderedItem {
+  width: 100%;
+}
+
 
 .orderedItemBase {
   .sc-tc;
+  table-layout: auto;
   background: @darkerWhite;
   .border-radius(2px);
   
@@ -223,7 +234,7 @@
 
 
 .orderedItemPrice {
-  width: 60px; // width for "000.00 €"
+  white-space: nowrap;
   .price;
   text-align: right;
   padding: 5px 5px 3px;
@@ -242,6 +253,18 @@
 //    }
 //  }
 //}
+
+.orderedArticle {
+  
+//  .orderedItemBase {
+//    width: 100%;
+//  }
+  
+  .orderedItemTitle {
+    width: 100%; // stretch item to 100% in Articles
+  }
+}
+
 
 .orderedMenu {
 
@@ -357,9 +380,9 @@
     &:before {
       content: counter(orderDetailsItemsCounter)")";
       position: absolute;
-      top: 29px;
-      left: 10px;
-      width: 20px;
+      top: 19px;
+      left: 3px;
+      width: 15px;
       text-align: right;
       display: block;
       color: @grayLight;
@@ -368,7 +391,8 @@
   }
   
   .orderedItem {
-    padding: 20px 20px 20px 40px;
+    .border-box;
+    padding: 10px 10px 10px 25px;
   }
   
   .orderedItemBase {  
@@ -416,11 +440,11 @@
     
     > .orderedItem {
       margin: 0;
-      padding-left: 60px;
-      padding-top: 10px;
+      padding-left: 35px;
+      padding-top: 5px;
       
       &:before {
-        left: 25px;
+        left: 15px;
         top: 0;
       }
       
@@ -429,14 +453,14 @@
       }
 
       &:last-child .orderedItemBase:after {
-        left: -35px;
+        left: -20px;
       }
       
       .orderedItemBase {
         
         &:before {
-          width: 25px;
-          left: -35px;
+          left: -20px;
+          width: 15px;
         }
       } 
     }
@@ -478,5 +502,132 @@
     color: @blue;
     border-color: @blue;
     margin: 0 3px 3px;
+  }
+}
+
+
+// Module responsiveness
+// --------------------------
+
+// Portrait Tablet (ratio: 0.7 - 0.5)
+
+@media only screen and (min-width : 450px) {
+
+  
+  .orderDetails {
+    padding: 0 25px 25px;
+  }
+  
+//  font-sizes to tablet size
+  
+  .orderDetailsContent {
+    font-size: @orderDetailsTabletBaseFontSize;
+    
+    .icn {
+      font-size: @orderDetailsTabletSmallFontSize;
+      margin-right: 15px;
+    }
+  }
+  
+  .orderDetailsHead {
+    font-size: @orderDetailsTabletSmallFontSize;  
+    
+    > div {
+      padding: 20px 20px 18px;
+    }
+    
+    .icn {
+      width: 30px;
+      font-size: @orderDetailsTabletBigFontSize;
+      padding: 10px 20px;
+    }
+  }
+  
+  .orderDetailsDueTime {
+    font-size: @orderDetailsTabletBigFontSize;  
+    width: 100px;
+    padding: 10px 20px 0 !important;
+    
+    
+    &:before { font-size: @orderDetailsTabletSmallerFontSize; }
+  }
+  
+  .orderDetailsAbstract {
+    > div > div {
+      padding: 20px 20px 18px;
+    }
+  }
+  
+  .ordererAddress:before {
+    font-size: @orderDetailsTabletSmallerFontSize;
+  }
+  
+  .ordererMessage .ordererMessageContent {
+    padding-left: 15px;
+  }
+  
+  .orderedArticlesList {
+    li {
+      padding-left: 25px !important;
+      font-size: @orderDetailsTabletSmallFontSize;
+
+      &:before {
+        width: 15px;
+        font-size: @orderDetailsTabletSmallerFontSize;
+      }
+    }
+  
+    .orderDetailsItems > div:before {
+      font-size: @orderDetailsTabletSmallFontSize;
+    }
+  }
+  
+  .orderDetailsItems {
+    
+    > div:before {
+      top: 29px;
+      left: 10px;
+      width: 20px;
+    }
+    
+    .orderedItem {
+      padding: 20px 20px 20px 40px;
+    }
+    
+    .orderedMenu {
+      > .orderedItem {
+        padding-left: 60px;
+        padding-top: 10px;
+        
+        &:before {
+          left: 25px;
+        }
+        
+        .orderedItemBase {
+          &:before {
+            width: 25px;
+            left: -35px;
+          }
+        }
+        
+        &:last-child .orderedItemBase:after {
+          left: -35px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width : 650px) {
+  
+  .orderDetailsAbstract {
+    display: block;
+    > div {
+      display: block;
+    }
+  }
+  .ordererDetails {
+      border-right: none; 
+      border-bottom: 1px solid @grayLighter;
   }
 }

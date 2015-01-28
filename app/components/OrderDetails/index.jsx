@@ -68,6 +68,7 @@ module.exports = React.createClass({
                 {info}
               </div>
               <div className="orderedItemPaidExtras">
+              
               {paidIngredients.map(i => <span className="label framed">{i.shortcut}</span>)}
               </div>
             </div>
@@ -79,11 +80,12 @@ module.exports = React.createClass({
             <li>
               <div className="orderedMenu">
                 <header>
-                  <div className="orderedItem">
-                    <div className="orderedItemBase">
-                      <div className="orderedItemAmount">{orderedItem.amount}x</div>
-                      <div className="orderedItemCategory">Menü</div>
-                      <div className="orderedItemTitle">{menu.title}</div>
+                  <div className="orderedMenuBase">
+                    <div className="orderedItem">
+                      <div className="orderedItemBase">
+                        <div className="orderedItemAmount">{orderedItem.amount}x</div>
+                        <div className="orderedItemTitle">{menu.title}</div>
+                      </div>
                     </div>
                     <div className="orderedItemPrice">15,56</div>
                   </div>
@@ -98,6 +100,8 @@ module.exports = React.createClass({
               <div className="orderedArticle">
                 <div className="orderedArticleBase">
                 {articles}
+                
+                <div className="orderedItemPrice">15,56</div>
                 </div>
               </div>
             </li>
@@ -146,13 +150,11 @@ module.exports = React.createClass({
           return (
             <div className="orderedMenu">
               <header>
-                <div className="orderedMenuBase">
-                  <div className="orderedItem">
-                    <div className="orderedItemBase">
-                      <div className="orderedItemAmount">{orderedItem.amount}x</div>
-                      <div className="orderedItemTitle">{menu.title}</div>
-                      <div className="orderedItemLabel"><span className="label">Menü</span></div>
-                    </div>
+                <div className="orderedItem">
+                  <div className="orderedItemBase">
+                    <div className="orderedItemAmount">{orderedItem.amount}x</div>
+                    <div className="orderedItemTitle">{menu.title}</div>
+                    <div className="orderedItemLabel"><span className="label">Menü</span></div>
                   </div>
                 </div>
               </header>
