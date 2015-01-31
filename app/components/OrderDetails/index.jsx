@@ -68,7 +68,6 @@ module.exports = React.createClass({
                 {info}
               </div>
               <div className="orderedItemPaidExtras">
-              
               {paidIngredients.map(i => <span className="label framed">{i.shortcut}</span>)}
               </div>
             </div>
@@ -87,7 +86,7 @@ module.exports = React.createClass({
                         <div className="orderedItemTitle">{menu.title}</div>
                       </div>
                     </div>
-                    <div className="orderedItemPrice">15,56</div>
+                    <div className="orderedItemPrice">{orderedItem.total}</div>
                   </div>
                 </header>
                 {articles}
@@ -100,8 +99,7 @@ module.exports = React.createClass({
               <div className="orderedArticle">
                 <div className="orderedArticleBase">
                 {articles}
-                
-                <div className="orderedItemPrice">15,56</div>
+                <div className="orderedItemPrice">{orderedItem.total}</div>
                 </div>
               </div>
             </li>
