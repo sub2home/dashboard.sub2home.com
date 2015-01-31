@@ -72,7 +72,7 @@ module.exports = React.createClass({
           </div>
           <div id="loginStickToBottom">
               <div id="loginInputGroup">
-                  <input type="number" className="darkNote" placeholder="Benutzername" value={this.state.number} onKeyUp={this._handleEnter} onChange={this._handleNumberChange} />
+                  <input type="tel" className="darkNote" placeholder="Benutzername" value={this.state.number} onKeyUp={this._handleEnter} onChange={this._handleNumberChange} />
                   <input type="password" className="darkNote" placeholder="Passwort" value={this.state.password} onKeyUp={this._handleEnter} onChange={this._handlePasswordChange} />
               </div>
               <div id="loginSubmitButton" className="darkNote btn" onClick={this._handleSubmit}>
