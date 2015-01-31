@@ -57,6 +57,7 @@
   background: @darkWhite;
   font-size: @orderDetailsMobileSmallFontSize;
   .sc-tc100;
+  table-layout: auto;
   .border-box;
   
   > div {
@@ -73,12 +74,31 @@
   }
 }
 
+.orderNumber {
+  width: 100%;
+  > span {
+    white-space: nowrap;
+    display: inline-block;
+  }
+  
+  .orderNumberBase {
+    margin-right: 5px;
+  }
+  
+  .orderNumberAdditionalInfo {
+    &:before {
+      content: " (eingegangen am";
+    }
+  }
+}
+
 .orderDetailsDueTime {
-  width: 70px;
+  
   font-size: @orderDetailsMobileBigFontSize;
 //  color: @orange;
   text-align: right;
   padding: 5px 15px 0 !important;
+  white-space: nowrap;
   
   &:before {
     content: "BIS";
@@ -572,7 +592,7 @@
       font-size: @orderDetailsTabletSmallFontSize;
 
       &:before {
-        width: 15px;
+        width: 25px;
         font-size: @orderDetailsTabletSmallerFontSize;
       }
     }
@@ -620,6 +640,15 @@
 
 @media only screen and (max-width : 650px) {
   
+  .orderNumber {
+    
+    .orderNumberAdditionalInfo {
+      &:before {
+        content: " (am";
+      }
+    }
+  }
+  
   .orderDetailsAbstract {
     display: block;
     > div {
@@ -662,9 +691,5 @@
         margin: 3px;
       }
     }
-    
-    .ordered {}
-    
   }
-  
 }

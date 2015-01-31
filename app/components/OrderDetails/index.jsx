@@ -178,7 +178,7 @@ module.exports = React.createClass({
         <div className="orderDetailsContent">
           <section className="orderDetailsHead">
             <div className="orderNumber">
-              Best.-Nr. <span>{pad(order.id, 8)}</span> (eingegangen am {timestampToDate(order.createdAt)} um {timestampToTime(order.createdAt)})
+              <span className="orderNumberBase">Best.-Nr. {pad(order.id, 8)}</span><span className="orderNumberAdditionalInfo"> {timestampToDate(order.createdAt)} um {timestampToTime(order.createdAt)})</span>
             </div>
             <div className="orderDetailsDueTime">{timestampToTime(order.dueAt)}</div>
             <div className="icn iResendMail" onClick={this._resendMail}></div>
