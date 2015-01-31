@@ -2,8 +2,7 @@
 
 .orderCountdown {
   .positioned;
-  width: 47px;
-  padding-right: 12px;
+  text-align: center !important;
   
   svg {
     .rotate(-90deg);
@@ -14,8 +13,10 @@
 }
 
 .orderCountdownContainer {
-  height: 47px;
-  .fix-tc;
+  .square(47px);
+  .positioned;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .orderCountdownBackground, .orderCountdownStroke {
@@ -64,3 +65,4 @@
     color: @grayLighter;
   }
 }
+
