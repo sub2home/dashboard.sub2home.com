@@ -31,7 +31,7 @@ module.exports = React.createClass({
     var dueDate = new Date(this.props.order.dueAt);
     var createdDate = new Date(this.props.order.createdAt);
     var dueDelta = (dueDate - now) / 60000;
-    var createdDelta = (createdDate - now) / 60000;
+    var createdDelta = (now - createdDate) / 60000;
     var minimumDuration = this.props.order.deliveryAreaModel.minimumDuration;
     var isToday = dueDate.toDateString() === now.toDateString();
     var isDifferentYear = dueDate.getFullYear() !== now.getFullYear();
@@ -47,13 +47,17 @@ module.exports = React.createClass({
     var cx = 'order';
     if (hasWaitingCredit) {
       cx += ' hasWaitingCredit';
-    } else if (hasAcceptedCredit) {
+    }
+    if (hasAcceptedCredit) {
       cx += ' hasAcceptedCredit';
-    } else if (isCurrent) {
+    }
+    if (!hasCredit && isCurrent) {
       cx += ' isCurrent';
-    } else if (isHot) {
+    }
+    if (!hasCredit && isHot) {
       cx += ' isHot';
-    } else if (isNew) {
+    }
+    if (!hasCredit && isNew) {
       cx += ' isNew';
     }
 
