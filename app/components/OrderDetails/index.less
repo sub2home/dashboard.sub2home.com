@@ -630,4 +630,41 @@
       border-right: none; 
       border-bottom: 1px solid @grayLighter;
   }
+  
+  .orderedItemIngredients {
+    > div {
+      display: table-row;
+      border-right: none;
+      text-align: left;
+      
+      header, > div {
+        display: table-cell;
+        border-bottom: 1px solid @grayLighter;
+        padding: 5px;
+        vertical-align: top;
+      }
+      
+      header {
+        padding-top: 15px; // simulate vertical-align: middle for one-row ingredients
+      }
+      
+      > div {
+        width: 100%; // stretch to max-width
+      }
+      
+      &:last-child {
+        header, > div {
+          border-bottom: none;
+        }
+      }
+      
+      .label {
+        margin: 3px;
+      }
+    }
+    
+    .ordered {}
+    
+  }
+  
 }
